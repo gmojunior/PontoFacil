@@ -25,6 +25,13 @@ namespace PontoFacil.Views
         public MainPage()
         {
             this.InitializeComponent();
+
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            Object settingsOk = localSettings.Values["SettingsOk"];
+            if (settingsOk != null)
+                FrameContent.Navigate(typeof(PlanningPage));
+            else
+                FrameContent.Navigate(typeof(SettingsPage));
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
