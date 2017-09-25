@@ -8,6 +8,32 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Planning - Testing Menu Navigation!"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Margin="10,10,50,0" VerticalAlignment="Top" x:Uid="AccumulatedHoursLabel"/>
+            <TextBlock x:Name="AccumulatedHoursValueXAML" HorizontalAlignment="Left" Margin="10,40,0,0" Text="Horas Extras" FontSize="50" Width="927"/>
+        </Grid>
+        <Grid Grid.Row="1" Height="100" Width="1000" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,5,0" x:Uid="HoursToAdjust" />
+            <TextBox x:Name="HoursToAdjustValueXAML" Grid.Column="0" Grid.Row="1"  Margin="0,0,5,0" KeyDown="NumberTypeCheck" />
+
+            <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0,0,5,0" x:Uid="NumberOfDays" />
+            <TextBox x:Name="NumberOfDaysValueXAML" Grid.Column="1" Grid.Row="1"  Margin="0,0,5,0" KeyDown="NumberTypeCheck"/>
+
+            <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,0,5,0"  x:Uid="StartDay" />
+            <CalendarDatePicker x:Name="StartDayValueXAML" Grid.Column="2" Grid.Row="1" DateFormat="{}{dayofweek.full}‎, ‎{day.integer} {month.full}‎, ‎{year.full}" Margin="10,0,0,0" Width="300" />
+        </Grid>
     </Grid>
 </Page>
