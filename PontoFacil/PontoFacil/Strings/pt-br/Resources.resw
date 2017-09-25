@@ -123,8 +123,14 @@
   <data name="HoursToAdjust.Text" xml:space="preserve">
     <value>Horas a serem ajustadas</value>
   </data>
+  <data name="HoursToAdjustValue.PlaceholderText" xml:space="preserve">
+    <value>Exemplo 50</value>
+  </data>
   <data name="NumberOfDays.Text" xml:space="preserve">
     <value>Em quantos dias</value>
+  </data>
+  <data name="NumberOfDaysValue.PlaceholderText" xml:space="preserve">
+    <value>Exemplo 10</value>
   </data>
   <data name="StartDay.Text" xml:space="preserve">
     <value>Dia de inicio</value>

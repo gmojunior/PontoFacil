@@ -27,10 +27,10 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,5,0" x:Uid="HoursToAdjust" />
-            <TextBox x:Name="HoursToAdjustValueXAML" Grid.Column="0" Grid.Row="1"  Margin="0,0,5,0" KeyDown="NumberTypeCheck" />
+            <TextBox x:Name="HoursToAdjustValueXAML" Grid.Column="0" x:Uid="HoursToAdjustValue" Grid.Row="1"  Margin="0,0,5,0" KeyDown="NumberTypeCheck" />
 
             <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0,0,5,0" x:Uid="NumberOfDays" />
-            <TextBox x:Name="NumberOfDaysValueXAML" Grid.Column="1" Grid.Row="1"  Margin="0,0,5,0" KeyDown="NumberTypeCheck"/>
+            <TextBox x:Name="NumberOfDaysValueXAML" Grid.Column="1" Grid.Row="1" x:Uid="NumberOfDaysValue" Margin="0,0,5,0" KeyDown="NumberTypeCheck"/>
 
             <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,0,5,0"  x:Uid="StartDay" />
             <CalendarDatePicker x:Name="StartDayValueXAML" Grid.Column="2" Grid.Row="1" DateFormat="{}{dayofweek.full}‎, ‎{day.integer} {month.full}‎, ‎{year.full}" Margin="10,0,0,0" Width="300" />
