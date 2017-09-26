@@ -12,12 +12,26 @@ namespace PontoFacil.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (((bool)value) ? Visibility.Visible : Visibility.Collapsed);
+            try
+            {
+                return ((bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+                return Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return (((Visibility)value) == Visibility.Visible);
+            try
+            {
+                return ((Visibility)value) == Visibility.Visible;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
     }
 }
