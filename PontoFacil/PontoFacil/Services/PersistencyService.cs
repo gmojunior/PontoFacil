@@ -12,9 +12,11 @@ namespace PontoFacil.Services
     {
         #region Properties
         private readonly string DATA_FILE_NAME = "PontoFacilData.txt";
-        private readonly string PATH_SEPARTOR = @"\";
+        private readonly string PATH_SEPARATOR = @"\";
         private readonly string DATABASE_FOLDER = ApplicationData.Current.LocalFolder.Path;
         private string DATABASE_PATH;
+
+        private object lockFileWriter;
 
         private static PersistencyService persistencyService;
 
@@ -44,9 +46,11 @@ namespace PontoFacil.Services
         #region Construcutor
         private PersistencyService()
         {
-            DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARTOR + DATA_FILE_NAME;
+            DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
 
             this.clockInList = new List<ClockIn>();
+
+            this.lockFileWriter = new object();
         }
 
         public static PersistencyService getInstance()
@@ -58,23 +62,28 @@ namespace PontoFacil.Services
         #endregion
 
         #region Methods
-        public async Task persist()
+        public void Persist()
         {
-            await Task.Run(() =>
-                File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(persistencyService))
-            );
+
+            Task.Run(() =>
+            {
+                lock (lockFileWriter)
+                {
+                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(persistencyService));
+                }
+            });
+
         }
 
-        public void restore()
+        public void Restore()
         {
             try
             {
-                string result = File.ReadAllText(DATABASE_PATH);
-                persistencyService = JsonConvert.DeserializeObject<PersistencyService>(result);
-            }
-            catch (FileNotFoundException fileNotFoundException)
-            {
-                Console.WriteLine(fileNotFoundException.Message);
+                if (File.Exists(DATABASE_PATH))
+                {
+                    string result = File.ReadAllText(DATABASE_PATH);
+                    persistencyService = JsonConvert.DeserializeObject<PersistencyService>(result);
+                }
             }
             catch (Exception e)
             {
@@ -82,19 +91,28 @@ namespace PontoFacil.Services
             }
         }
 
-        public void saveClockIn(ClockIn clockIn)
+        public void SaveClockIn(ClockIn clockIn)
         {
             persistencyService.clockInList.Add(clockIn);
+            this.Persist();
         }
 
-        public void savePlanning(Planning planning)
+        public void SavePlanning(Planning planning)
         {
             persistencyService.MyPlanning = planning;
+            this.Persist();
         }
 
-        public void saveProfile(Profile profile)
+        public void SaveProfile(Profile profile)
         {
             persistencyService.MyProfile = profile;
+            this.Persist();
+        }
+
+        public ClockIn getClockInById(DateTime datetime)
+        {
+            ClockIn result = null;
+            return result;
         }
         #endregion
     }
