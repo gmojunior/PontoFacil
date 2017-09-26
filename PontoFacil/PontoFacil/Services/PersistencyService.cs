@@ -12,6 +12,7 @@ namespace PontoFacil.Services
     {
         #region Properties
         private readonly string DATA_FILE_NAME = "PontoFacilData.txt";
+        private readonly string PATH_SEPARTOR = @"\";
         private readonly string DATABASE_FOLDER = ApplicationData.Current.LocalFolder.Path;
         private string DATABASE_PATH;
 
@@ -43,7 +44,7 @@ namespace PontoFacil.Services
         #region Construcutor
         private PersistencyService()
         {
-            DATABASE_PATH = DATABASE_FOLDER + "\\" + DATA_FILE_NAME;
+            DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARTOR + DATA_FILE_NAME;
 
             this.clockInList = new List<ClockIn>();
         }
