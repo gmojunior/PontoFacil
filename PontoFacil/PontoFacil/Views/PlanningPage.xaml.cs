@@ -23,14 +23,6 @@ namespace PontoFacil.Views
         public PlanningPage()
         {
             this.InitializeComponent();
-
-            AccumulatedHoursValueXAML.Text = AccumulatedHoursValue.ToString();
-            
-            HoursToAdjustValueXAML.Text = hoursToAdjustValue.ToString();
-            
-            NumberOfDaysValueXAML.Text = NumberOfDaysValue.ToString();
-
-            StartDayValueXAML.Date = startDayValue;
         }
 
         public string AccumulatedHoursValue { get => accumulatedHoursValue.ToString("HH:mm"); set => accumulatedHoursValue = DateTime.MinValue; }
