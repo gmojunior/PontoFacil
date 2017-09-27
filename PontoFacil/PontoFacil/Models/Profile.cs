@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PontoFacil.Models
 {
-    class Profile
+    public class Profile
     {
         #region Properties
         private string name;
