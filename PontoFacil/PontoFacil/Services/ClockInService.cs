@@ -1,23 +1,24 @@
 ﻿using PontoFacil.Models;
-using PontoFacil.Repositories;
 using System;
 
 namespace PontoFacil.Services
 {
     class ClockInService
     {
-        private IRepository<ClockIn> Rep;
         private ClockIn clockIn;
 
-        public ClockInService(IRepository<ClockIn> rep)
+        private IPersistencyService PersistencyService;
+
+        public ClockInService(IPersistencyService persistencyService)
         {
-            clockIn = new ClockIn();
-            Rep = rep;
+            PersistencyService = persistencyService;
         }
 
         public void Register(DateTime date)
         {
-            if (clockIn.IsOpen)
+            ClockIn clockIn = PersistencyService.getClockInById(DateTime.Now.Date);
+
+            if (clockIn != null)
                 EndCurrentDay(date);
             else
                 StartNewDay(date);
@@ -27,14 +28,13 @@ namespace PontoFacil.Services
         {
             clockIn = new ClockIn();
             clockIn.Open(dt);
-
-            //Rep add new day
+            PersistencyService.SaveClockIn(clockIn);
         }
 
         private void EndCurrentDay(DateTime dt)
         {
             clockIn.Close(dt);
-            Rep.SaveClockIn(clockIn);
+            PersistencyService.SaveClockIn(clockIn);
         }
     }
 }
