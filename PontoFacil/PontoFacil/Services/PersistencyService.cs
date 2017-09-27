@@ -138,6 +138,11 @@ namespace PontoFacil.Services
         {
             return persistencyService.MyProfile;
         }
+
+        public Profile getProfile()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

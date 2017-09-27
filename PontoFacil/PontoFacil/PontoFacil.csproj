@@ -104,6 +104,7 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\ClockInService.cs" />
     <Compile Include="Services\IPersistencyService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PersistencyService.cs" />
     <Compile Include="Services\SettingsService.cs" />
