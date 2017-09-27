@@ -17,5 +17,6 @@ namespace PontoFacil.Services
         void SaveClockIn(ClockIn clockIn);
         void SavePlanning(Planning planning);
         void SaveProfile(Profile profile);
+        Profile getProfile();
     }
 }
