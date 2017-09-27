@@ -114,6 +114,11 @@ namespace PontoFacil.Services
             ClockIn result = null;
             return result;
         }
+
+        public Profile getProfile()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
