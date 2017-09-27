@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     xmlns:prism="using:Prism.Windows.Mvvm"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
+    prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="10, 10, 10, 10" HorizontalAlignment="Center"  VerticalAlignment="Center">
         <Grid.RowDefinitions>
@@ -17,25 +17,28 @@
         <StackPanel>
             <TextBlock FontSize="25" Margin="0, 0, 0, 20 ">Configurações</TextBlock>
             <TextBlock>Nome do usuário</TextBlock>
-            <TextBox></TextBox>
+            <TextBox Text="{x:Bind ViewModel.Profile.Name, Mode=TwoWay}"></TextBox>
             <TextBlock>Entrada</TextBlock>
-            <TimePicker></TimePicker>
+            <TimePicker Time="{x:Bind ViewModel.Profile.EntryTime, Mode=TwoWay}"></TimePicker>
             <TextBlock>Intervalo do almoço</TextBlock>
-            <TextBox Width="80" HorizontalAlignment="Left"></TextBox>
+            <ComboBox SelectedItem="{x:Bind ViewModel.Profile.LunchTime, Mode=TwoWay}" ItemsSource="{x:Bind ViewModel.Time}" Width="80" HorizontalAlignment="Left" ></ComboBox>
             <TextBlock>Saída</TextBlock>
-            <TimePicker></TimePicker>
-            <TextBlock>Saldo atual</TextBlock>
-            <TextBox Width="80" HorizontalAlignment="Left"></TextBox>
+            <TimePicker Time="{x:Bind ViewModel.Profile.ExitTime, Mode=TwoWay}"></TimePicker>
+            <TextBlock>Saldo inicial</TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Profile.CurrentBalance, Mode=TwoWay}" Width="100" HorizontalAlignment="Left"></TextBox>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="0, 20">
             <StackPanel>
-                <CheckBox>Habilitar notificação</CheckBox>
+                <CheckBox x:Name="chkEnabledNotify" IsChecked="{x:Bind ViewModel.Profile.Notify, Mode=TwoWay}">Habilitar notificação</CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center">Avise-me</TextBlock>
-                <TextBox Margin="10, 0, 10, 0"></TextBox>
-                <TextBlock VerticalAlignment="Center">minutos antes</TextBlock>
+                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" Margin="10, 0, 10, 0" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Width="100" InputScope="TimeHour"></TextBox>
+                <TextBlock VerticalAlignment="Center">minutos antes da saída</TextBlock>
+            </StackPanel>
+            <StackPanel Margin="0, 20">
+                <Button HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.SaveCommand}">Save</Button>
             </StackPanel>
         </StackPanel>
     </Grid>
