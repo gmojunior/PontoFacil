@@ -4,38 +4,60 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     xmlns:prism="using:Prism.Windows.Mvvm"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
+    prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="10, 10, 10, 10" HorizontalAlignment="Center"  VerticalAlignment="Center">
+    <Page.Resources>
+        <Style x:Key="GridStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="TextBoxHourStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="InputScope" Value="TimeHour"/>
+        </Style>
+        <Style x:Key="StackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0, 20, 0, 0"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0, 5, 0, 0"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Style="{StaticResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel>
-            <TextBlock FontSize="25" Margin="0, 0, 0, 20 ">Configurações</TextBlock>
-            <TextBlock>Nome do usuário</TextBlock>
-            <TextBox></TextBox>
-            <TextBlock>Entrada</TextBlock>
-            <TimePicker></TimePicker>
-            <TextBlock>Intervalo do almoço</TextBlock>
-            <TextBox Width="80" HorizontalAlignment="Left"></TextBox>
-            <TextBlock>Saída</TextBlock>
-            <TimePicker></TimePicker>
-            <TextBlock>Saldo atual</TextBlock>
-            <TextBox Width="80" HorizontalAlignment="Left"></TextBox>
+            <TextBlock FontSize="25" Margin="0, 0, 0, 20">Configurações</TextBlock>
+            <TextBlock Style="{StaticResource TextBlockStyle}">Nome do usuário</TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Profile.Name, Mode=TwoWay}"></TextBox>
+            <TextBlock Style="{StaticResource TextBlockStyle}">Entrada</TextBlock>
+            <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"></TimePicker>
+            <TextBlock Style="{StaticResource TextBlockStyle}">Intervalo do almoço</TextBlock>
+            <ComboBox SelectedItem="{x:Bind ViewModel.Profile.LunchTime, Mode=TwoWay}" ItemsSource="{x:Bind ViewModel.IntervalTime}"></ComboBox>
+            <TextBlock Style="{StaticResource TextBlockStyle}">Saída</TextBlock>
+            <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"></TimePicker>
+            <TextBlock Style="{StaticResource TextBlockStyle}">Saldo inicial</TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Profile.InitialBalance, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}"></TextBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="0, 20">
+        <StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">
             <StackPanel>
-                <CheckBox>Habilitar notificação</CheckBox>
+                <CheckBox x:Name="chkEnabledNotify" IsChecked="{x:Bind ViewModel.Profile.Notify, Mode=TwoWay}">Habilitar notificação</CheckBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center">Avise-me</TextBlock>
-                <TextBox Margin="10, 0, 10, 0"></TextBox>
-                <TextBlock VerticalAlignment="Center">minutos antes</TextBlock>
+                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0"></TextBox>
+                <TextBlock VerticalAlignment="Center">minutos antes da saída</TextBlock>
+            </StackPanel>
+            <StackPanel Style="{StaticResource StackPanelStyle}">
+                <Button HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.SaveCommand}">Save</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

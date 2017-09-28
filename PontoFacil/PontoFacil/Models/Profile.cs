@@ -1,51 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Prism.Mvvm;
 
 namespace PontoFacil.Models
 {
-    public class Profile
+    public class Profile : BindableBase
     {
         #region Properties
-        private string name;
-
+        private string _name;
         public string Name
         {
-            get { return this.name; }
-            set { name = value; }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
 
-        private DateTime defaultBegin;
-
-        public DateTime DefaultBegin
+        private TimeSpan _entryHour;
+        public TimeSpan EntryHour
         {
-            get { return this.defaultBegin; }
-            set { defaultBegin = value; }
+            get { return _entryHour; }
+            set { SetProperty(ref _entryHour, value); }
         }
 
-        private DateTime lunchPeriod;
-
-        public DateTime LunchPeriod {
-            get { return lunchPeriod; }
-            set { lunchPeriod = value;  }
-        }
-        
-        private DateTime defaultFinish;
-
-        public DateTime DefaultFinish
+        private string _lunchTime;
+        public string LunchTime
         {
-            get { return this.defaultFinish; }
-            set { defaultFinish = value; }
+            get { return _lunchTime; }
+            set { SetProperty(ref _lunchTime, value); }
         }
-        
-        private DateTime accumulatedHours;
 
-        public DateTime AccumulatedHours
+        private TimeSpan _exitHour;
+        public TimeSpan ExitHour
         {
-            get { return this.accumulatedHours; }
-            set { accumulatedHours = value; }
+            get { return _exitHour; }
+            set { SetProperty(ref _exitHour, value); }
+        }
+
+        private TimeSpan initialBalance;
+        public TimeSpan InitialBalance
+        {
+            get { return initialBalance; }
+            set { SetProperty(ref initialBalance, value); }
+        }
+
+        private bool? _notify;
+        public bool? Notify
+        {
+            get { return _notify; }
+            set { SetProperty(ref _notify, value); }
+        }
+
+        private TimeSpan _notifyTime;
+        public TimeSpan NotifyTime
+        {
+            get { return _notifyTime; }
+            set { SetProperty(ref _notifyTime, value); }
         }
         #endregion
     }
