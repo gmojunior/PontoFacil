@@ -3,38 +3,45 @@ using System;
 
 namespace PontoFacil.Services
 {
-    class ClockInService
+    class ClockInService : IClockInService
     {
-        private ClockIn clockIn;
+        #region Properties
+        private ClockIn _clockIn;
 
-        private IPersistencyService PersistencyService;
+        private IPersistencyService _persistencyService;
 
+        #endregion
+
+        #region Constructor
         public ClockInService(IPersistencyService persistencyService)
         {
-            PersistencyService = persistencyService;
-        }
+            this._persistencyService = persistencyService;
 
+            _clockIn = this._persistencyService.getClockInById(DateTime.Now.Date);
+        }
+        #endregion
+
+        #region Methods
         public void Register(DateTime date)
         {
-            ClockIn clockIn = PersistencyService.getClockInById(DateTime.Now.Date);
-
-            if (clockIn != null)
+            if (_clockIn != null && _clockIn.IsOpen())
                 EndCurrentDay(date);
             else
                 StartNewDay(date);
         }
 
-        private void StartNewDay(DateTime dt)
+        public void StartNewDay(DateTime dt)
         {
-            clockIn = new ClockIn();
-            clockIn.Open(dt);
-            PersistencyService.SaveClockIn(clockIn);
+            _clockIn = new ClockIn();
+            this._clockIn.Open(dt);
+            this._persistencyService.SaveClockIn(_clockIn);
         }
 
-        private void EndCurrentDay(DateTime dt)
+        public void EndCurrentDay(DateTime dt)
         {
-            clockIn.Close(dt);
-            PersistencyService.SaveClockIn(clockIn);
+            this._clockIn.Close(dt);
+            this._persistencyService.SaveClockIn(_clockIn);
         }
+        #endregion
     }
 }

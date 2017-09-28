@@ -1,21 +1,29 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 
 namespace PontoFacil.Models
 {
-    class ClockIn
+    public class ClockIn : BindableBase
     {
         private DateTime _start;
-        private DateTime Start
+        public DateTime Start
         {
             get { return _start; }
-            set { _start = value; }
+            private set { _start = value; }
         }
 
         private DateTime _end;
-        private DateTime End
+        public DateTime End
         {
             get { return _end; }
-            set { _end = value; }
+            private set { _end = value; }
+        }
+
+        private int _lunchTime;
+        public int LunchTime
+        {
+            get { return _lunchTime; }
+            set { _lunchTime = value; }
         }
 
         public void Open(DateTime dt)
@@ -26,6 +34,11 @@ namespace PontoFacil.Models
         public void Close(DateTime dt)
         {
             _end = dt;
+        }
+
+        public bool IsOpen()
+        {
+            return _start != null;
         }
     }
 }
