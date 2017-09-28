@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using Prism.Mvvm;
 
 namespace PontoFacil.Models
