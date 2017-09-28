@@ -40,5 +40,13 @@ namespace PontoFacil.Models
         {
             return _start != null;
         }
+
+        private DateTime? _id;
+
+        public DateTime? Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
     }
 }

@@ -100,10 +100,10 @@
     <Compile Include="Models\Planning.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="PageTokens.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\ClockInService.cs" />
+    <Compile Include="Services\IClockInService.cs" />
     <Compile Include="Services\IPersistencyService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PersistencyService.cs" />
     <Compile Include="Services\SettingsService.cs" />
