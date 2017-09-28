@@ -1,22 +1,20 @@
 ﻿using PontoFacil.Models;
-using PontoFacil.Services;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using Windows.UI.Popups;
+using Windows.Foundation;
+using Windows.UI.ViewManagement;
 
 namespace PontoFacil.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
-
-        private List<int> time;
-        public List<int> Time
+        #region Properties
+        private List<int> intervalTime;
+        public List<int> IntervalTime
         {
-            get { return this.time; }
-            set { SetProperty(ref time, value); }
+            get { return this.intervalTime; }
+            set { SetProperty(ref intervalTime, value); }
         }
 
         private Profile _profile;
@@ -25,15 +23,18 @@ namespace PontoFacil.ViewModels
             get { return _profile; }
             set { SetProperty(ref _profile, value); }
         }
+        #endregion
 
         public DelegateCommand SaveCommand { get; private set; }
-        public DelegateCommand NotifyCommand { get; private set; }
 
         public SettingsPageViewModel()
         {
-            Profile = new Profile();
-            Time = new List<int> { 1, 2 };
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 1000));
+            
+            //Set options in Lunch Interval ComboBox
+            IntervalTime = new List<int> { 1, 2 };
             Profile.Notify = false;
+
             InicializeCommands();
         }
 
@@ -44,6 +45,7 @@ namespace PontoFacil.ViewModels
 
         private void ActionSave()
         {
+            //TODO: Call Save method in SettingsService
         }
     }
 }
