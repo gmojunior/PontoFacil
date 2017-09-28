@@ -1,16 +1,18 @@
 ﻿using Newtonsoft.Json;
 using PontoFacil.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
+using PontoFacil.Repositories;
 
 namespace PontoFacil.Services
 {
     public class PersistencyService : IPersistencyService
     {
         #region Properties
+        private IRepository repository;
+
         private readonly string DATA_FILE_NAME = "PontoFacilData.txt";
         private readonly string PATH_SEPARATOR = @"\";
         private readonly string DATABASE_FOLDER = ApplicationData.Current.LocalFolder.Path;
@@ -18,39 +20,14 @@ namespace PontoFacil.Services
 
         private object lockFileWriter;
 
-        private List<ClockIn> clockInList;
-        public List<ClockIn> ClockInList
-        {
-            get { return clockInList; }
-            set { clockInList = value; }
-        }
-
-        private Planning myPlanning;
-        public Planning MyPlanning
-        {
-            get { return myPlanning; }
-            set { myPlanning = value; }
-        }
-
-        private Profile myProfile;
-        public Profile MyProfile
-        {
-            get { return myProfile; }
-            set { myProfile = value; }
-        }
-
-        private IPersistencyService _persistencyService;
-
         #endregion
 
         #region Construcutor
-        public PersistencyService(IPersistencyService persistencyService)
+        public PersistencyService()
         {
-            this._persistencyService = persistencyService;
-
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
 
-            this.clockInList = new List<ClockIn>();
+            this.repository = new Repository();
 
             this.lockFileWriter = new object();
         }
@@ -63,10 +40,9 @@ namespace PontoFacil.Services
             {
                 lock (lockFileWriter)
                 {
-                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(_persistencyService));
+                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(this.repository));
                 }
             });
-
         }
 
         public void Restore()
@@ -76,7 +52,7 @@ namespace PontoFacil.Services
                 if (File.Exists(DATABASE_PATH))
                 {
                     string result = File.ReadAllText(DATABASE_PATH);
-                    _persistencyService = JsonConvert.DeserializeObject<PersistencyService>(result);
+                    this.repository = JsonConvert.DeserializeObject<Repository>(result);
                 }
             }
             catch (Exception e)
@@ -90,12 +66,12 @@ namespace PontoFacil.Services
             if (clockIn.Id == null)
             {
                 clockIn.Id = DateTime.Now.Date;
-                _persistencyService.ClockInList.Add(clockIn);
+                this.repository.ClockInList.Add(clockIn);
             }
             else
             {
-                int index = _persistencyService.ClockInList.FindIndex(ci => ci.Id == clockIn.Id);
-                _persistencyService.ClockInList.Insert(index, clockIn);
+                int index = this.repository.ClockInList.FindIndex(ci => ci.Id == clockIn.Id);
+                this.repository.ClockInList.Insert(index, clockIn);
             }
             this.Persist();
 
@@ -104,7 +80,7 @@ namespace PontoFacil.Services
 
         public Planning SavePlanning(Planning planning)
         {
-            _persistencyService.MyPlanning = planning;
+            this.repository.MyPlanning = planning;
             this.Persist();
 
             return planning;
@@ -112,7 +88,7 @@ namespace PontoFacil.Services
 
         public Profile SaveProfile(Profile profile)
         {
-            _persistencyService.MyProfile = profile;
+            this.repository.MyProfile = profile;
             this.Persist();
 
             return profile;
@@ -120,17 +96,17 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return _persistencyService.ClockInList.Find(ci => ci.Id == datetime);
+            return this.repository.ClockInList.Find(ci => ci.Id == datetime);
         }
 
         public Planning getPlanning()
         {
-            return _persistencyService.MyPlanning;
+            return this.repository.MyPlanning;
         }
 
         public Profile getProfile()
         {
-            return _persistencyService.MyProfile;
+            return this.repository.MyProfile;
         }
         #endregion
     }

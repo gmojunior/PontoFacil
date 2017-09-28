@@ -1,17 +1,15 @@
-﻿using Windows.UI.Xaml.Controls;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using PontoFacil.ViewModels;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PlanningPage : Page
     {
         public PlanningPage()
         {
             this.InitializeComponent();
         }
-    }
+
+        public PlanningPageViewModel ViewModel { get { return (PlanningPageViewModel)this.DataContext; } }
+   }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PontoFacil.ViewModels
+namespace PontoFacil.Services
 {
-    class PlanningViewModel
+    public class PlanningService : IPlanningService
     {
     }
 }
