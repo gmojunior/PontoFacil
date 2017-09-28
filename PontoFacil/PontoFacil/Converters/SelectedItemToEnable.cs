@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace PontoFacil.Converters
 {
-    class SelectedItemToEnable : IValueConverter
+    class SelectedItemToEnableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string test)
         {
