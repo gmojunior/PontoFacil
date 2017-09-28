@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ShowHoursOnlyConverter.cs" />
     <Compile Include="Models\ClockIn.cs" />
     <Compile Include="Models\Planning.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -112,7 +113,7 @@
     </Compile>
     <Compile Include="ViewModels\HistoryPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\PlanningViewModel.cs" />
+    <Compile Include="ViewModels\PlanningPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
