@@ -1,4 +1,5 @@
 ﻿using PontoFacil;
+using PontoFacil.Services;
 using Prism.Unity.Windows;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -21,13 +22,14 @@ namespace PontoFacil
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate(PageTokens.MainPage, null);
+            NavigationService.Navigate(PageTokens.Planning, null);
             return Task.FromResult<object>(null);
         }
 
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
+            RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
         }
     }
 }

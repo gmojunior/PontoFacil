@@ -105,8 +105,10 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\ClockInService.cs" />
     <Compile Include="Services\IPersistencyService.cs" />
+    <Compile Include="Services\IPlanningService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PersistencyService.cs" />
+    <Compile Include="Services\PlanningService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="UserControls\HamburgerMenu.xaml.cs">
       <DependentUpon>HamburgerMenu.xaml</DependentUpon>
