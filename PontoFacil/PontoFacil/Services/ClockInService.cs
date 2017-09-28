@@ -1,12 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PontoFacil.Models;
+using System;
 
 namespace PontoFacil.Services
 {
-    class ClockInService
+    class ClockInService : IClockInService
     {
+        #region Properties
+        private ClockIn _clockIn;
+
+        private IPersistencyService _persistencyService;
+
+        #endregion
+
+        #region Constructor
+        public ClockInService(IPersistencyService persistencyService)
+        {
+            this._persistencyService = persistencyService;
+
+            _clockIn = this._persistencyService.getClockInById(DateTime.Now.Date);
+        }
+        #endregion
+
+        #region Methods
+        public void Register(DateTime date)
+        {
+            if (_clockIn != null && _clockIn.IsOpen())
+                EndCurrentDay(date);
+            else
+                StartNewDay(date);
+        }
+
+        public void StartNewDay(DateTime dt)
+        {
+            _clockIn = new ClockIn();
+            this._clockIn.Open(dt);
+            this._persistencyService.SaveClockIn(_clockIn);
+        }
+
+        public void EndCurrentDay(DateTime dt)
+        {
+            this._clockIn.Close(dt);
+            this._persistencyService.SaveClockIn(_clockIn);
+        }
+        #endregion
     }
 }

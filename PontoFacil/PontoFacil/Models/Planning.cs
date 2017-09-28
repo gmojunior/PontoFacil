@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PontoFacil.Models
+﻿namespace PontoFacil.Models
 {
-    class Planning
+    public class Planning
     {
     }
 }

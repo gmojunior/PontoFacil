@@ -1,21 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PontoFacil.Models;
-using System.Threading.Tasks;
-using System;
 
 namespace PontoFacil.Services
 {
-    interface IPersistencyService
+    public interface IPersistencyService
     {
         List<ClockIn> ClockInList { get; set; }
         Planning MyPlanning { get; set; }
         Profile MyProfile { get; set; }
 
+        ClockIn getClockInById(DateTime datetime);
+        Planning getPlanning();
+        Profile getProfile();
         void Persist();
         void Restore();
-        ClockIn getClockInById(DateTime datetime);
-        void SaveClockIn(ClockIn clockIn);
-        void SavePlanning(Planning planning);
-        void SaveProfile(Profile profile);
+        ClockIn SaveClockIn(ClockIn clockIn);
+        Planning SavePlanning(Planning planning);
+        Profile SaveProfile(Profile profile);
     }
 }
