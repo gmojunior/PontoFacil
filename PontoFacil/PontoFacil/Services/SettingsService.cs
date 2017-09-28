@@ -1,85 +1,29 @@
 ﻿using PontoFacil.Models;
-using System;
 
 namespace PontoFacil.Services
 {
-    class SettingsService : ISettingsService
+    public class SettingsService : ISettingsService
     {
         #region Properties
-        private static SettingsService settingsService;
-        private IPersistencyService persistencyService;
-        private Profile profile;
+        private IPersistencyService _persistencyService;
         #endregion
 
-        #region Construcutor
-        private SettingsService(IPersistencyService persistencyService)
+        #region Constructor
+        public SettingsService(IPersistencyService persistencyService)
         {
-            this.persistencyService = persistencyService;
-            profile = this.persistencyService.getProfile();
-        }
-
-        public static SettingsService getInstance(IPersistencyService persistencyService)
-        {
-            if (settingsService == null)
-                settingsService = new SettingsService(persistencyService);
-            return settingsService;
+            this._persistencyService = persistencyService;
         }
         #endregion
 
         #region Methods
-        public void RegisterName(string name)
+        public Profile GetProfile()
         {
-            profile.Name = name;
-            persistencyService.SaveProfile(profile);
+            return this._persistencyService.getProfile();
         }
 
-        public string GetName()
+        public void Save(Profile profile)
         {
-            return profile.Name;
-        }
-
-        public void RegisterDefaultStart(DateTime begin)
-        {
-            profile.DefaultBegin = begin;
-            persistencyService.SaveProfile(profile);
-        }
-
-        public DateTime GetDefaultStart()
-        {
-            return profile.DefaultBegin;
-        }
-
-        public void RegisterDefaultFinish(DateTime finish)
-        {
-            profile.DefaultFinish = finish;
-            persistencyService.SaveProfile(profile);
-        }
-
-        public DateTime GetDefaultFinish()
-        {
-            return profile.DefaultFinish;
-        }
-
-        public void RegisterLunchPeriod(DateTime lunchPeriod)
-        {
-            profile.LunchPeriod = lunchPeriod;
-            persistencyService.SaveProfile(profile);
-        }
-
-        public DateTime GetLunchPeriod()
-        {
-            return profile.LunchPeriod;
-        }
-
-        public void RegisterAccumulatedHours(DateTime accumulatedHours)
-        {
-            profile.AccumulatedHours = accumulatedHours;
-            persistencyService.SaveProfile(profile);
-        }
-
-        public DateTime GetrAccumulatedHours()
-        {
-            return profile.AccumulatedHours;
+            _persistencyService.SaveProfile(profile);
         }
         #endregion
     }

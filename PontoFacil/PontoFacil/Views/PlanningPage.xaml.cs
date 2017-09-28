@@ -1,4 +1,4 @@
-﻿using PontoFacil.ViewModels;
+using PontoFacil.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.Views
