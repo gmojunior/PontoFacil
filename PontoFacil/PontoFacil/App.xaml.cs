@@ -1,8 +1,11 @@
-﻿using PontoFacil;
 using PontoFacil.Services;
+using PontoFacil.Views;
 using Prism.Unity.Windows;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil
 {
@@ -20,9 +23,22 @@ namespace PontoFacil
             this.InitializeComponent();
         }
 
+        protected override UIElement CreateShell(Frame rootFrame)
+        {
+            var shell = Container.TryResolve<MainPage>();
+            shell.SetContentFrame(rootFrame);
+            return shell;
+        }
+
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
-            NavigationService.Navigate(PageTokens.Planning, null);
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            Object settingsOk = localSettings.Values["SettingsOk"];
+            if (settingsOk != null)
+                NavigationService.Navigate(PageTokens.CurrentDate, null);
+            else
+                NavigationService.Navigate(PageTokens.Settings, null);
+
             return Task.FromResult<object>(null);
         }
 
@@ -30,6 +46,8 @@ namespace PontoFacil
         {
             base.ConfigureContainer();
             RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
+            RegisterTypeIfMissing(typeof(IPersistencyService), typeof(PersistencyService), true);
+            RegisterTypeIfMissing(typeof(IClockInService), typeof(ClockInService), true);
         }
     }
 }

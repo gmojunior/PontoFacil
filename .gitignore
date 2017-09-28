@@ -53,8 +53,6 @@ build/
 *.pidb
 *.log
 *.scc
-*.bash_profile
-*.bashrc
 
 # OS generated files #
 .DS_Store*

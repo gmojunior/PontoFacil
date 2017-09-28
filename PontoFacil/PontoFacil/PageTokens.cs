@@ -6,5 +6,6 @@
         public const string Settings = "Settings";
         public const string History = "History";
         public const string Planning = "Planning";
+        public const string CurrentDate = "CurrentDate";
     }
 }
