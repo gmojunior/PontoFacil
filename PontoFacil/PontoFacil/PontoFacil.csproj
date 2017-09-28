@@ -115,6 +115,9 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PlanningViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Views\CurrentDatePage.xaml.cs">
+      <DependentUpon>CurrentDatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
     <Page Include="UserControls\HamburgerMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\HistoryPage.xaml">
       <SubType>Designer</SubType>

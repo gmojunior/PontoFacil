@@ -25,38 +25,11 @@ namespace PontoFacil.Views
         public MainPage()
         {
             this.InitializeComponent();
-
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            Object settingsOk = localSettings.Values["SettingsOk"];
-            if (settingsOk != null)
-                FrameContent.Navigate(typeof(PlanningPage));
-            else
-                FrameContent.Navigate(typeof(SettingsPage));
         }
 
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        public void SetContentFrame(Frame frame)
         {
-            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
-        }
-
-        private void MenuButtonHome_Click(object sender, RoutedEventArgs e)
-        {
-            //FrameContent.Navigate(typeof());
-        }
-
-        private void MenuButtonPlanning_Click(object sender, RoutedEventArgs e)
-        {
-            FrameContent.Navigate(typeof(PlanningPage));
-        }
-
-        private void MenuButtonHistory_Click(object sender, RoutedEventArgs e)
-        {
-            FrameContent.Navigate(typeof(HistoryPage));
-        }
-
-        private void MenuButtonSettings_Click(object sender, RoutedEventArgs e)
-        {
-            FrameContent.Navigate(typeof(SettingsPage));
+            MySplitView.Content = frame;
         }
     }
 }
