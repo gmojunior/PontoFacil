@@ -1,10 +1,6 @@
-﻿using PontoFacil.Models;
-using PontoFacil.Services;
-using PontoFacil.Views;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
-using System;
 
 namespace PontoFacil.ViewModels
 {

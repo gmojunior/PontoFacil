@@ -1,4 +1,4 @@
-﻿using PontoFacil.Services;
+using PontoFacil.Services;
 using PontoFacil.Views;
 using Prism.Unity.Windows;
 using System;
@@ -45,6 +45,7 @@ namespace PontoFacil
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
+            RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
             RegisterTypeIfMissing(typeof(IPersistencyService), typeof(PersistencyService), true);
             RegisterTypeIfMissing(typeof(IClockInService), typeof(ClockInService), true);
         }
