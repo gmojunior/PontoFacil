@@ -8,36 +8,33 @@
     mc:Ignorable="d"
     prism:ViewModelLocator.AutoWireViewModel="true">
 
-    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" 
-               CompactPaneLength="50" OpenPaneLength="130">
+    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="{Binding IsMenuOpen, Mode=TwoWay}" 
+               CompactPaneLength="48" OpenPaneLength="130">
         <SplitView.Pane>
             <StackPanel Background="#0063B1">
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Foreground="White"
-                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
+                    Width="50" Height="50" Background="Transparent" Command="{Binding HamburguerCommand}"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuButtonHome" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" Foreground="White"
-                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Home" Click="MenuButtonHome_Click"/>
+                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Home" Command="{Binding HomeNavigateCommand}"/>
                     <TextBlock Text="Home" FontSize="16" VerticalAlignment="Center" Foreground="White" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuButtonPlanning" FontFamily="Segoe MDL2 Assets" Content="&#xE77F;" Foreground="White"
-                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Planning" Click="MenuButtonPlanning_Click"/>
+                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Planning" Command="{Binding PlanningNavigateCommand}" />
                     <TextBlock Text="Planning" FontSize="16" VerticalAlignment="Center" Foreground="White" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuButtonHistory" FontFamily="Segoe MDL2 Assets" Content="&#xE787;" Foreground="White"
-                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="History" Click="MenuButtonHistory_Click"/>
+                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="History" Command="{Binding HistoryNavigateCommand}" />
                     <TextBlock Text="History" FontSize="16" VerticalAlignment="Center" Foreground="White" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuButtonSettings" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" Foreground="White"
-                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Settings" Click="MenuButtonSettings_Click"/>
+                        Width="50" Height="50" Background="Transparent" ToolTipService.ToolTip="Settings" Command="{Binding SettingsNavigateCommand}" />
                     <TextBlock Text="Settings" FontSize="16" VerticalAlignment="Center" Foreground="White" />
                 </StackPanel>
             </StackPanel>
         </SplitView.Pane>
-        <SplitView.Content>
-            <Frame x:Name="FrameContent" />
-        </SplitView.Content>
     </SplitView>
 </Page>

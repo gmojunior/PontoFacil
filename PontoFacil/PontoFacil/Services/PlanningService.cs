@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PontoFacil.Repositories
+namespace PontoFacil.Services
 {
-    class Repository
+    public class PlanningService : IPlanningService
     {
     }
 }
