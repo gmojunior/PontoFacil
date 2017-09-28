@@ -5,30 +5,26 @@ namespace PontoFacil.Services
     public class SettingsService : ISettingsService
     {
         #region Properties
-        private static SettingsService settingsService;
-        private IPersistencyService persistencyService;
-        private Profile profile;
+        private IPersistencyService _persistencyService;
         #endregion
 
+        #region Constructor
         public SettingsService(IPersistencyService persistencyService)
         {
-            this.persistencyService = persistencyService;
-            profile = this.persistencyService.getProfile();
+            this._persistencyService = persistencyService;
         }
+        #endregion
 
-        public string GetName()
-        {
-            return profile.Name;
-        }
-
+        #region Methods
         public Profile GetProfile()
         {
-            return profile;
+            return this._persistencyService.getProfile();
         }
 
         public void Save(Profile profile)
         {
-            persistencyService.SaveProfile(profile);
+            _persistencyService.SaveProfile(profile);
         }
+        #endregion
     }
 }

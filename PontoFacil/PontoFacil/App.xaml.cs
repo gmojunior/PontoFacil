@@ -1,5 +1,4 @@
-﻿using PontoFacil;
-using PontoFacil.Services;
+﻿using PontoFacil.Services;
 using Prism.Unity.Windows;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -28,10 +27,9 @@ namespace PontoFacil
 
         protected override void ConfigureContainer()
         {
+            base.ConfigureContainer();
             RegisterTypeIfMissing(typeof(IPersistencyService), typeof(PersistencyService), true);
             RegisterTypeIfMissing(typeof(ISettingsService), typeof(SettingsService), true);
-            
-            base.ConfigureContainer();
         }
     }
 }

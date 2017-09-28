@@ -3,7 +3,6 @@ using PontoFacil.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 
@@ -18,8 +17,6 @@ namespace PontoFacil.Services
         private string DATABASE_PATH;
 
         private object lockFileWriter;
-
-        private static PersistencyService persistencyService;
 
         private List<ClockIn> clockInList;
         public List<ClockIn> ClockInList
@@ -42,23 +39,20 @@ namespace PontoFacil.Services
             set { myProfile = value; }
         }
 
+        private IPersistencyService _persistencyService;
+
         #endregion
 
         #region Construcutor
-        private PersistencyService()
+        public PersistencyService(IPersistencyService persistencyService)
         {
+            this._persistencyService = persistencyService;
+
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
 
             this.clockInList = new List<ClockIn>();
 
             this.lockFileWriter = new object();
-        }
-
-        public static PersistencyService getInstance()
-        {
-            if (persistencyService == null)
-                persistencyService = new PersistencyService();
-            return persistencyService;
         }
         #endregion
 
@@ -69,7 +63,7 @@ namespace PontoFacil.Services
             {
                 lock (lockFileWriter)
                 {
-                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(persistencyService));
+                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(_persistencyService));
                 }
             });
 
@@ -82,7 +76,7 @@ namespace PontoFacil.Services
                 if (File.Exists(DATABASE_PATH))
                 {
                     string result = File.ReadAllText(DATABASE_PATH);
-                    persistencyService = JsonConvert.DeserializeObject<PersistencyService>(result);
+                    _persistencyService = JsonConvert.DeserializeObject<PersistencyService>(result);
                 }
             }
             catch (Exception e)
@@ -96,12 +90,12 @@ namespace PontoFacil.Services
             if (clockIn.Id == null)
             {
                 clockIn.Id = DateTime.Now.Date;
-                persistencyService.clockInList.Add(clockIn);
+                _persistencyService.ClockInList.Add(clockIn);
             }
             else
             {
-                int index = persistencyService.clockInList.FindIndex(ci => ci.Id == clockIn.Id);
-                persistencyService.clockInList.Insert(index, clockIn);
+                int index = _persistencyService.ClockInList.FindIndex(ci => ci.Id == clockIn.Id);
+                _persistencyService.ClockInList.Insert(index, clockIn);
             }
             this.Persist();
 
@@ -110,7 +104,7 @@ namespace PontoFacil.Services
 
         public Planning SavePlanning(Planning planning)
         {
-            persistencyService.MyPlanning = planning;
+            _persistencyService.MyPlanning = planning;
             this.Persist();
 
             return planning;
@@ -118,7 +112,7 @@ namespace PontoFacil.Services
 
         public Profile SaveProfile(Profile profile)
         {
-            persistencyService.MyProfile = profile;
+            _persistencyService.MyProfile = profile;
             this.Persist();
 
             return profile;
@@ -126,17 +120,17 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return persistencyService.clockInList.Find(ci => ci.Id == datetime);
+            return _persistencyService.ClockInList.Find(ci => ci.Id == datetime);
         }
 
         public Planning getPlanning()
         {
-            return persistencyService.MyPlanning;
+            return _persistencyService.MyPlanning;
         }
 
         public Profile getProfile()
         {
-            return persistencyService.MyProfile;
+            return _persistencyService.MyProfile;
         }
         #endregion
     }

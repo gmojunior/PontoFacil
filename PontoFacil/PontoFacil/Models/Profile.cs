@@ -1,6 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using Prism.Mvvm;
 
 namespace PontoFacil.Models
 {
@@ -21,8 +20,8 @@ namespace PontoFacil.Models
             set { SetProperty(ref _entryHour, value); }
         }
 
-        private string _lunchTime;
-        public string LunchTime
+        private byte _lunchTime;
+        public byte LunchTime
         {
             get { return _lunchTime; }
             set { SetProperty(ref _lunchTime, value); }
@@ -35,11 +34,11 @@ namespace PontoFacil.Models
             set { SetProperty(ref _exitHour, value); }
         }
 
-        private TimeSpan initialBalance;
-        public TimeSpan InitialBalance
+        private TimeSpan _accumulatedHours;
+        public TimeSpan AccumuletedHours
         {
-            get { return initialBalance; }
-            set { SetProperty(ref initialBalance, value); }
+            get { return _accumulatedHours; }
+            set { SetProperty(ref _accumulatedHours, value); }
         }
 
         private bool? _notify;
