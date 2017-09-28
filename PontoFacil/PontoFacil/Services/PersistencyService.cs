@@ -3,12 +3,13 @@ using PontoFacil.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace PontoFacil.Services
 {
-    class PersistencyService : IPersistencyService
+    public class PersistencyService : IPersistencyService
     {
         #region Properties
         private readonly string DATA_FILE_NAME = "PontoFacilData.txt";
@@ -64,7 +65,6 @@ namespace PontoFacil.Services
         #region Methods
         public void Persist()
         {
-
             Task.Run(() =>
             {
                 lock (lockFileWriter)
@@ -91,28 +91,57 @@ namespace PontoFacil.Services
             }
         }
 
-        public void SaveClockIn(ClockIn clockIn)
+        public ClockIn SaveClockIn(ClockIn clockIn)
         {
-            persistencyService.clockInList.Add(clockIn);
+            if (clockIn.Id == null)
+            {
+                clockIn.Id = DateTime.Now.Date;
+                persistencyService.clockInList.Add(clockIn);
+            }
+            else
+            {
+                int index = persistencyService.clockInList.FindIndex(ci => ci.Id == clockIn.Id);
+                persistencyService.clockInList.Insert(index, clockIn);
+            }
             this.Persist();
+
+            return clockIn;
         }
 
-        public void SavePlanning(Planning planning)
+        public Planning SavePlanning(Planning planning)
         {
             persistencyService.MyPlanning = planning;
             this.Persist();
+
+            return planning;
         }
 
-        public void SaveProfile(Profile profile)
+        public Profile SaveProfile(Profile profile)
         {
             persistencyService.MyProfile = profile;
             this.Persist();
+
+            return profile;
         }
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            ClockIn result = null;
-            return result;
+            return persistencyService.clockInList.Find(ci => ci.Id == datetime);
+        }
+
+        public Planning getPlanning()
+        {
+            return persistencyService.MyPlanning;
+        }
+
+        public Profile getProfile()
+        {
+            return persistencyService.MyProfile;
+        }
+
+        public Profile getProfile()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

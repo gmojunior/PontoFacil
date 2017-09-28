@@ -1,5 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services;
+using System;
 
 namespace PontoFacil.ViewModels
 {
@@ -7,7 +8,7 @@ namespace PontoFacil.ViewModels
     {
         public MainPageViewModel()
         {
-            
+
         }
     }
 }

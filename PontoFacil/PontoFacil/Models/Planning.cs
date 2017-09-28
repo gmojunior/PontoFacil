@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PontoFacil.Models
 {
-    class Planning
+    public class Planning
     {
     }
 }
