@@ -18,7 +18,7 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref currentTime, value); }
         }
 
-        DispatcherTimer Timer = new DispatcherTimer();
+        private DispatcherTimer _timer;
         #endregion
 
         public CurrentDatePageViewModel(IClockInService clockInService)
@@ -31,10 +31,10 @@ namespace PontoFacil.ViewModels
 
         private void InitializeClockInTime()
         {
-            Timer = new DispatcherTimer();
-            Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Start();
+            _timer = new DispatcherTimer();
+            _timer.Tick += Timer_Tick;
+            _timer.Interval = new TimeSpan(0, 0, 1);
+            _timer.Start();
         }
 
         private void Timer_Tick(object sender, object e)
