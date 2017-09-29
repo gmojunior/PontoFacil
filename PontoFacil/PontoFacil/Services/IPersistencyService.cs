@@ -6,10 +6,6 @@ namespace PontoFacil.Services
 {
     public interface IPersistencyService
     {
-        List<ClockIn> ClockInList { get; set; }
-        Planning MyPlanning { get; set; }
-        Profile MyProfile { get; set; }
-
         ClockIn getClockInById(DateTime datetime);
         Planning getPlanning();
         Profile getProfile();

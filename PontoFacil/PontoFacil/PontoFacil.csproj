@@ -102,6 +102,7 @@
     <Compile Include="Models\Planning.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="PageTokens.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\ClockInService.cs" />
     <Compile Include="Services\HistoryService.cs" />
     <Compile Include="Services\IClockInService.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\PersistencyService.cs" />
     <Compile Include="Services\PlanningService.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="UserControls\HamburgerMenu.xaml.cs">
       <DependentUpon>HamburgerMenu.xaml</DependentUpon>
@@ -119,7 +121,7 @@
     <Compile Include="ViewModels\HistoryPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PlanningPageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Views\CurrentDatePage.xaml.cs">
       <DependentUpon>CurrentDatePage.xaml</DependentUpon>
     </Compile>

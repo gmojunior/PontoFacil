@@ -45,8 +45,9 @@ namespace PontoFacil
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-            RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
             RegisterTypeIfMissing(typeof(IPersistencyService), typeof(PersistencyService), true);
+            RegisterTypeIfMissing(typeof(ISettingsService), typeof(SettingsService), true);
+            RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
             RegisterTypeIfMissing(typeof(IClockInService), typeof(ClockInService), true);
         }
     }
