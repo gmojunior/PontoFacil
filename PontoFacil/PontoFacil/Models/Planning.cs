@@ -6,14 +6,15 @@ namespace PontoFacil.Models
     public class Planning : BindableBase
     {
         #region Properties
-        private DateTime _accumulatedHoursValue;
-        public DateTime AccumulatedHoursValue {
+        private TimeSpan _accumulatedHoursValue;
+        public TimeSpan AccumulatedHoursValue
+        {
             get { return _accumulatedHoursValue; }
             set { SetProperty(ref _accumulatedHoursValue, value); }
         }
 
-        private DateTime _hoursToAdjustValue;
-        public DateTime HoursToAdjustValue
+        private TimeSpan _hoursToAdjustValue;
+        public TimeSpan HoursToAdjustValue
         {
             get { return _hoursToAdjustValue; }
             set { SetProperty(ref _hoursToAdjustValue, value); }
@@ -26,9 +27,10 @@ namespace PontoFacil.Models
             set { SetProperty(ref _numberOfDaysValue, value); }
         }
 
-        private DateTime _startDayValue;
-        public DateTime StartDayValue {
-            get { return _startDayValue.Date; }
+        private System.Nullable<DateTimeOffset> _startDayValue;
+        public System.Nullable<DateTimeOffset> StartDayValue
+        {
+            get { return _startDayValue; }
             set { SetProperty(ref _startDayValue, value); }
         }
         #endregion
