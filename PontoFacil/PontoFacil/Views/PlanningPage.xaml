@@ -25,13 +25,13 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Left" FontWeight="Bold" Margin="10,10,50,0" VerticalAlignment="Top" x:Uid="AccumulatedHoursLabel" />
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" Margin="10,10,50,0" VerticalAlignment="Top" Text="{x:Bind ViewModel.AccumulatedHoursValue, Mode=OneWay, Converter={StaticResource ShowHoursOnlyConverter}}" />
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" FontWeight="Bold" Margin="10,10,50,0" VerticalAlignment="Top" Text="{x:Bind ViewModel.Planning.AccumulatedHoursValue, Mode=OneWay, Converter={StaticResource ShowHoursOnlyConverter}}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,0,5,0" x:Uid="HoursToAdjust" />
-            <TextBox Grid.Column="1" x:Uid="HoursToAdjustValue" Grid.Row="1" Text="{x:Bind ViewModel.HoursToAdjustValue, Converter={StaticResource ShowHoursOnlyConverter}}" />
+            <TextBox Grid.Column="1" x:Uid="HoursToAdjustValue" Grid.Row="1" Text="{x:Bind ViewModel.Planning.HoursToAdjustValue, Converter={StaticResource ShowHoursOnlyConverter}}" />
 
             <TextBlock Grid.Column="0" Grid.Row="2" x:Uid="NumberOfDays" />
-            <TextBox Grid.Column="1" Grid.Row="2" x:Uid="NumberOfDaysValue" Text="{x:Bind ViewModel.NumberOfDaysValue}" />
+            <TextBox Grid.Column="1" Grid.Row="2" x:Uid="NumberOfDaysValue" Text="{x:Bind ViewModel.Planning.NumberOfDaysValue}" />
 
             <TextBlock Grid.Column="0" Grid.Row="3" x:Uid="StartDay" />
             <CalendarDatePicker Grid.Column="1" Grid.Row="3" DateFormat="{}{dayofweek.full}‎, ‎{day.integer} {month.full}‎, ‎{year.full}" HorizontalAlignment="Stretch" />
