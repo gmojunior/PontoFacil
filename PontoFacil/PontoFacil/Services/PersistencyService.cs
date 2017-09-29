@@ -24,8 +24,10 @@ namespace PontoFacil.Services
         #endregion
 
         #region Construcutor
-        public PersistencyService()
+        public PersistencyService(IRepository repository)
         {
+            this.repository = repository;
+
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
             
             this.Restore();

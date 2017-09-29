@@ -1,3 +1,4 @@
+using PontoFacil.Repositories;
 using PontoFacil.Services;
 using PontoFacil.Views;
 using Prism.Unity.Windows;
@@ -50,6 +51,7 @@ namespace PontoFacil
             RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
             RegisterTypeIfMissing(typeof(IClockInService), typeof(ClockInService), true);
             RegisterTypeIfMissing(typeof(IHistoryService), typeof(HistoryService), true);
+            RegisterTypeIfMissing(typeof(IRepository), typeof(Repository), true);
         }
     }
 }
