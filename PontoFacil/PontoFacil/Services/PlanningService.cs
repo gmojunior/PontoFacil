@@ -11,14 +11,14 @@ namespace PontoFacil.Services
         #region Constructor
         public PlanningService(IPersistencyService persistencyService)
         {
-            this._persistencyService = persistencyService;
+            _persistencyService = persistencyService;
         }
         #endregion
 
         #region Methods
         public Planning GetPlanning()
         {
-            return this._persistencyService.getPlanning();
+            return _persistencyService.getPlanning();
         }
 
         public void Save(Planning planning)
