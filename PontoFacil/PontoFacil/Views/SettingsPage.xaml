@@ -34,33 +34,33 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <TextBlock FontSize="25" Margin="0, 0, 0, 20">Configurações</TextBlock>
-            <TextBlock Style="{StaticResource TextBlockStyle}">Nome do usuário</TextBlock>
-            <TextBox Text="{x:Bind ViewModel.Profile.Name, Mode=TwoWay}"></TextBox>
-            <TextBlock Style="{StaticResource TextBlockStyle}">Entrada</TextBlock>
-            <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"></TimePicker>
-            <TextBlock Style="{StaticResource TextBlockStyle}">Intervalo do almoço</TextBlock>
+            <TextBlock FontSize="25" Margin="0, 0, 0, 20"  x:Uid="Settings"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="UserName"/>
+            <TextBox Text="{x:Bind ViewModel.Profile.Name, Mode=TwoWay}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Entry"/>
+            <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="LunchTime"/>
             <StackPanel Orientation="Horizontal">
                 <RadioButton Content="1 horas" IsChecked="{Binding LunchTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <RadioButton Content="2 horas"/>
             </StackPanel>
-            <TextBlock Style="{StaticResource TextBlockStyle}">Saída</TextBlock>
-            <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"></TimePicker>
-            <TextBlock Style="{StaticResource TextBlockStyle}">Saldo inicial</TextBlock>
-            <TextBox Text="{x:Bind ViewModel.Profile.AccumuletedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}"></TextBox>
+            <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Exit"/>
+            <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="AccumulatedHoursLabel"/>
+            <TextBox Text="{x:Bind ViewModel.Profile.AccumuletedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">
             <StackPanel>
-                <CheckBox x:Name="chkEnabledNotify" IsChecked="{x:Bind ViewModel.Profile.Notify, Mode=TwoWay}">Habilitar notificação</CheckBox>
+                <CheckBox x:Name="chkEnabledNotify" IsChecked="{x:Bind ViewModel.Profile.Notify, Mode=TwoWay}" x:Uid="EnableNotify"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center">Avise-me</TextBlock>
+                <TextBlock VerticalAlignment="Center" x:Uid="WarnMe"/>
                 <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0"></TextBox>
-                <TextBlock VerticalAlignment="Center">minutos antes da saída</TextBlock>
+                <TextBlock VerticalAlignment="Center" x:Uid="MinutesBeforeExit"/>
             </StackPanel>
             <StackPanel Style="{StaticResource StackPanelStyle}">
-                <Button HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.SaveCommand}">Save</Button>
+                <Button HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.SaveCommand}" x:Uid="Save"/>
             </StackPanel>
         </StackPanel>
     </Grid>
