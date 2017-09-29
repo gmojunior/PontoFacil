@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 using PontoFacil.Models;
+using PontoFacil.Repositories;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
-using PontoFacil.Repositories;
-using System.Collections;
 
 namespace PontoFacil.Services
 {
@@ -99,19 +98,20 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            
             return this._repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
         }
 
         public Planning getPlanning()
         {
             Planning p = this._repository.MyPlanning;
+
             return p != null ? p : new Planning();
         }
 
         public Profile getProfile()
         {
             Profile p = this._repository.MyProfile;
+
             return p != null ? p : new Profile();
         }
         #endregion
