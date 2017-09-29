@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\SelectedItemToEnable.cs" />
+    <Compile Include="Converters\SelectedItemToEnableConverter.cs" />
     <Compile Include="Converters\ShowHoursOnlyConverter.cs" />
     <Compile Include="Models\ClockIn.cs" />
     <Compile Include="Models\Planning.cs" />

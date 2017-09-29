@@ -9,6 +9,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
+    
+    
     prism:ViewModelLocator.AutoWireViewModel="true">
     
     <Page.Resources>
@@ -34,11 +37,11 @@
 
         <DataTemplate x:Key="HistoryDataTemplate" x:DataType="models:ClockIn">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Date}" Style="{StaticResource HistoryContent}" Margin="8,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding StartTime}" Style="{StaticResource HistoryContent}" Margin="23,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding Id}" Style="{StaticResource HistoryContent}" Margin="8,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding Start}" Style="{StaticResource HistoryContent}" Margin="23,0,0,0"></TextBlock>
                 <TextBlock Text="12:00" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
                 <TextBlock Text="13:00" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding EndTime}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding End}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
                 <TextBlock Text="08:30" Style="{StaticResource HistoryContent}" Margin="47,0,0,0"></TextBlock>
                 <TextBlock Text="00:30" Style="{StaticResource HistoryContent}" Margin="75,0,0,0"></TextBlock>
                 <TextBlock Text="01:30" Style="{StaticResource HistoryContent}" Margin="60,0,0,0"></TextBlock>
