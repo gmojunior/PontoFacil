@@ -42,6 +42,7 @@
                 <TextBlock Text="08:30" Style="{StaticResource HistoryContent}" Margin="47,0,0,0"></TextBlock>
                 <TextBlock Text="00:30" Style="{StaticResource HistoryContent}" Margin="75,0,0,0"></TextBlock>
                 <TextBlock Text="01:30" Style="{StaticResource HistoryContent}" Margin="60,0,0,0"></TextBlock>
+                <SymbolIcon Symbol="Accept" Visibility="{Binding IsWaiver}" Margin="60,0,0,0" />
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -93,6 +94,7 @@
                     <TextBlock Text="Regular Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="Overtime Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="Total Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock Text="Abono" Style="{StaticResource HistoryTitle}"></TextBlock>
                 </StackPanel>
                 <ListView x:Name="historyList" Margin="0,20,0,0" Height="auto" MaxHeight="700" ScrollViewer.VerticalScrollBarVisibility="auto"
                           ItemsSource="{Binding History}" ItemTemplate="{StaticResource HistoryDataTemplate}"></ListView>
@@ -102,7 +104,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="4" VerticalAlignment="Top" Margin="0,10,0,0">
             <Button Content="Abonar" Margin="0,0,10,0" 
                     IsEnabled="{Binding SelectedItem, ElementName=historyList, Mode=TwoWay, Converter={StaticResource SelectedItemToEnableConverter}}"
-                    Command="{Binding ClockInWaiverCommand}" ></Button>
+                    Command="{Binding ClockInWaiverCommand}" CommandParameter="{Binding SelectedItem, ElementName=historyList}" ></Button>
             <Button Content="Editar" IsEnabled="{Binding SelectedItem, ElementName=historyList, Mode=TwoWay, Converter={StaticResource SelectedItemToEnableConverter}}"></Button>
         </StackPanel>
     </Grid>

@@ -54,6 +54,13 @@ namespace PontoFacil.Models
             set { SetProperty(ref _overtimeHours, value); }
         }
 
+        private bool _isWaiver;
+        public bool IsWaiver
+        {
+            get { return _isWaiver; }
+            set { SetProperty(ref _isWaiver, value); }
+        }
+
         public void Open(DateTime dt)
         {
             _start = dt;
@@ -74,6 +81,12 @@ namespace PontoFacil.Models
         {
             get { return _id; }
             set { _id = value; }
+        }
+
+        public void AllowWaiver()
+        {
+            this.IsWaiver = true;
+            this.OvertimeHours = new DateTime();
         }
     }
 }

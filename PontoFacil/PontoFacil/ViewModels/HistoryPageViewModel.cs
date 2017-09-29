@@ -87,7 +87,7 @@ namespace PontoFacil.ViewModels
         {
             if (IsDateIntervalValid())
             {
-                History = new ObservableCollection<ClockIn>(_historyService.GetFreeHistory(_startDate, _endDate));
+                History = new ObservableCollection<ClockIn>(_historyService.GetFreeHistory(_startDate, _endDate));                
             }
             else
             {
@@ -98,7 +98,7 @@ namespace PontoFacil.ViewModels
 
         private void ClockInWaiver(ClockIn clockIn)
         {
-
+            _historyService.AllowWaiver(clockIn);
         }
 
         private void EditClockIn(ClockIn clockIn)

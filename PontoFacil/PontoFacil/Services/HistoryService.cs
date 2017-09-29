@@ -34,5 +34,11 @@ namespace PontoFacil.Services
             _clockInList = _persistencyService.GetFreeHistory(startDate, endDate);
             return _clockInList;
         }
+
+        public ClockIn AllowWaiver(ClockIn clockIn)
+        {
+            clockIn.AllowWaiver();
+            return _persistencyService.SaveClockIn(clockIn);
+        }
     }
 }
