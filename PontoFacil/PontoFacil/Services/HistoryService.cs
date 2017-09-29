@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PontoFacil.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,30 @@ namespace PontoFacil.Services
 {
     public class HistoryService : IHistoryService
     {
+        #region Properties
+        private List<ClockIn> _clockInList;
+        private IPersistencyService _persistencyService;
+        #endregion
 
+        #region Constructor
+        public HistoryService(IPersistencyService persistencyService)
+        {
+            _persistencyService = persistencyService;
+
+            _clockInList = new List<ClockIn>();
+        }
+        #endregion
+
+        public List<ClockIn> GetMonthlyHistory()
+        {
+            _clockInList = _persistencyService.GetMonthlyHistory();
+            return _clockInList;
+        }
+
+        public List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate)
+        {
+            _clockInList = _persistencyService.GetFreeHistory(startDate, endDate);
+            return _clockInList;
+        }
     }
 }

@@ -9,21 +9,49 @@ namespace PontoFacil.Models
         public DateTime Start
         {
             get { return _start; }
-            set { _start = value; }
+            set { SetProperty(ref _start, value); }
         }
 
         private DateTime _end;
         public DateTime End
         {
             get { return _end; }
-            set { _end = value; }
+            set { SetProperty(ref _end, value); }
         }
 
         private int _lunchTime;
         public int LunchTime
         {
             get { return _lunchTime; }
-            set { _lunchTime = value; }
+            set { SetProperty(ref _lunchTime, value); }
+        }
+
+        private DateTime _startLunchTime;
+        public DateTime StartLunchTime
+        {
+            get { return _startLunchTime; }
+            set { SetProperty(ref _startLunchTime, value); }
+        }
+
+        private DateTime _endLunchTime;
+        public DateTime EndLunchTime
+        {
+            get { return _endLunchTime; }
+            set { SetProperty(ref _endLunchTime, value); }
+        }
+
+        private DateTime _regularHours;
+        public DateTime RegularHours
+        {
+            get { return _regularHours; }
+            set { SetProperty(ref _regularHours, value); }
+        }
+
+        private DateTime _overtimeHours;
+        public DateTime OvertimeHours
+        {
+            get { return _overtimeHours; }
+            set { SetProperty(ref _overtimeHours, value); }
         }
 
         public void Open(DateTime dt)

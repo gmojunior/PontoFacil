@@ -14,5 +14,7 @@ namespace PontoFacil.Services
         ClockIn SaveClockIn(ClockIn clockIn);
         Planning SavePlanning(Planning planning);
         Profile SaveProfile(Profile profile);
+        List<ClockIn> GetMonthlyHistory();
+        List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate);
     }
 }
