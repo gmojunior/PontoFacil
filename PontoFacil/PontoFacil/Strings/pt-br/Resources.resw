@@ -120,11 +120,26 @@
   <data name="AccumulatedHoursLabel.Text" xml:space="preserve">
     <value>Horas acumuladas</value>
   </data>
+  <data name="EnableNotify.Content" xml:space="preserve">
+    <value>Habilitar notificação</value>
+  </data>
+  <data name="Entry.Text" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="Exit.Text" xml:space="preserve">
+    <value>Saída</value>
+  </data>
   <data name="HoursToAdjust.Text" xml:space="preserve">
     <value>Horas a serem ajustadas</value>
   </data>
   <data name="HoursToAdjustValue.PlaceholderText" xml:space="preserve">
     <value>Exemplo 50</value>
+  </data>
+  <data name="LunchTime.Text" xml:space="preserve">
+    <value>Intervalo do almoço</value>
+  </data>
+  <data name="MinutesBeforeExit.Text" xml:space="preserve">
+    <value>minutos antes da saída</value>
   </data>
   <data name="NumberOfDays.Text" xml:space="preserve">
     <value>Em quantos dias</value>
@@ -132,7 +147,25 @@
   <data name="NumberOfDaysValue.PlaceholderText" xml:space="preserve">
     <value>Exemplo 10</value>
   </data>
+  <data name="OneHour.Text" xml:space="preserve">
+    <value>1 hora</value>
+  </data>
+  <data name="Save.Content" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Configurações</value>
+  </data>
   <data name="StartDay.Text" xml:space="preserve">
     <value>Dia de inicio</value>
+  </data>
+  <data name="TowHours.Text" xml:space="preserve">
+    <value>2 horas</value>
+  </data>
+  <data name="UserName.Text" xml:space="preserve">
+    <value>Nome do usuário</value>
+  </data>
+  <data name="WarnMe.Text" xml:space="preserve">
+    <value>Avise-me</value>
   </data>
 </root>
