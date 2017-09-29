@@ -2,6 +2,7 @@
 using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.ViewModels
 {
@@ -40,5 +41,20 @@ namespace PontoFacil.ViewModels
             _planningService.Save(Planning);
         }
         #endregion
+
+        public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            if (!IsANumber(sender.Text))
+            {
+                int pos = sender.SelectionStart - 1;
+                sender.Text = sender.Text.Remove(pos, 1);
+                sender.SelectionStart = pos + 1;
+            }
+        }
+
+        private static bool IsANumber(string sender)
+        {
+            return double.TryParse(sender, out double dtemp) && sender != "";
+        }
     }
 }
