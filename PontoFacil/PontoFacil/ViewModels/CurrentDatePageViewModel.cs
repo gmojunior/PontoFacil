@@ -11,11 +11,11 @@ namespace PontoFacil.ViewModels
         #region Properties
         private IClockInService _clockInService;
 
-        private string currentTime;
+        private string _currentTime;
         public string CurrentTime
         {
-            get { return currentTime; }
-            set { SetProperty(ref currentTime, value); }
+            get { return _currentTime; }
+            set { SetProperty(ref _currentTime, value); }
         }
 
         private DispatcherTimer _timer;
