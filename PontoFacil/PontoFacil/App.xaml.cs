@@ -49,6 +49,7 @@ namespace PontoFacil
             RegisterTypeIfMissing(typeof(ISettingsService), typeof(SettingsService), true);
             RegisterTypeIfMissing(typeof(IPlanningService), typeof(PlanningService), true);
             RegisterTypeIfMissing(typeof(IClockInService), typeof(ClockInService), true);
+            RegisterTypeIfMissing(typeof(IHistoryService), typeof(HistoryService), true);
         }
     }
 }

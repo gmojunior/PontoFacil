@@ -1,7 +1,10 @@
-﻿using Prism.Commands;
+﻿using PontoFacil.Models;
+using PontoFacil.Services;
+using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,54 +15,95 @@ namespace PontoFacil.ViewModels
 {
     public class HistoryPageViewModel : ViewModelBase
     {
-        #region properties
-        private DateTimeOffset startDate;
+        #region Properties
+        private DateTimeOffset _startDate;
         public DateTimeOffset StartDate
         {
-            get { return startDate; }
-            set { SetProperty(ref startDate, value); }
+            get { return _startDate; }
+            set { SetProperty(ref _startDate, value); }
         }
 
-        private DateTimeOffset endDate;
+        private DateTimeOffset _endDate;
         public DateTimeOffset EndDate
         {
-            get { return endDate; }
-            set { SetProperty(ref endDate, value); }
+            get { return _endDate; }
+            set { SetProperty(ref _endDate, value); }
         }
 
-        private string dateValidationMessage;
+        private ObservableCollection<ClockIn> _history;
+        public ObservableCollection<ClockIn> History
+        {
+            get { return _history; }
+            set { SetProperty(ref _history, value); }
+        }
+
+        private string _dateValidationMessage;
+
+        private IHistoryService _historyService;
+
         #endregion
 
-        public HistoryPageViewModel()
+        #region Constructor
+        public HistoryPageViewModel(IHistoryService historyService)
         {
             InitializeCommands();
 
+            _historyService = historyService;
             // Set StartDate to yesterday by default
             StartDate = DateTime.Now.AddDays(-1);
 
             // Set EndDate to today by default
             EndDate = DateTime.Now;
-        }
 
+            History = new ObservableCollection<ClockIn>();
+
+            // Show monthly history by default
+            ShowMonthlyHistory();
+        }
+        #endregion
+
+        #region Methods
         private void InitializeCommands()
         {
+            ShowMonthlyHistoryCommand = new DelegateCommand(ShowMonthlyHistory);
             ShowFreeHistoryCommand = new DelegateCommand(ShowFreeHistory);
+            ClockInWaiverCommand = new DelegateCommand<ClockIn>(ClockInWaiver);
+            EditClockInCommand = new DelegateCommand<ClockIn>(EditClockIn);
         }
+        #endregion
 
         #region Commands
+        public DelegateCommand ShowMonthlyHistoryCommand { get; private set; }
         public DelegateCommand ShowFreeHistoryCommand { get; private set; }
+        public DelegateCommand<ClockIn> ClockInWaiverCommand { get; private set; }
+        public DelegateCommand<ClockIn> EditClockInCommand { get; private set; }
+
+        private void ShowMonthlyHistory()
+        {
+            History.Clear();
+        }
 
         private async void ShowFreeHistory()
         {
             if (!IsDateIntervalValid())
             {
-                var dialog = new MessageDialog(dateValidationMessage);
+                var dialog = new MessageDialog(_dateValidationMessage);
                 await dialog.ShowAsync();
             }
             else
             {
-
+                History.Clear();
             }
+        }
+
+        private void ClockInWaiver(ClockIn clockIn)
+        {
+
+        }
+
+        private void EditClockIn(ClockIn clockIn)
+        {
+
         }
 
         /// <summary>
@@ -69,19 +113,19 @@ namespace PontoFacil.ViewModels
         {
             bool isValid = true;
 
-            if(endDate > DateTime.Now)
+            if(_endDate > DateTime.Now)
             {
-                dateValidationMessage = "The End Date must be less than the current date.";
+                _dateValidationMessage = "The End Date must be less than the current date.";
                 isValid = false;
             }
-            else if(endDate <= startDate)
+            else if(_endDate <= _startDate)
             {
-                dateValidationMessage = "The End Date must be greater than the Start Date.";
+                _dateValidationMessage = "The End Date must be greater than the Start Date.";
                 isValid = false;
             }
-            else if (startDate >= DateTime.Now)
+            else if (_startDate >= DateTime.Now)
             {
-                dateValidationMessage = "The Start Date must be less than the current date.";
+                _dateValidationMessage = "The Start Date must be less than the current date.";
                 isValid = false;
             }
             
