@@ -1,5 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services;
+using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
 
@@ -16,6 +17,8 @@ namespace PontoFacil.ViewModels
         }
 
         private IPlanningService _planningService;
+
+        public DelegateCommand SaveCommand { get; private set; }
         #endregion
 
         #region Construcutor
@@ -23,7 +26,14 @@ namespace PontoFacil.ViewModels
         {
             _planningService = planningService;
 
+            InicializeCommands();
+
             Planning = _planningService.GetPlanning();
+        }
+
+        private void InicializeCommands()
+        {
+            SaveCommand = new DelegateCommand(ActionSave);
         }
 
         private void ActionSave()
