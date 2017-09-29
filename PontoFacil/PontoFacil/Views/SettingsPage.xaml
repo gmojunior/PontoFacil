@@ -41,7 +41,7 @@
             <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"></TimePicker>
             <TextBlock Style="{StaticResource TextBlockStyle}">Intervalo do almoço</TextBlock>
             <StackPanel Orientation="Horizontal">
-                <RadioButton Content="1 horas" IsChecked="{Binding LunchTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton Content="1 hora" IsChecked="{Binding LunchTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <RadioButton Content="2 horas"/>
             </StackPanel>
             <TextBlock Style="{StaticResource TextBlockStyle}">Saída</TextBlock>

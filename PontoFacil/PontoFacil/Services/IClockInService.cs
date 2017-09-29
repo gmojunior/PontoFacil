@@ -2,12 +2,8 @@
 
 namespace PontoFacil.Services
 {
-    interface IClockInService
+    public interface IClockInService
     {
         void Register(DateTime date);
-
-        void StartNewDay(DateTime datetime);
-
-        void EndCurrentDay(DateTime datetime);
     }
 }

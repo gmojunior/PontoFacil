@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using PontoFacil.Repositories;
+using System.Collections;
 
 namespace PontoFacil.Services
 {
@@ -26,8 +27,8 @@ namespace PontoFacil.Services
         public PersistencyService()
         {
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
-
-            this.repository = new Repository();
+            
+            this.Restore();
 
             this.lockFileWriter = new object();
         }
@@ -70,8 +71,8 @@ namespace PontoFacil.Services
             }
             else
             {
-                int index = this.repository.ClockInList.FindIndex(ci => ci.Id == clockIn.Id);
-                this.repository.ClockInList.Insert(index, clockIn);
+                int index = this.repository.ClockInList.FindIndex(0, this.repository.ClockInList.Count, ci => ci.Id.Equals(clockIn.Id));
+                this.repository.ClockInList[index] = clockIn;
             }
             this.Persist();
 
@@ -96,17 +97,20 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return this.repository.ClockInList.Find(ci => ci.Id == datetime);
+            
+            return this.repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
         }
 
         public Planning getPlanning()
         {
-            return this.repository.MyPlanning;
+            Planning p = this.repository.MyPlanning;
+            return p != null ? p : new Planning();
         }
 
         public Profile getProfile()
         {
-            return this.repository.MyProfile;
+            Profile p = this.repository.MyProfile;
+            return p != null ? p : new Profile();
         }
         #endregion
     }

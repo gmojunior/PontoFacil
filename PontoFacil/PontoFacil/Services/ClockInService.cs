@@ -3,7 +3,7 @@ using System;
 
 namespace PontoFacil.Services
 {
-    class ClockInService : IClockInService
+    public class ClockInService : IClockInService
     {
         #region Properties
         private ClockIn _clockIn;
@@ -30,14 +30,14 @@ namespace PontoFacil.Services
                 StartNewDay(date);
         }
 
-        public void StartNewDay(DateTime dt)
+        private void StartNewDay(DateTime dt)
         {
             _clockIn = new ClockIn();
             this._clockIn.Open(dt);
-            this._persistencyService.SaveClockIn(_clockIn);
+            this._clockIn = this._persistencyService.SaveClockIn(_clockIn);
         }
 
-        public void EndCurrentDay(DateTime dt)
+        private void EndCurrentDay(DateTime dt)
         {
             this._clockIn.Close(dt);
             this._persistencyService.SaveClockIn(_clockIn);

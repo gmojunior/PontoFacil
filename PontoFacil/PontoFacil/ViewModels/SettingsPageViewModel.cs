@@ -2,6 +2,7 @@
 using PontoFacil.Services;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
+using System;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
 
@@ -33,6 +34,11 @@ namespace PontoFacil.ViewModels
         {
             _settingsService = settingsService;
 
+            Profile = _settingsService.GetProfile();
+            LunchTime = true;
+            if (Profile.LunchTime.Equals(2))
+                LunchTime = false;
+
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 1000));
 
             InicializeCommands();
@@ -45,6 +51,9 @@ namespace PontoFacil.ViewModels
 
         private void ActionSave()
         {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["SettingsOk"] = true;
+
             Profile.LunchTime = (byte)(LunchTime ? 1 : 2);
             _settingsService.Save(Profile);
         }

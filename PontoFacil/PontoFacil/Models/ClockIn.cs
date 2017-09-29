@@ -9,14 +9,14 @@ namespace PontoFacil.Models
         public DateTime Start
         {
             get { return _start; }
-            private set { _start = value; }
+            set { _start = value; }
         }
 
         private DateTime _end;
         public DateTime End
         {
             get { return _end; }
-            private set { _end = value; }
+            set { _end = value; }
         }
 
         private int _lunchTime;
@@ -42,7 +42,6 @@ namespace PontoFacil.Models
         }
 
         private DateTime? _id;
-
         public DateTime? Id
         {
             get { return _id; }
