@@ -8,5 +8,6 @@ namespace PontoFacil.Services
     {
         List<ClockIn> GetMonthlyHistory();
         List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate);
+        ClockIn AllowWaiver(ClockIn clockIn);
     }
 }

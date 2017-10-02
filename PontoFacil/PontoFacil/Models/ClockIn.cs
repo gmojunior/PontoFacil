@@ -55,6 +55,13 @@ namespace PontoFacil.Models
         }
 
         private TimeSpan _regularHours = new TimeSpan(8,0,0);
+        
+        private bool _isWaiver;
+        public bool IsWaiver
+        {
+            get { return _isWaiver; }
+            set { SetProperty(ref _isWaiver, value); }
+        }
 
         public void Open(DateTime dt, int lunchTime)
         {
@@ -82,6 +89,12 @@ namespace PontoFacil.Models
         {
             get { return _id; }
             set { _id = value; }
+        }
+
+        public void AllowWaiver()
+        {
+            this.IsWaiver = true;
+            this.OvertimeHours = TimeSpan.Zero;
         }
     }
 }
