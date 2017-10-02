@@ -15,18 +15,18 @@ namespace PontoFacil.ViewModels
     public class SettingsPageViewModel : ViewModelBase
     {
         #region Properties
-        private bool _lunchTimeOne;
-        public bool LunchTimeOne
+        private bool _lunchTimeOneHour;
+        public bool LunchTimeOneHour
         {
-            get { return this._lunchTimeOne; }
-            set { SetProperty(ref _lunchTimeOne, value); }
+            get { return this._lunchTimeOneHour; }
+            set { SetProperty(ref _lunchTimeOneHour, value); }
         }
 
-        private bool _lunchTimeTwo;
-        public bool LunchTimeTwo
+        private bool _lunchTimeTwoHour;
+        public bool LunchTimeTwoHour
         {
-            get { return this._lunchTimeTwo; }
-            set { SetProperty(ref _lunchTimeTwo, value); }
+            get { return this._lunchTimeTwoHour; }
+            set { SetProperty(ref _lunchTimeTwoHour, value); }
         }
 
         private Profile _profile;
@@ -54,8 +54,8 @@ namespace PontoFacil.ViewModels
 
             Profile = _settingsService.GetProfile();
 
-            LunchTimeOne = Profile.LunchTime == 1;
-            LunchTimeTwo = !LunchTimeOne;
+            LunchTimeOneHour = Profile.LunchTime == 1;
+            LunchTimeTwoHour = !LunchTimeOneHour;
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 1000));
 
@@ -77,7 +77,7 @@ namespace PontoFacil.ViewModels
             {
                 SetFirstAccess();
 
-                Profile.LunchTime = (byte)(LunchTimeOne ? 1 : 2);
+                Profile.LunchTime = (byte)(LunchTimeOneHour ? 1 : 2);
                 _settingsService.Save(Profile);
 
                 message = resourceLoader.GetString("SaveSuccess");

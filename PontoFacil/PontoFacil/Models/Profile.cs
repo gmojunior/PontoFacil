@@ -48,8 +48,8 @@ namespace PontoFacil.Models
             set { SetProperty(ref _notify, value); }
         }
 
-        private int _notifyTime;
-        public int NotifyTime
+        private TimeSpan _notifyTime;
+        public TimeSpan NotifyTime
         {
             get { return _notifyTime; }
             set { SetProperty(ref _notifyTime, value); }
