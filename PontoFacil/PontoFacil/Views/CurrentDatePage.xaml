@@ -89,7 +89,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="dataAtual" FontSize="18" Text="Quinta-feira, 18 de fevereiro" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="dataAtual" FontSize="18" Text="{Binding DayOfWeekDayMonthYear}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="3" Margin="10,0,10,0"/>
             <TextBlock x:Name="horaAtual" FontSize="60" Text="{Binding CurrentTime}" Grid.Row="1" HorizontalAlignment="Center"/>
 

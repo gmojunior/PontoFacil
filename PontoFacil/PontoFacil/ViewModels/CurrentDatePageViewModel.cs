@@ -1,7 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services;
 using Prism.Commands;
-using Prism.Windows.Mvvm;
 using System;
 using Windows.UI.Xaml;
 
@@ -11,6 +10,13 @@ namespace PontoFacil.ViewModels
 	{
         #region Properties
         private IClockInService _clockInService;
+
+        private string _dayOfWeekDayMonthYear;
+        public string DayOfWeekDayMonthYear
+        {
+            get { return _dayOfWeekDayMonthYear; }
+            set { SetProperty(ref _dayOfWeekDayMonthYear, value); }
+        }
 
         private string _currentTime;
         public string CurrentTime
@@ -47,9 +53,16 @@ namespace PontoFacil.ViewModels
             setStartEndTime(clockIn);
             SetButtonState(clockIn);
 
+            initializeProperties();
             InitializeCommands();
-
             InitializeClockInTime();
+        }
+
+        private void initializeProperties()
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var linkPreposition = loader.GetString("LinkPreposition");
+            DayOfWeekDayMonthYear = DateTime.Now.ToString("dddd, dd {0} MMMM {0} yyyy").Replace("{0}", linkPreposition);
         }
 
         private void InitializeClockInTime()
