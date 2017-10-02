@@ -1,5 +1,6 @@
 using PontoFacil.Repositories;
 using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using PontoFacil.Views;
 using Prism.Unity.Windows;
 using System;
