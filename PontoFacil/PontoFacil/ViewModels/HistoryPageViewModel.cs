@@ -80,25 +80,25 @@ namespace PontoFacil.ViewModels
 
         private void ShowMonthlyHistory()
         {
-            History.Clear();
+            History = new ObservableCollection<ClockIn>(_historyService.GetMonthlyHistory());
         }
 
         private async void ShowFreeHistory()
         {
-            if (!IsDateIntervalValid())
+            if (IsDateIntervalValid())
             {
-                var dialog = new MessageDialog(_dateValidationMessage);
-                await dialog.ShowAsync();
+                History = new ObservableCollection<ClockIn>(_historyService.GetFreeHistory(_startDate, _endDate));                
             }
             else
             {
-                History.Clear();
+                var dialog = new MessageDialog(_dateValidationMessage);
+                await dialog.ShowAsync();
             }
         }
 
         private void ClockInWaiver(ClockIn clockIn)
         {
-
+            _historyService.AllowWaiver(clockIn);
         }
 
         private void EditClockIn(ClockIn clockIn)
