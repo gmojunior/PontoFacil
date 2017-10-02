@@ -36,14 +36,14 @@
 
         <DataTemplate x:Key="HistoryDataTemplate" x:DataType="models:ClockIn">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Id}" Style="{StaticResource HistoryContent}" Margin="8,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="23,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding StartLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding EndLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding End, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding WorkedHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="47,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding OvertimeHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="75,0,0,0"></TextBlock>
-                <TextBlock Text="00:00:00" Style="{StaticResource HistoryContent}" Margin="60,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding Id}" Style="{StaticResource HistoryContent}" Margin="2,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="20,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding StartLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="12,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding EndLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="12,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding End, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="12,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding WorkedHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="48,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding OvertimeHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="65,0,0,0"></TextBlock>
+                <TextBlock Text="00:00:00" Style="{StaticResource HistoryContent}" Margin="45,0,0,0"></TextBlock>
                 <SymbolIcon Symbol="Accept" Visibility="{Binding IsWaiver}" Margin="60,0,0,0" />
             </StackPanel>
         </DataTemplate>
@@ -62,41 +62,41 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel>
-            <TextBlock x:Name="titlePeriod" Text="Period" FontSize="20" FontWeight="Bold"></TextBlock>
-            <RadioButton x:Name="rbMonthlyPeriod" Content="Monthly (Current month)" Margin="0,10,0,0" IsChecked="True" Command="{Binding ShowMonthlyHistoryCommand}" ></RadioButton>
-            <RadioButton x:Name="rbFreePeriod" Content="Free Period" Margin="0"></RadioButton>
+            <TextBlock x:Name="titlePeriod" x:Uid="Period" FontSize="20" FontWeight="Bold"></TextBlock>
+            <RadioButton x:Name="rbMonthlyPeriod" x:Uid="Monthly" Margin="0,10,0,0" IsChecked="True" Command="{Binding ShowMonthlyHistoryCommand}" ></RadioButton>
+            <RadioButton x:Name="rbFreePeriod" x:Uid="FreePeriod" Margin="0"></RadioButton>
         </StackPanel>
 
         <StackPanel x:Name="FreePeriodFields" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsChecked, ElementName=rbFreePeriod, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel Width="200" Margin="28,5,10,0">
-                <TextBlock Text="Start Date"></TextBlock>
+                <TextBlock x:Uid="StartDate"></TextBlock>
                 <CalendarDatePicker x:Name="calendarStartDate" 
-                                    DisplayMode="Month" PlaceholderText="Choose a start date" 
+                                    DisplayMode="Month" x:Uid="ChooseAStartDate"
                                     HorizontalAlignment="Stretch" Date="{Binding StartDate, Mode=TwoWay}"/>
             </StackPanel>
             <StackPanel Width="200" Margin="0,5,10,0">
-                <TextBlock Text="End Date"></TextBlock>
+                <TextBlock x:Uid="EndDate"></TextBlock>
                 <CalendarDatePicker x:Name="calendarEndDate" 
-                                    DisplayMode="Month" PlaceholderText="Choose an end date" 
+                                    DisplayMode="Month" x:Uid="ChooseAnEndDate"
                                     HorizontalAlignment="Stretch" Date="{Binding EndDate, Mode=TwoWay}"/>
             </StackPanel>
-            <Button x:Name="btnShowHistory" Content="Show History" Margin="10,25,0,0" Command="{Binding ShowFreeHistoryCommand}"></Button>
+            <Button x:Name="btnShowHistory" x:Uid="ShowHistory" Margin="10,25,0,0" Command="{Binding ShowFreeHistoryCommand}"></Button>
         </StackPanel>
 
-        <TextBlock Grid.Row="2" Text="History" FontSize="20" FontWeight="Bold" Margin="0,20,0,0"></TextBlock>
+        <TextBlock Grid.Row="2" x:Uid="History" FontSize="20" FontWeight="Bold" Margin="0,20,0,0"></TextBlock>
 
         <Border x:Name="historyListBorder" BorderBrush="Aqua" BorderThickness="1" Grid.Row="3" Margin="0,10,0,0" VerticalAlignment="Top">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Date" Width="60" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Start Time" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="End Time" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Start Time" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="End Time" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Worked Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Overtime Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Total Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Abono" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="Date" Width="60" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="StartTime" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="EndTime" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="StartTime" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="EndTime" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="WorkedHours" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="OvertimeHours" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="TotalHours" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock x:Uid="Waiver" Style="{StaticResource HistoryTitle}"></TextBlock>
                 </StackPanel>
                 <ListView x:Name="historyList" Margin="0,20,0,0" Height="auto" MaxHeight="700" ScrollViewer.VerticalScrollBarVisibility="auto"
                           ItemsSource="{Binding History}" ItemTemplate="{StaticResource HistoryDataTemplate}"></ListView>
@@ -104,10 +104,9 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" VerticalAlignment="Top" Margin="0,10,0,0">
-            <Button Content="Abonar" Margin="0,0,10,0" 
+            <Button x:Uid="ToWaiver" Margin="0,0,10,0" 
                     IsEnabled="{Binding SelectedItem, ElementName=historyList, Mode=TwoWay, Converter={StaticResource SelectedItemToEnableConverter}}"
                     Command="{Binding ClockInWaiverCommand}" CommandParameter="{Binding SelectedItem, ElementName=historyList}" ></Button>
-            <Button Content="Editar" IsEnabled="{Binding SelectedItem, ElementName=historyList, Mode=TwoWay, Converter={StaticResource SelectedItemToEnableConverter}}"></Button>
         </StackPanel>
     </Grid>
 </Page>
