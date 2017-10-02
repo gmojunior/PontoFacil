@@ -72,11 +72,10 @@ namespace PontoFacil.ViewModels
         protected override void OnLoaded()
         {
             base.OnLoaded();
+
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
             SetButtonState(clockIn);
-
         }
-
 
         private void RegisterTime()
         {
