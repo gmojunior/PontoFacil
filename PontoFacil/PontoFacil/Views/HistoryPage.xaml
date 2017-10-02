@@ -31,17 +31,19 @@
 
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:SelectedItemToEnableConverter x:Key="SelectedItemToEnableConverter" />
+        <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
 
         <DataTemplate x:Key="HistoryDataTemplate" x:DataType="models:ClockIn">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Id}" Style="{StaticResource HistoryContent}" Margin="8,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding Start}" Style="{StaticResource HistoryContent}" Margin="23,0,0,0"></TextBlock>
-                <TextBlock Text="12:00" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="13:00" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="{Binding End}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
-                <TextBlock Text="08:30" Style="{StaticResource HistoryContent}" Margin="47,0,0,0"></TextBlock>
-                <TextBlock Text="00:30" Style="{StaticResource HistoryContent}" Margin="75,0,0,0"></TextBlock>
-                <TextBlock Text="01:30" Style="{StaticResource HistoryContent}" Margin="60,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding Start, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="23,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding StartLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding EndLunchTime, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding End, Converter={StaticResource DateTimeToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="35,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding WorkedHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="47,0,0,0"></TextBlock>
+                <TextBlock Text="{Binding OvertimeHours, Converter={StaticResource TimeSpanToStringConverter}}" Style="{StaticResource HistoryContent}" Margin="75,0,0,0"></TextBlock>
+                <TextBlock Text="00:00:00" Style="{StaticResource HistoryContent}" Margin="60,0,0,0"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -90,7 +92,7 @@
                     <TextBlock Text="End Time" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="Start Time" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="End Time" Style="{StaticResource HistoryTitle}"></TextBlock>
-                    <TextBlock Text="Regular Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
+                    <TextBlock Text="Worked Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="Overtime Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
                     <TextBlock Text="Total Hours" Style="{StaticResource HistoryTitle}"></TextBlock>
                 </StackPanel>

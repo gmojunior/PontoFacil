@@ -33,7 +33,8 @@ namespace PontoFacil.Services
         private void StartNewDay(DateTime dt)
         {
             _clockIn = new ClockIn();
-            this._clockIn.Open(dt);
+
+            this._clockIn.Open(dt, this._persistencyService.getProfile().LunchTime);
             this._clockIn = this._persistencyService.SaveClockIn(_clockIn);
         }
 

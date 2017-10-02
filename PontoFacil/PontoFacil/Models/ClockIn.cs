@@ -40,28 +40,36 @@ namespace PontoFacil.Models
             set { SetProperty(ref _endLunchTime, value); }
         }
 
-        private DateTime _regularHours;
-        public DateTime RegularHours
+        private TimeSpan _workedHours;
+        public TimeSpan WorkedHours
         {
-            get { return _regularHours; }
-            set { SetProperty(ref _regularHours, value); }
+            get { return _workedHours; }
+            set { SetProperty(ref _workedHours, value); }
         }
 
-        private DateTime _overtimeHours;
-        public DateTime OvertimeHours
+        private TimeSpan _overtimeHours;
+        public TimeSpan OvertimeHours
         {
             get { return _overtimeHours; }
             set { SetProperty(ref _overtimeHours, value); }
         }
 
-        public void Open(DateTime dt)
+        private TimeSpan _regularHours = new TimeSpan(8,0,0);
+
+        public void Open(DateTime dt, int lunchTime)
         {
-            _start = dt;
+            Start = Convert.ToDateTime(dt.ToString("HH:mm:ss"));
+            LunchTime = lunchTime;
+            StartLunchTime = Convert.ToDateTime("12:00:00");
+            EndLunchTime = lunchTime == 1 ? Convert.ToDateTime("13:00:00") : Convert.ToDateTime("14:00:00");
         }
 
         public void Close(DateTime dt)
         {
-            _end = dt;
+            End = dt;
+
+            WorkedHours = End - Start.AddHours(LunchTime);
+            OvertimeHours = WorkedHours - _regularHours;
         }
 
         public bool IsOpen()
