@@ -52,9 +52,9 @@ namespace PontoFacil.ViewModels
             }
         }
 
-        private static bool IsANumber(string sender)
+        private static bool IsANumber(string text)
         {
-            return double.TryParse(sender, out double dtemp) && sender != "";
+            return double.TryParse(text, out double dtemp) && !string.IsNullOrWhiteSpace(text);
         }
     }
 }

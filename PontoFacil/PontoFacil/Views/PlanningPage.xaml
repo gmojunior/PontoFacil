@@ -48,7 +48,7 @@
             <TextBlock Grid.Column="0" Grid.Row="2" x:Uid="NumberOfDays" />
             <TextBox Grid.Column="1" Grid.Row="2" Text="{x:Bind ViewModel.Planning.NumberOfDaysValue, Mode=TwoWay}" Style="{StaticResource TextBoxDaysStyle}" TextChanging="{x:Bind ViewModel.TextBox_TextChanging}" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3" x:Uid="StartDay" />
+            <TextBlock Grid.Column="0" Grid.Row="3" x:Uid="StartDay" />
             <CalendarDatePicker Grid.Column="1" Grid.Row="3" Style="{StaticResource CalendarDatePickerStyle}" Date="{x:Bind ViewModel.Planning.StartDayValue, Mode=TwoWay}" />
 
             <Button Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.SaveCommand}" x:Uid="Save" />
