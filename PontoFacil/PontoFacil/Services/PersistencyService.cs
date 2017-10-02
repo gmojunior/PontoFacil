@@ -104,26 +104,31 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return _repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
+            return _repository.ClockInList.Find(ci => ci.Id.Equals(datetime.Date));
         }
 
         public Planning getPlanning()
         {
             Planning p = _repository.MyPlanning;
 
-            return p != null ? p : new Planning();
+            return p ?? new Planning();
         }
 
         public Profile getProfile()
         {
             Profile p = _repository.MyProfile;
 
-            return p != null ? p : new Profile();
+            return p ?? new Profile();
         }
 
         public List<ClockIn> GetMonthlyHistory()
         {
-            return _repository.ClockInList.FindAll(ci => ci.Id >= FIRST_DAY_OF_THE_MONTH && ci.Id <= TODAY);
+            return _repository.ClockInList.FindAll(ci => CheckIsBetweenDates(ci, FIRST_DAY_OF_THE_MONTH, TODAY));
+        }
+
+        private bool CheckIsBetweenDates(ClockIn ci, DateTime start, DateTime end)
+        {
+            return ci.Id >= start && ci.Id <= end;
         }
 
         public List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate)
@@ -131,7 +136,7 @@ namespace PontoFacil.Services
             DateTime start = startDate.Date;
             DateTime end = endDate.Date;
 
-            return _repository.ClockInList.FindAll(ci => ci.Id >= start && ci.Id <= end);
+            return _repository.ClockInList.FindAll(ci => CheckIsBetweenDates(ci, start, end));
         }
 
         #endregion

@@ -15,9 +15,9 @@ namespace PontoFacil.Services
         #region Constructor
         public ClockInService(IPersistencyService persistencyService)
         {
-            this._persistencyService = persistencyService;
+            _persistencyService = persistencyService;
 
-            _clockIn = this._persistencyService.getClockInById(DateTime.Now.Date);
+            _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
         }
         #endregion
 
@@ -34,15 +34,21 @@ namespace PontoFacil.Services
         {
             _clockIn = new ClockIn();
 
-            _clockIn.Open(dt, this._persistencyService.getProfile().LunchTime);
-            _clockIn = this._persistencyService.SaveClockIn(_clockIn);
+            _clockIn.Open(dt, _persistencyService.getProfile().LunchTime);
+            _clockIn = _persistencyService.SaveClockIn(_clockIn);
         }
 
         private void EndCurrentDay(DateTime dt)
         {
-            this._clockIn.Close(dt);
-            this._persistencyService.SaveClockIn(_clockIn);
+            _clockIn.Close(dt);
+            _persistencyService.SaveClockIn(_clockIn);
         }
+
+        public ClockIn getClockInById(DateTime datetime)
+        {
+            return _persistencyService.getClockInById(datetime);
+        }
+
         #endregion
     }
 }

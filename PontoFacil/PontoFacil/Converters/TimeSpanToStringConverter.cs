@@ -24,7 +24,6 @@ namespace PontoFacil.Converters
             }
                 
             return time;
-            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
