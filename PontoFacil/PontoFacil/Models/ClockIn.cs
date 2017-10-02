@@ -75,6 +75,11 @@ namespace PontoFacil.Models
             get { return _isWaiver; }
             set { SetProperty(ref _isWaiver, value); }
         }
+
+        private readonly DateTime MIDDAY = Convert.ToDateTime("12:00:00");
+        private readonly DateTime ONE_PM = Convert.ToDateTime("13:00:00");
+        private readonly DateTime TWO_PM = Convert.ToDateTime("14:00:00");
+
         #endregion
 
         #region Constructor
@@ -88,11 +93,9 @@ namespace PontoFacil.Models
         public void Open(DateTime dt, int lunchTime)
         {
             Start = Convert.ToDateTime(dt.ToString("HH:mm:ss"));
-            LunchTime = lunchTime;
-            StartLunchTime = Convert.ToDateTime("12:00:00");
-            EndLunchTime = lunchTime == 1 ? Convert.ToDateTime("13:00:00") : Convert.ToDateTime("14:00:00");
+            SetProperties(lunchTime);
         }
-
+        
         public void Close(DateTime dt)
         {
             End = dt;
@@ -110,6 +113,13 @@ namespace PontoFacil.Models
         {
             this.IsWaiver = true;
             this.OvertimeHours = TimeSpan.Zero;
+        }
+
+        private void SetProperties(int lunchTime)
+        {
+            LunchTime = lunchTime;
+            StartLunchTime = MIDDAY;
+            EndLunchTime = lunchTime == 1 ? ONE_PM : TWO_PM;
         }
         #endregion
     }

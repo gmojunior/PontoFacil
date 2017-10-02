@@ -17,7 +17,9 @@ namespace PontoFacil.Services
         private readonly string DATA_FILE_NAME = "PontoFacilData.txt";
         private readonly string PATH_SEPARATOR = @"\";
         private readonly string DATABASE_FOLDER = ApplicationData.Current.LocalFolder.Path;
-        private string DATABASE_PATH;
+        private readonly string DATABASE_PATH;
+        private readonly DateTime FIRST_DAY_OF_THE_MONTH;
+        private readonly DateTime TODAY;
 
         private object lockFileWriter;
 
@@ -27,6 +29,8 @@ namespace PontoFacil.Services
         public PersistencyService(IRepository repository)
         {
             this._repository = repository;
+            FIRST_DAY_OF_THE_MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            TODAY = DateTime.Now.Date;
 
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
             
@@ -118,10 +122,7 @@ namespace PontoFacil.Services
 
         public List<ClockIn> GetMonthlyHistory()
         {
-            DateTime firstDayOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime today = DateTime.Now.Date;
-
-            return _repository.ClockInList.FindAll(ci => ci.Id >= firstDayOfTheMonth && ci.Id <= today);
+            return _repository.ClockInList.FindAll(ci => ci.Id >= FIRST_DAY_OF_THE_MONTH && ci.Id <= TODAY);
         }
 
         public List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate)

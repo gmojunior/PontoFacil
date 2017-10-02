@@ -12,14 +12,11 @@ namespace PontoFacil.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             string time = "00:00:00";
-            try
+            if(value != null)
             {
-                return value != null ? ((DateTime)value).ToString("HH:mm:ss") : time;
+                time = ((DateTime)value).ToString("HH:mm:ss");
             }
-            catch (Exception)
-            {
-                return time;
-            }
+            return time;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
