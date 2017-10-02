@@ -78,7 +78,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="dataAtual" FontSize="18" Text="Quinta-feira, 18 de fevereiro" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Border BorderBrush="Black" BorderThickness="2" Grid.RowSpan="3" Margin="10,0,10,0"/>
-            <TextBlock x:Name="horaAtual" FontSize="60" Text="08:00" Grid.Row="1" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="horaAtual" FontSize="60" Text="{Binding CurrentTime}" Grid.Row="1" HorizontalAlignment="Center"/>
 
             <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ToggleButton x:Name="ButtonRegistrarPonto" Content="Registrar" Command="{Binding RegisterTimeCommand}"  HorizontalAlignment="Center" Width="100" Margin="20,0,20,0"/>

@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PontoFacil.Models;
+using PontoFacil.Repositories;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
-using PontoFacil.Repositories;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace PontoFacil.Services
 {
@@ -25,8 +24,10 @@ namespace PontoFacil.Services
         #endregion
 
         #region Construcutor
-        public PersistencyService()
+        public PersistencyService(IRepository repository)
         {
+            this._repository = repository;
+
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
             
             this.Restore();
@@ -42,7 +43,7 @@ namespace PontoFacil.Services
             {
                 lock (lockFileWriter)
                 {
-                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(_repository));
+                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(this._repository));
                 }
             });
         }
@@ -54,11 +55,7 @@ namespace PontoFacil.Services
                 if (File.Exists(DATABASE_PATH))
                 {
                     string result = File.ReadAllText(DATABASE_PATH);
-                    _repository = JsonConvert.DeserializeObject<Repository>(result);
-                }
-                else
-                {
-                    _repository = new Repository();
+                    this._repository = JsonConvert.DeserializeObject<Repository>(result);
                 }
             }
             catch (Exception e)
@@ -72,12 +69,12 @@ namespace PontoFacil.Services
             if (clockIn.Id == null)
             {
                 clockIn.Id = DateTime.Now.Date;
-                _repository.ClockInList.Add(clockIn);
+                this._repository.ClockInList.Add(clockIn);
             }
             else
             {
-                int index = _repository.ClockInList.FindIndex(0, _repository.ClockInList.Count, ci => ci.Id.Equals(clockIn.Id));
-                _repository.ClockInList[index] = clockIn;
+                int index = this._repository.ClockInList.FindIndex(0, this._repository.ClockInList.Count, ci => ci.Id.Equals(clockIn.Id));
+                this._repository.ClockInList[index] = clockIn;
             }
             this.Persist();
 
@@ -86,7 +83,7 @@ namespace PontoFacil.Services
 
         public Planning SavePlanning(Planning planning)
         {
-            _repository.MyPlanning = planning;
+            this._repository.MyPlanning = planning;
             this.Persist();
 
             return planning;
@@ -94,7 +91,7 @@ namespace PontoFacil.Services
 
         public Profile SaveProfile(Profile profile)
         {
-            _repository.MyProfile = profile;
+            this._repository.MyProfile = profile;
             this.Persist();
 
             return profile;
@@ -102,19 +99,20 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            
-            return _repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
+            return this._repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
         }
 
         public Planning getPlanning()
         {
-            Planning p = _repository.MyPlanning;
+            Planning p = this._repository.MyPlanning;
+
             return p != null ? p : new Planning();
         }
 
         public Profile getProfile()
         {
             Profile p = this._repository.MyProfile;
+
             return p != null ? p : new Profile();
         }
 
@@ -127,6 +125,7 @@ namespace PontoFacil.Services
         {
             return _repository.ClockInList.FindAll(ci => ci.Id >= startDate.Date && ci.Id <= endDate.Date);
         }
+
         #endregion
     }
 }
