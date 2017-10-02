@@ -11,6 +11,13 @@ namespace PontoFacil.ViewModels
         #region Properties
         private IClockInService _clockInService;
 
+        private string _dayOfWeekDayMonthYear;
+        public string DayOfWeekDayMonthYear
+        {
+            get { return _dayOfWeekDayMonthYear; }
+            set { SetProperty(ref _dayOfWeekDayMonthYear, value); }
+        }
+
         private string _currentTime;
         public string CurrentTime
         {
@@ -24,9 +31,17 @@ namespace PontoFacil.ViewModels
         public CurrentDatePageViewModel(IClockInService clockInService)
         {
             _clockInService = clockInService;
-            InitializeCommands();
 
+            initializeProperties();
+            InitializeCommands();
             InitializeClockInTime();
+        }
+
+        private void initializeProperties()
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var linkPreposition = loader.GetString("LinkPreposition");
+            DayOfWeekDayMonthYear = DateTime.Now.ToString("dddd, dd {0} MMMM {0} yyyy").Replace("{0}", linkPreposition);
         }
 
         private void InitializeClockInTime()
