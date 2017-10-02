@@ -42,6 +42,12 @@ namespace PontoFacil.Services
             this._clockIn.Close(dt);
             this._persistencyService.SaveClockIn(_clockIn);
         }
+
+        public ClockIn getClockInById(DateTime datetime)
+        {
+            return _persistencyService.getClockInById(datetime);
+        }
+
         #endregion
     }
 }
