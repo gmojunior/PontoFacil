@@ -28,15 +28,15 @@ namespace PontoFacil.Services
         #region Construcutor
         public PersistencyService(IRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
             FIRST_DAY_OF_THE_MONTH = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             TODAY = DateTime.Now.Date;
 
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
             
-            this.Restore();
+            Restore();
 
-            this.lockFileWriter = new object();
+            lockFileWriter = new object();
         }
         #endregion
 
@@ -47,7 +47,7 @@ namespace PontoFacil.Services
             {
                 lock (lockFileWriter)
                 {
-                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(this._repository));
+                    File.WriteAllText(DATABASE_PATH, JsonConvert.SerializeObject(_repository));
                 }
             });
         }
@@ -59,7 +59,7 @@ namespace PontoFacil.Services
                 if (File.Exists(DATABASE_PATH))
                 {
                     string result = File.ReadAllText(DATABASE_PATH);
-                    this._repository = JsonConvert.DeserializeObject<Repository>(result);
+                    _repository = JsonConvert.DeserializeObject<Repository>(result);
                 }
             }
             catch (Exception e)
@@ -73,49 +73,50 @@ namespace PontoFacil.Services
             if (clockIn.Id == null)
             {
                 clockIn.Id = DateTime.Now.Date;
-                this._repository.ClockInList.Add(clockIn);
+                _repository.ClockInList.Add(clockIn);
             }
             else
             {
-                int index = this._repository.ClockInList.FindIndex(0, this._repository.ClockInList.Count, ci => ci.Id.Equals(clockIn.Id));
-                this._repository.ClockInList[index] = clockIn;
+                int index = _repository.ClockInList.FindIndex(0, _repository.ClockInList.Count, ci => ci.Id.Equals(clockIn.Id));
+                _repository.ClockInList[index] = clockIn;
             }
-            this.Persist();
+
+            Persist();
 
             return clockIn;
         }
 
         public Planning SavePlanning(Planning planning)
         {
-            this._repository.MyPlanning = planning;
-            this.Persist();
+            _repository.MyPlanning = planning;
+            Persist();
 
             return planning;
         }
 
         public Profile SaveProfile(Profile profile)
         {
-            this._repository.MyProfile = profile;
-            this.Persist();
+            _repository.MyProfile = profile;
+            Persist();
 
             return profile;
         }
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return this._repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
+            return _repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
         }
 
         public Planning getPlanning()
         {
-            Planning p = this._repository.MyPlanning;
+            Planning p = _repository.MyPlanning;
 
             return p != null ? p : new Planning();
         }
 
         public Profile getProfile()
         {
-            Profile p = this._repository.MyProfile;
+            Profile p = _repository.MyProfile;
 
             return p != null ? p : new Profile();
         }

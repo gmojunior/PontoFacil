@@ -5,7 +5,7 @@ namespace PontoFacil.Models
 {
     public class ClockIn : BindableBase
     {
-        #region
+        #region Properties
         private DateTime? _id;
         public DateTime? Id
         {
@@ -79,7 +79,6 @@ namespace PontoFacil.Models
         private readonly DateTime MIDDAY = Convert.ToDateTime("12:00:00");
         private readonly DateTime ONE_PM = Convert.ToDateTime("13:00:00");
         private readonly DateTime TWO_PM = Convert.ToDateTime("14:00:00");
-
         #endregion
 
         #region Constructor
