@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using PontoFacil.Models;
+﻿using PontoFacil.Models;
+using System;
 
-namespace PontoFacil.Services
+namespace PontoFacil.Services.Interfaces
 {
     public interface IPersistencyService
     {

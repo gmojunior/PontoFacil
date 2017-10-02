@@ -1,4 +1,4 @@
-﻿namespace PontoFacil.Services
+﻿namespace PontoFacil.Services.Interfaces
 {
     public interface IHistoryService
     {
