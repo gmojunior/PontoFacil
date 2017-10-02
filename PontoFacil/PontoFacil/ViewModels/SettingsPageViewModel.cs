@@ -3,7 +3,10 @@ using PontoFacil.Services;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
+using System.Text;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 
 namespace PontoFacil.ViewModels
@@ -11,11 +14,20 @@ namespace PontoFacil.ViewModels
     public class SettingsPageViewModel : ViewModelBase
     {
         #region Properties
-        private bool _lunchTime;
-        public bool LunchTime
+        private StringBuilder sbMessages;
+
+        private bool _lunchTimeOne;
+        public bool LunchTimeOne
         {
-            get { return this._lunchTime; }
-            set { SetProperty(ref _lunchTime, value); }
+            get { return this._lunchTimeOne; }
+            set { SetProperty(ref _lunchTimeOne, value); }
+        }
+
+        private bool _lunchTimeTwo;
+        public bool LunchTimeTwo
+        {
+            get { return this._lunchTimeTwo; }
+            set { SetProperty(ref _lunchTimeTwo, value); }
         }
 
         private Profile _profile;
@@ -26,36 +38,62 @@ namespace PontoFacil.ViewModels
         }
 
         public DelegateCommand SaveCommand { get; private set; }
-        #endregion
 
         private ISettingsService _settingsService;
+        #endregion
 
+        #region Constructor
         public SettingsPageViewModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
 
             Profile = _settingsService.GetProfile();
-            LunchTime = true;
-            if (Profile.LunchTime.Equals(2))
-                LunchTime = false;
+
+            LunchTimeOne = Profile.LunchTime == 1;
+            LunchTimeTwo = !LunchTimeOne;
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 1000));
 
             InicializeCommands();
         }
+        #endregion
 
+        #region Commands
         private void InicializeCommands()
         {
             SaveCommand = new DelegateCommand(ActionSave);
         }
 
-        private void ActionSave()
+        private async void ActionSave()
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            localSettings.Values["SettingsOk"] = true;
+            MessageDialog dialog;
 
-            Profile.LunchTime = (byte)(LunchTime ? 1 : 2);
-            _settingsService.Save(Profile);
+            if (IsValid())
+            {
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                localSettings.Values["SettingsOk"] = true;
+
+                Profile.LunchTime = (byte)(LunchTimeOne ? 1 : 2);
+                _settingsService.Save(Profile);
+
+                dialog = new MessageDialog("Configurações salvas com sucesso!");
+            }
+            else
+                dialog = new MessageDialog(sbMessages.ToString());
+           
+            await dialog.ShowAsync();
         }
+        #endregion
+
+        #region Methods
+        private bool IsValid()
+        {
+            sbMessages = new StringBuilder();
+            if (!Regex.IsMatch(Profile.AccumuletedHours, @"\d{1,4}:\d{2}"))
+                sbMessages.AppendLine("Campo \"Horas acumuladas\" com formato inválido");
+
+            return sbMessages.Length == 0;
+        }
+        #endregion
     }
 }
