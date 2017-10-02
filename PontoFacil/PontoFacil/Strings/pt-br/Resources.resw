@@ -129,6 +129,9 @@
   <data name="Exit.Text" xml:space="preserve">
     <value>Saída</value>
   </data>
+  <data name="FormatInvalidFieldAccumuletedHours" xml:space="preserve">
+    <value>Campo \"Horas acumuladas\" com formato inválido</value>
+  </data>
   <data name="HoursToAdjust.Text" xml:space="preserve">
     <value>Horas a serem ajustadas</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="Save.Content" xml:space="preserve">
     <value>Salvar</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Configurações salvas com sucesso!</value>
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Configurações</value>

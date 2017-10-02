@@ -5,6 +5,7 @@ using Prism.Windows.Mvvm;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
@@ -14,8 +15,6 @@ namespace PontoFacil.ViewModels
     public class SettingsPageViewModel : ViewModelBase
     {
         #region Properties
-        private StringBuilder sbMessages;
-
         private bool _lunchTimeOne;
         public bool LunchTimeOne
         {
@@ -40,12 +39,18 @@ namespace PontoFacil.ViewModels
         public DelegateCommand SaveCommand { get; private set; }
 
         private ISettingsService _settingsService;
+
+        private ResourceLoader resourceLoader;
+
+        private StringBuilder sbValidationMessages;
         #endregion
 
         #region Constructor
         public SettingsPageViewModel(ISettingsService settingsService)
         {
             _settingsService = settingsService;
+
+            resourceLoader = new ResourceLoader();
 
             Profile = _settingsService.GetProfile();
 
@@ -66,33 +71,49 @@ namespace PontoFacil.ViewModels
 
         private async void ActionSave()
         {
-            MessageDialog dialog;
+            string message;
 
-            if (IsValid())
+            if (ValidateFields())
             {
-                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                localSettings.Values["SettingsOk"] = true;
+                SetFirstAccess();
 
                 Profile.LunchTime = (byte)(LunchTimeOne ? 1 : 2);
                 _settingsService.Save(Profile);
 
-                dialog = new MessageDialog("Configurações salvas com sucesso!");
+                message = resourceLoader.GetString("SaveSuccess");
             }
             else
-                dialog = new MessageDialog(sbMessages.ToString());
-           
+                message = sbValidationMessages.ToString();
+
+            var dialog = new MessageDialog(message);
             await dialog.ShowAsync();
         }
         #endregion
 
         #region Methods
-        private bool IsValid()
+        private bool ValidateFields()
         {
-            sbMessages = new StringBuilder();
-            if (!Regex.IsMatch(Profile.AccumuletedHours, @"\d{1,4}:\d{2}"))
-                sbMessages.AppendLine("Campo \"Horas acumuladas\" com formato inválido");
+            sbValidationMessages = new StringBuilder();
+            string message;
 
-            return sbMessages.Length == 0;
+            if (!FormatHourIsValidd(Profile.AccumuletedHours))
+            {
+                message = resourceLoader.GetString("FormatInvalidFieldAccumuletedHours");
+                sbValidationMessages.AppendLine(message);
+            }
+
+            return sbValidationMessages.Length == 0;
+        }
+
+        private bool FormatHourIsValidd(string hour)
+        {
+            return Regex.IsMatch(hour, @"\d{1,4}:\d{2}");
+        }
+
+        private void SetFirstAccess()
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["SettingsOk"] = true;
         }
         #endregion
     }
