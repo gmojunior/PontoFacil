@@ -34,8 +34,8 @@ namespace PontoFacil.Services
         {
             _clockIn = new ClockIn();
 
-            this._clockIn.Open(dt, this._persistencyService.getProfile().LunchTime);
-            this._clockIn = this._persistencyService.SaveClockIn(_clockIn);
+            _clockIn.Open(dt, this._persistencyService.getProfile().LunchTime);
+            _clockIn = this._persistencyService.SaveClockIn(_clockIn);
         }
 
         private void EndCurrentDay(DateTime dt)

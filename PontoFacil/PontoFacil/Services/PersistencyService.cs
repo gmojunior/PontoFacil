@@ -118,12 +118,18 @@ namespace PontoFacil.Services
 
         public List<ClockIn> GetMonthlyHistory()
         {
-            return _repository.ClockInList.FindAll(ci => ci.Id >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1) && ci.Id <= DateTime.Now.Date);
+            DateTime firstDayOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime today = DateTime.Now.Date;
+
+            return _repository.ClockInList.FindAll(ci => ci.Id >= firstDayOfTheMonth && ci.Id <= today);
         }
 
         public List<ClockIn> GetFreeHistory(DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            return _repository.ClockInList.FindAll(ci => ci.Id >= startDate.Date && ci.Id <= endDate.Date);
+            DateTime start = startDate.Date;
+            DateTime end = endDate.Date;
+
+            return _repository.ClockInList.FindAll(ci => ci.Id >= start && ci.Id <= end);
         }
 
         #endregion
