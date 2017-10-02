@@ -1,13 +1,13 @@
-﻿using PontoFacil.Services;
+﻿using PontoFacil.Models;
+using PontoFacil.Services;
 using Prism.Commands;
-using Prism.Windows.Mvvm;
 using System;
 using Windows.UI.Xaml;
 
 namespace PontoFacil.ViewModels
 {
-    public class CurrentDatePageViewModel : ViewModelBase
-    {
+    public class CurrentDatePageViewModel : StateViewModelBase
+	{
         #region Properties
         private IClockInService _clockInService;
 
@@ -26,11 +26,32 @@ namespace PontoFacil.ViewModels
         }
 
         private DispatcherTimer _timer;
+
+        private string _startTime;
+
+        public string StartTime
+        {
+            get { return this._startTime; }
+            set { SetProperty(ref _startTime, value); }
+        }
+
+        private string _endTime;
+
+        public string EndTime
+        {
+            get { return this._endTime; }
+            set { SetProperty(ref _endTime, value); }
+        }
+
         #endregion
 
         public CurrentDatePageViewModel(IClockInService clockInService)
         {
             _clockInService = clockInService;
+
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            setStartEndTime(clockIn);
+            SetButtonState(clockIn);
 
             initializeProperties();
             InitializeCommands();
@@ -65,6 +86,41 @@ namespace PontoFacil.ViewModels
         private void RegisterTime()
         {
             _clockInService.Register(DateTime.Now);
+
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+
+            setStartEndTime(clockIn);
+
+            SetButtonState(clockIn);
+        }
+
+        private void setStartEndTime(ClockIn clockIn)
+        {
+            if (clockIn != null)
+            {
+                StartTime = clockIn.Start.ToString("HH:mm:ss");
+
+                if (!clockIn.IsOpen())
+                {
+                    EndTime = clockIn.End.ToString("HH:mm:ss");
+                }
+            }
+        }
+
+        private void SetButtonState(ClockIn clockIn)
+        {
+
+            if (clockIn != null)
+            {
+                if (clockIn.IsOpen())
+                {
+                    GoToState(REGISTER_OUT_STATE);
+                }
+                else
+                {
+                    GoToState(REGISTER_DISABLED);
+                }
+            }
         }
 
         public DelegateCommand RegisterTimeCommand { get; private set; }
