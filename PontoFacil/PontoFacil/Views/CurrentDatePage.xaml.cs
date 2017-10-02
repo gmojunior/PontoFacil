@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PontoFacil.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,5 +27,12 @@ namespace PontoFacil.Views
 		{
 			this.InitializeComponent();
 		}
-	}
+
+		public CurrentDatePageViewModel ViewModel { get { return (CurrentDatePageViewModel)DataContext; } }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SetupVisualState(sender,e);
+        }
+    }
 }

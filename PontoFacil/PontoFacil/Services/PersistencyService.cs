@@ -25,7 +25,7 @@ namespace PontoFacil.Services
         #region Construcutor
         public PersistencyService(IRepository repository)
         {
-            this._repository = repository;
+			this._repository = repository;
 
             DATABASE_PATH = DATABASE_FOLDER + PATH_SEPARATOR + DATA_FILE_NAME;
             
@@ -98,7 +98,7 @@ namespace PontoFacil.Services
 
         public ClockIn getClockInById(DateTime datetime)
         {
-            return this._repository.ClockInList.Find(ci => ci.Id.Equals(datetime));
+            return this._repository.ClockInList.Find(ci => ci.Id.Equals(datetime.Date));
         }
 
         public Planning getPlanning()
