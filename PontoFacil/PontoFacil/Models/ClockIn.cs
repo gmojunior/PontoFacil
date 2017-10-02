@@ -5,6 +5,14 @@ namespace PontoFacil.Models
 {
     public class ClockIn : BindableBase
     {
+        #region
+        private DateTime? _id;
+        public DateTime? Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         private DateTime _start;
         public DateTime Start
         {
@@ -54,15 +62,29 @@ namespace PontoFacil.Models
             set { SetProperty(ref _overtimeHours, value); }
         }
 
-        private TimeSpan _regularHours = new TimeSpan(8,0,0);
-        
+        private TimeSpan _regularHours;
+        public TimeSpan RegularHours
+        {
+            get { return _regularHours; }
+            set { SetProperty(ref _regularHours, value); }
+        }
+
         private bool _isWaiver;
         public bool IsWaiver
         {
             get { return _isWaiver; }
             set { SetProperty(ref _isWaiver, value); }
         }
+        #endregion
 
+        #region Constructor
+        public ClockIn()
+        {
+            RegularHours = new TimeSpan(8, 0, 0);
+        }
+        #endregion
+
+        #region Methods
         public void Open(DateTime dt, int lunchTime)
         {
             Start = Convert.ToDateTime(dt.ToString("HH:mm:ss"));
@@ -83,18 +105,12 @@ namespace PontoFacil.Models
         {
             return _start != null;
         }
-
-        private DateTime? _id;
-        public DateTime? Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
+        
         public void AllowWaiver()
         {
             this.IsWaiver = true;
             this.OvertimeHours = TimeSpan.Zero;
         }
+        #endregion
     }
 }
