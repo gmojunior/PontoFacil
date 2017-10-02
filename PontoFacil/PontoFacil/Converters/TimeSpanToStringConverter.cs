@@ -16,9 +16,14 @@ namespace PontoFacil.Converters
             {
                 if (value != null)
                 {
-                    time = (TimeSpan)value < TimeSpan.Zero ? "-" + ((TimeSpan)value).ToString(@"hh\:mm\:ss") : ((TimeSpan)value).ToString(@"hh\:mm\:ss");
-                }
+                    time = ((TimeSpan)value).ToString(@"hh\:mm\:ss");
 
+                    if((TimeSpan)value < TimeSpan.Zero)
+                    {
+                        time = "-" + time;
+                    }
+                }
+                
                 return time;
             }
             catch (Exception)
