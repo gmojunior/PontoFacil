@@ -50,8 +50,7 @@ namespace PontoFacil.ViewModels
             _clockInService = clockInService;
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
-            setStartEndTime(clockIn);
-            SetButtonState(clockIn);
+            SetStartEndTime(clockIn);
 
             initializeProperties();
             InitializeCommands();
@@ -83,18 +82,26 @@ namespace PontoFacil.ViewModels
             RegisterTimeCommand = new DelegateCommand(RegisterTime);
         }
 
+        protected override void OnLoaded()
+        {
+            base.OnLoaded();
+
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            SetButtonState(clockIn);
+        }
+
         private void RegisterTime()
         {
             _clockInService.Register(DateTime.Now);
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
 
-            setStartEndTime(clockIn);
+            SetStartEndTime(clockIn);
 
             SetButtonState(clockIn);
         }
 
-        private void setStartEndTime(ClockIn clockIn)
+        private void SetStartEndTime(ClockIn clockIn)
         {
             if (clockIn != null)
             {
