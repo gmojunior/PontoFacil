@@ -138,6 +138,9 @@
   <data name="HoursToAdjustValue.PlaceholderText" xml:space="preserve">
     <value>Exemplo 50</value>
   </data>
+  <data name="linkPreposition" xml:space="preserve">
+    <value>de</value>
+  </data>
   <data name="LunchTime.Text" xml:space="preserve">
     <value>Intervalo do almoço</value>
   </data>

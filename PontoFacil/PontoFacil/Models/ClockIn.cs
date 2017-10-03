@@ -38,7 +38,7 @@ namespace PontoFacil.Models
 
         public bool IsOpen()
         {
-            return _start != null;
+            return (_start != null && DateTime.MinValue != _start) && (_end == null || DateTime.MinValue == _end );
         }
 
         private DateTime? _id;
