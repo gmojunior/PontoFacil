@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 
@@ -38,6 +39,7 @@ namespace PontoFacil.ViewModels
         }
 
         private string _dateValidationMessage;
+        private ResourceLoader _loader;
 
         private IHistoryService _historyService;
 
@@ -49,6 +51,8 @@ namespace PontoFacil.ViewModels
             InitializeCommands();
 
             _historyService = historyService;
+            _loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+
             // Set StartDate to yesterday by default
             StartDate = DateTime.Now.AddDays(-1);
 
@@ -113,19 +117,19 @@ namespace PontoFacil.ViewModels
         {
             bool isValid = true;
 
-            if(_endDate > DateTime.Now)
+            if (_endDate > DateTime.Now)
             {
-                _dateValidationMessage = "The End Date must be less than the current date.";
+                _dateValidationMessage = _loader.GetString("EndDateLessThenCurrentDate");
                 isValid = false;
             }
             else if(_endDate <= _startDate)
             {
-                _dateValidationMessage = "The End Date must be greater than the Start Date.";
+                _dateValidationMessage = _loader.GetString("EndDateGreaterThenStartDate");
                 isValid = false;
             }
             else if (_startDate >= DateTime.Now)
             {
-                _dateValidationMessage = "The Start Date must be less than the current date.";
+                _dateValidationMessage = _loader.GetString("StartDateLessThenCurrentDate");
                 isValid = false;
             }
             

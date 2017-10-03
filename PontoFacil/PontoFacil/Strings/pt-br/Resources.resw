@@ -222,4 +222,13 @@
   <data name="WorkedHours.Text" xml:space="preserve">
     <value>Horas trabalhadas</value>
   </data>
+  <data name="EndDateGreaterThenStartDate" xml:space="preserve">
+    <value>A data final deve ser maior que a data inicial</value>
+  </data>
+  <data name="EndDateLessThenCurrentDate" xml:space="preserve">
+    <value>A data final deve ser menor que a data atual</value>
+  </data>
+  <data name="StartDateLessThenCurrentDate" xml:space="preserve">
+    <value>A data inicial deve ser menor que a data atual</value>
+  </data>
 </root>
