@@ -44,7 +44,13 @@ namespace PontoFacil.Services
 
             totalHours = totalHours + overtimeHours;
 
-            return totalHours.ToString(@"hh\:mm\:ss");
+            string totalHoursText = totalHours.ToString(@"hh\:mm\:ss");
+            if (totalHours < TimeSpan.Zero)
+            {
+                totalHoursText = "-" + totalHoursText;
+            }
+
+            return totalHoursText;
         }
 
         public string GetProfileAccumulatedHours()
