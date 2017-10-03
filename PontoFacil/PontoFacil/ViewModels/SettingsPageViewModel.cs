@@ -1,5 +1,5 @@
 ﻿using PontoFacil.Models;
-using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;

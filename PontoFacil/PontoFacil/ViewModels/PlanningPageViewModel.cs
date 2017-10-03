@@ -1,8 +1,8 @@
 ﻿using PontoFacil.Models;
-using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
-using System;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.ViewModels
 {
@@ -41,5 +41,22 @@ namespace PontoFacil.ViewModels
             _planningService.Save(Planning);
         }
         #endregion
+
+        public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            if (!IsANumber(sender.Text))
+                RemoveLastAddedChar(sender, sender.SelectionStart - 1);
+        }
+
+        private static void RemoveLastAddedChar(TextBox sender, int position)
+        {
+            sender.Text = sender.Text.Remove(position, 1);
+            sender.SelectionStart = position + 1;
+        }
+
+        private static bool IsANumber(string text)
+        {
+            return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
+        }
     }
 }
