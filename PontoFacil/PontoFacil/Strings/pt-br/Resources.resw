@@ -230,7 +230,7 @@
   </data>
   <data name="Register.Content" xml:space="preserve">
     <value>Registrar</value>
-    </data>
+  </data>
   <data name="WorkedHours.Text" xml:space="preserve">
     <value>Horas trabalhadas</value>
   </data>
@@ -242,5 +242,8 @@
   </data>
   <data name="StartDateLessThenCurrentDate" xml:space="preserve">
     <value>A data inicial deve ser menor que a data atual</value>
+  </data>
+  <data name="AccumulatedHours.Text" xml:space="preserve">
+    <value>Saldo: </value>
   </data>
 </root>
