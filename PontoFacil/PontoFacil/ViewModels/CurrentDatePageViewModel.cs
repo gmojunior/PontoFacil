@@ -1,5 +1,5 @@
 ﻿using PontoFacil.Models;
-using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using System;
 using Windows.UI.Xaml;
@@ -7,10 +7,11 @@ using Windows.UI.Xaml;
 namespace PontoFacil.ViewModels
 {
     public class CurrentDatePageViewModel : StateViewModelBase
-	{
+    {
         #region Properties
         private IClockInService _clockInService;
-        private IPersistencyService _persistencyService;
+        public DelegateCommand RegisterTimeCommand { get; private set; }
+        private DispatcherTimer _timer;
 
         private string _dayOfWeekDayMonthYear;
         public string DayOfWeekDayMonthYear
@@ -26,10 +27,7 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _currentTime, value); }
         }
 
-        private DispatcherTimer _timer;
-
         private string _startTime;
-
         public string StartTime
         {
             get { return this._startTime; }
@@ -37,15 +35,14 @@ namespace PontoFacil.ViewModels
         }
 
         private string _endTime;
-
         public string EndTime
         {
             get { return this._endTime; }
             set { SetProperty(ref _endTime, value); }
         }
-
         #endregion
 
+        #region Constructor
         public CurrentDatePageViewModel(IClockInService clockInService)
         {
             _clockInService = clockInService;
@@ -57,7 +54,9 @@ namespace PontoFacil.ViewModels
             InitializeCommands();
             InitializeClockInTime();
         }
+        #endregion
 
+        #region Methods
         private void initializeProperties()
         {
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
@@ -67,6 +66,8 @@ namespace PontoFacil.ViewModels
 
         private void InitializeClockInTime()
         {
+            CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+
             _timer = new DispatcherTimer();
             _timer.Tick += Timer_Tick;
             _timer.Interval = new TimeSpan(0, 0, 1);
@@ -130,7 +131,6 @@ namespace PontoFacil.ViewModels
                 }
             }
         }
-
-        public DelegateCommand RegisterTimeCommand { get; private set; }
+        #endregion        
     }
 }

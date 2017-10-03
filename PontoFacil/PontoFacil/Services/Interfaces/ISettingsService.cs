@@ -1,6 +1,6 @@
 ﻿using PontoFacil.Models;
 
-namespace PontoFacil.Services
+namespace PontoFacil.Services.Interfaces
 {
     public interface ISettingsService
     {
