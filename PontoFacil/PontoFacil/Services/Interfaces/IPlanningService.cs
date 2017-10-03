@@ -6,6 +6,5 @@ namespace PontoFacil.Services.Interfaces
     {
         Planning GetPlanning();
         void Save(Planning planning);
-        Planning GetPlanningByDate();
     }
 }

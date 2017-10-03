@@ -40,8 +40,8 @@
             <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="LunchTime"/>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Uid="OneHour" IsChecked="{Binding LunchTimeOne, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <RadioButton x:Uid="TwoHours" IsChecked="{Binding LunchTimeTwo}"/>
+                <RadioButton x:Uid="OneHour" IsChecked="{Binding LunchTimeOneHour, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton x:Uid="TwoHours" IsChecked="{Binding LunchTimeTwoHour}"/>
             </StackPanel>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Exit"/>
             <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"/>
