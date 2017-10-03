@@ -144,6 +144,8 @@
   <data name="Exit.Text" xml:space="preserve">
     <value>Saída</value>
   </data>
+  <data name="FormatInvalidFieldAccumulatedHours" xml:space="preserve">
+    <value>Campo \"Horas acumuladas\" com formato inválido</value>
   <data name="FreePeriod.Content" xml:space="preserve">
     <value>Período livre</value>
   </data>
@@ -174,7 +176,7 @@
   <data name="NumberOfDaysValue.PlaceholderText" xml:space="preserve">
     <value>Exemplo 10</value>
   </data>
-  <data name="OneHour.Text" xml:space="preserve">
+  <data name="OneHour.Content" xml:space="preserve">
     <value>1 hora</value>
   </data>
   <data name="OvertimeHours.Text" xml:space="preserve">
@@ -185,6 +187,9 @@
   </data>
   <data name="Save.Content" xml:space="preserve">
     <value>Salvar</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Configurações salvas com sucesso!</value>
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Configurações</value>
@@ -198,6 +203,9 @@
   <data name="StartDay.Text" xml:space="preserve">
     <value>Dia de inicio</value>
   </data>
+  <data name="TwoHours.Content" xml:space="preserve">
+    <value>2 horas</value>
+  </data>
   <data name="StartTime.Text" xml:space="preserve">
     <value>Entrada</value>
   </data>
@@ -206,9 +214,6 @@
   </data>
   <data name="ToWaiver.Content" xml:space="preserve">
     <value>Abonar</value>
-  </data>
-  <data name="TowHours.Text" xml:space="preserve">
-    <value>2 horas</value>
   </data>
   <data name="UserName.Text" xml:space="preserve">
     <value>Nome do usuário</value>

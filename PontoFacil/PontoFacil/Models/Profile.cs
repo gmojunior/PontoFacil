@@ -34,8 +34,8 @@ namespace PontoFacil.Models
             set { SetProperty(ref _exitHour, value); }
         }
 
-        private TimeSpan _accumulatedHours;
-        public TimeSpan AccumuletedHours
+        private string _accumulatedHours;
+        public string AccumuletedHours
         {
             get { return _accumulatedHours; }
             set { SetProperty(ref _accumulatedHours, value); }
@@ -48,8 +48,8 @@ namespace PontoFacil.Models
             set { SetProperty(ref _notify, value); }
         }
 
-        private TimeSpan _notifyTime;
-        public TimeSpan NotifyTime
+        private int _notifyTime;
+        public int NotifyTime
         {
             get { return _notifyTime; }
             set { SetProperty(ref _notifyTime, value); }

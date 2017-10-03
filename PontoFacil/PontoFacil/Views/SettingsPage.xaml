@@ -15,9 +15,8 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="TextBoxHourStyle" TargetType="TextBox">
-            <Setter Property="Width" Value="80"/>
+            <Setter Property="Width" Value="120"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="InputScope" Value="TimeHour"/>
         </Style>
         <Style x:Key="StackPanelStyle" TargetType="StackPanel">
             <Setter Property="Margin" Value="0, 20, 0, 0"/>
@@ -41,13 +40,13 @@
             <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="LunchTime"/>
             <StackPanel Orientation="Horizontal">
-                <RadioButton Content="1 hora" IsChecked="{Binding LunchTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <RadioButton Content="2 horas"/>
+                <RadioButton x:Uid="OneHour" IsChecked="{Binding LunchTimeOne, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <RadioButton x:Uid="TwoHours" IsChecked="{Binding LunchTimeTwo}"/>
             </StackPanel>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Exit"/>
             <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="AccumulatedHoursLabel"/>
-            <TextBox Text="{x:Bind ViewModel.Profile.AccumuletedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}"/>
+            <TextBox Text="{x:Bind ViewModel.Profile.AccumuletedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}" MaxLength="7"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">
@@ -56,7 +55,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" x:Uid="WarnMe"/>
-                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0"></TextBox>
+                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0" MaxLength="2"/>
                 <TextBlock VerticalAlignment="Center" x:Uid="MinutesBeforeExit"/>
             </StackPanel>
             <StackPanel Style="{StaticResource StackPanelStyle}">
