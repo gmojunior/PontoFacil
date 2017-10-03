@@ -6,9 +6,7 @@ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
 using Windows.UI.Popups;
-using Windows.UI.ViewManagement;
 
 namespace PontoFacil.ViewModels
 {
@@ -45,6 +43,12 @@ namespace PontoFacil.ViewModels
         private StringBuilder sbValidationMessages;
         #endregion
 
+        #region Constants
+            private const string PATTERN_HOUR_FORMAT = @"\d{1,4}:\d{2}";
+            private const string MESSAGE_SAVE_SUCCESS = "SaveSuccess";
+            private const string MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS = "FormatInvalidFieldAccumulatedHours";
+        #endregion
+
         #region Constructor
         public SettingsPageViewModel(ISettingsService settingsService)
         {
@@ -54,10 +58,7 @@ namespace PontoFacil.ViewModels
 
             Profile = _settingsService.GetProfile();
 
-            LunchTimeOneHour = Profile.LunchTime == 1;
-            LunchTimeTwoHour = !LunchTimeOneHour;
-
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 1000));
+            SetPropertiesLunchTime();
 
             InicializeCommands();
         }
@@ -77,10 +78,9 @@ namespace PontoFacil.ViewModels
             {
                 SetFirstAccess();
 
-                Profile.LunchTime = (byte)(LunchTimeOneHour ? 1 : 2);
-                _settingsService.Save(Profile);
+                SaveSettings();
 
-                message = resourceLoader.GetString("SaveSuccess");
+                message = resourceLoader.GetString(MESSAGE_SAVE_SUCCESS);
             }
             else
                 message = sbValidationMessages.ToString();
@@ -98,7 +98,7 @@ namespace PontoFacil.ViewModels
 
             if (!FormatHourIsValid(Profile.AccumuletedHours))
             {
-                message = resourceLoader.GetString("FormatInvalidFieldAccumuletedHours");
+                message = resourceLoader.GetString(MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS);
                 sbValidationMessages.AppendLine(message);
             }
 
@@ -107,13 +107,25 @@ namespace PontoFacil.ViewModels
 
         private bool FormatHourIsValid(string hour)
         {
-            return Regex.IsMatch(hour, @"\d{1,4}:\d{2}");
+            return Regex.IsMatch(hour, PATTERN_HOUR_FORMAT);
         }
 
         private void SetFirstAccess()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["SettingsOk"] = true;
+        }
+
+        private void SaveSettings()
+        {
+            Profile.LunchTime = (byte)(LunchTimeOneHour ? 1 : 2);
+            _settingsService.Save(Profile);
+        }
+
+        private void SetPropertiesLunchTime()
+        {
+            LunchTimeOneHour = Profile.LunchTime == 1;
+            LunchTimeTwoHour = !LunchTimeOneHour;
         }
         #endregion
     }

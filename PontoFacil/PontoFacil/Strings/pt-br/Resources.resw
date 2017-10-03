@@ -129,7 +129,7 @@
   <data name="Exit.Text" xml:space="preserve">
     <value>Saída</value>
   </data>
-  <data name="FormatInvalidFieldAccumuletedHours" xml:space="preserve">
+  <data name="FormatInvalidFieldAccumulatedHours" xml:space="preserve">
     <value>Campo \"Horas acumuladas\" com formato inválido</value>
   </data>
   <data name="HoursToAdjust.Text" xml:space="preserve">
