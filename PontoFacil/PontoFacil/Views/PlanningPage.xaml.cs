@@ -11,5 +11,5 @@ namespace PontoFacil.Views
         }
 
         public PlanningPageViewModel ViewModel { get { return (PlanningPageViewModel)this.DataContext; } }
-   }
+    }
 }

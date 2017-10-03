@@ -120,14 +120,35 @@
   <data name="AccumulatedHoursLabel.Text" xml:space="preserve">
     <value>Horas acumuladas</value>
   </data>
+  <data name="ChooseAnEndDate.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data final</value>
+  </data>
+  <data name="ChooseAStartDate.PlaceholderText" xml:space="preserve">
+    <value>Escolha uma data inicial</value>
+  </data>
+  <data name="Date.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
   <data name="EnableNotify.Content" xml:space="preserve">
     <value>Habilitar notificação</value>
+  </data>
+  <data name="EndDate.Text" xml:space="preserve">
+    <value>Data final</value>
+  </data>
+  <data name="EndTime.Text" xml:space="preserve">
+    <value>Saída</value>
   </data>
   <data name="Entry.Text" xml:space="preserve">
     <value>Entrada</value>
   </data>
   <data name="Exit.Text" xml:space="preserve">
     <value>Saída</value>
+  </data>
+  <data name="FreePeriod.Content" xml:space="preserve">
+    <value>Período livre</value>
+  </data>
+  <data name="History.Text" xml:space="preserve">
+    <value>Histórico</value>
   </data>
   <data name="HoursToAdjust.Text" xml:space="preserve">
     <value>Horas a serem ajustadas</value>
@@ -144,6 +165,9 @@
   <data name="MinutesBeforeExit.Text" xml:space="preserve">
     <value>minutos antes da saída</value>
   </data>
+  <data name="Monthly.Content" xml:space="preserve">
+    <value>Mensal (Mês atual)</value>
+  </data>
   <data name="NumberOfDays.Text" xml:space="preserve">
     <value>Em quantos dias</value>
   </data>
@@ -153,20 +177,44 @@
   <data name="OneHour.Text" xml:space="preserve">
     <value>1 hora</value>
   </data>
+  <data name="OvertimeHours.Text" xml:space="preserve">
+    <value>Hora Extra</value>
+  </data>
+  <data name="Period.Text" xml:space="preserve">
+    <value>Período</value>
+  </data>
   <data name="Save.Content" xml:space="preserve">
     <value>Salvar</value>
   </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Configurações</value>
   </data>
+  <data name="ShowHistory.Content" xml:space="preserve">
+    <value>Mostrar histórico</value>
+  </data>
+  <data name="StartDate.Text" xml:space="preserve">
+    <value>Data inicial</value>
+  </data>
   <data name="StartDay.Text" xml:space="preserve">
     <value>Dia de inicio</value>
+  </data>
+  <data name="StartTime.Text" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="TotalHours.Text" xml:space="preserve">
+    <value>Saldo Total</value>
+  </data>
+  <data name="ToWaiver.Content" xml:space="preserve">
+    <value>Abonar</value>
   </data>
   <data name="TowHours.Text" xml:space="preserve">
     <value>2 horas</value>
   </data>
   <data name="UserName.Text" xml:space="preserve">
     <value>Nome do usuário</value>
+  </data>
+  <data name="Waiver.Text" xml:space="preserve">
+    <value>Abono</value>
   </data>
   <data name="WarnMe.Text" xml:space="preserve">
     <value>Avise-me</value>
@@ -176,5 +224,17 @@
   </data>
   <data name="Register.Content" xml:space="preserve">
     <value>Registrar</value>
+    </data>
+  <data name="WorkedHours.Text" xml:space="preserve">
+    <value>Horas trabalhadas</value>
+  </data>
+  <data name="EndDateGreaterThenStartDate" xml:space="preserve">
+    <value>A data final deve ser maior que a data inicial</value>
+  </data>
+  <data name="EndDateLessThenCurrentDate" xml:space="preserve">
+    <value>A data final deve ser menor que a data atual</value>
+  </data>
+  <data name="StartDateLessThenCurrentDate" xml:space="preserve">
+    <value>A data inicial deve ser menor que a data atual</value>
   </data>
 </root>
