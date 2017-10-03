@@ -80,7 +80,7 @@
         <StackPanel>
             <TextBlock x:Name="titlePeriod" x:Uid="Period" Style="{StaticResource TextBlockTitle}"></TextBlock>
             <RadioButton x:Name="rbMonthlyPeriod" x:Uid="Monthly" Margin="0,10,0,0" IsChecked="True" Command="{Binding ShowMonthlyHistoryCommand}" ></RadioButton>
-            <RadioButton x:Name="rbFreePeriod" x:Uid="FreePeriod" Margin="0"></RadioButton>
+            <RadioButton x:Name="rbFreePeriod" x:Uid="FreePeriod"></RadioButton>
         </StackPanel>
 
         <StackPanel x:Name="FreePeriodFields" Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsChecked, ElementName=rbFreePeriod, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}">
