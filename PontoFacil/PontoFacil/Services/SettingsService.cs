@@ -34,7 +34,7 @@ namespace PontoFacil.Services
         {
             Profile profile = _persistencyService.getProfile();
 
-            profile.AccumuletedHours = CalculateAccumulatedHours(profile.AccumuletedHours, overtimeHours);
+            profile.AccumulatedHours = CalculateAccumulatedHours(profile.AccumulatedHours, overtimeHours);
             
             _persistencyService.SaveProfile(profile);
         }
@@ -78,7 +78,7 @@ namespace PontoFacil.Services
         {
             Profile profile = _persistencyService.getProfile();
             
-            return profile.AccumuletedHours;
+            return profile.AccumulatedHours;
         }
         #endregion
     }
