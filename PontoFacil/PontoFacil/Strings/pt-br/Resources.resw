@@ -146,7 +146,7 @@
   </data>
   <data name="FormatInvalidFieldAccumulatedHours" xml:space="preserve">
     <value>Campo \"Horas acumuladas\" com formato inválido</value>
-  </data>
+    </data>
   <data name="FreePeriod.Content" xml:space="preserve">
     <value>Período livre</value>
   </data>

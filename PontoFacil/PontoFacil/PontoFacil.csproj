@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\LunchTimeToBoolConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\SelectedItemToEnableConverter.cs" />
     <Compile Include="Converters\ShowHoursOnlyConverter.cs" />
