@@ -34,8 +34,8 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _history, value); }
         }
 
-        private TimeSpan _accumulatedHours;
-        public TimeSpan AccumuletedHours
+        private string _accumulatedHours;
+        public string AccumuletedHours
         {
             get { return _accumulatedHours; }
             set { SetProperty(ref _accumulatedHours, value); }

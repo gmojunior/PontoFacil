@@ -8,6 +8,6 @@ namespace PontoFacil.Services.Interfaces
         void Save(Profile profile);
         Profile GetProfile();
         void UpdateProfileAcumulatedHours(TimeSpan overtimeHours);
-        TimeSpan GetProfileAccumulatedHours();
+        string GetProfileAccumulatedHours();
     }
 }

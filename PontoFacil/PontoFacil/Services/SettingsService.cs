@@ -31,14 +31,26 @@ namespace PontoFacil.Services
         public void UpdateProfileAcumulatedHours(TimeSpan overtimeHours)
         {
             Profile profile = _persistencyService.getProfile();
-            profile.AccumuletedHours = profile.AccumuletedHours + overtimeHours;
 
+            profile.AccumuletedHours = CalculateAccumulatedHours(profile.AccumuletedHours, overtimeHours);
+            
             _persistencyService.SaveProfile(profile);
         }
 
-        public TimeSpan GetProfileAccumulatedHours()
+        private string CalculateAccumulatedHours(string accumuletedHours, TimeSpan overtimeHours)
+        {
+            TimeSpan totalHours;
+            TimeSpan.TryParse(accumuletedHours, out totalHours);
+
+            totalHours = totalHours + overtimeHours;
+
+            return totalHours.ToString(@"hh\:mm\:ss");
+        }
+
+        public string GetProfileAccumulatedHours()
         {
             Profile profile = _persistencyService.getProfile();
+            
             return profile.AccumuletedHours;
         }
         #endregion
