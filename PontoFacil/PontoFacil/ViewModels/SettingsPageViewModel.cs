@@ -96,7 +96,7 @@ namespace PontoFacil.ViewModels
             sbValidationMessages = new StringBuilder();
             string message;
 
-            if (!FormatHourIsValidd(Profile.AccumuletedHours))
+            if (!FormatHourIsValid(Profile.AccumuletedHours))
             {
                 message = resourceLoader.GetString("FormatInvalidFieldAccumuletedHours");
                 sbValidationMessages.AppendLine(message);
@@ -105,7 +105,7 @@ namespace PontoFacil.ViewModels
             return sbValidationMessages.Length == 0;
         }
 
-        private bool FormatHourIsValidd(string hour)
+        private bool FormatHourIsValid(string hour)
         {
             return Regex.IsMatch(hour, @"\d{1,4}:\d{2}");
         }
