@@ -36,6 +36,7 @@ namespace PontoFacil
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             Object settingsOk = localSettings.Values["SettingsOk"];
+            localSettings.Values["SettingsOk"] = null;
             if (settingsOk != null)
                 NavigationService.Navigate(PageTokens.CurrentDate, null);
             else

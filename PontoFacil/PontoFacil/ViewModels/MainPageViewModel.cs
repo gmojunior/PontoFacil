@@ -1,17 +1,25 @@
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
+using System;
+using Windows.UI.Xaml;
 
 namespace PontoFacil.ViewModels
 {
     class MainPageViewModel : ViewModelBase
     {
         private bool isMenuOpen;
-
         public bool IsMenuOpen
         {
             get { return isMenuOpen; }
             set { SetProperty(ref isMenuOpen, value); }
+        }
+
+        private Visibility _isMenuVisible;
+        public Visibility IsMenuVisible
+        {
+            get { return _isMenuVisible; }
+            set { SetProperty(ref _isMenuVisible, value); }
         }
 
         private INavigationService navigationService;
@@ -26,9 +34,21 @@ namespace PontoFacil.ViewModels
         {
             this.navigationService = navigationService;
 
+            CollapseMenuIfSettingsIsNotOK();
+
             isMenuOpen = false;
-            
+
             InitializeCommands();
+        }
+
+        private void CollapseMenuIfSettingsIsNotOK()
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            Object settingsOk = localSettings.Values["SettingsOk"];
+            if (settingsOk == null)
+                IsMenuVisible = Visibility.Collapsed;
+            else
+                IsMenuVisible = Visibility.Visible;
         }
 
         private void InitializeCommands()

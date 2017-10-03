@@ -11,7 +11,7 @@
     <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay" IsPaneOpen="{Binding IsMenuOpen, Mode=TwoWay}" 
                CompactPaneLength="48" OpenPaneLength="130">
         <SplitView.Pane>
-            <StackPanel Background="#0063B1">
+            <StackPanel Background="#0063B1" Visibility="{Binding IsMenuVisible}">
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Foreground="White"
                     Width="50" Height="50" Background="Transparent" Command="{Binding HamburguerCommand}"/>
                 <StackPanel Orientation="Horizontal">
