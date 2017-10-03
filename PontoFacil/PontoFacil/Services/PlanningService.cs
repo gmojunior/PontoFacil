@@ -26,6 +26,11 @@ namespace PontoFacil.Services
         {
             _persistencyService.SavePlanning(planning);
         }
+
+        public Planning GetPlanningByDate()
+        {
+            return _persistencyService.getPlanning();
+        }
         #endregion
     }
 }
