@@ -45,16 +45,18 @@ namespace PontoFacil.ViewModels
         public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
             if (!IsANumber(sender.Text))
-            {
-                int pos = sender.SelectionStart - 1;
-                sender.Text = sender.Text.Remove(pos, 1);
-                sender.SelectionStart = pos + 1;
-            }
+                RemoveLastAddedChar(sender, sender.SelectionStart - 1);
+        }
+
+        private static void RemoveLastAddedChar(TextBox sender, int position)
+        {
+            sender.Text = sender.Text.Remove(position, 1);
+            sender.SelectionStart = position + 1;
         }
 
         private static bool IsANumber(string text)
         {
-            return double.TryParse(text, out double dtemp) && !string.IsNullOrWhiteSpace(text);
+            return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
         }
     }
 }
