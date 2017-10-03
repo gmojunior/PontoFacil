@@ -224,6 +224,12 @@
   <data name="WarnMe.Text" xml:space="preserve">
     <value>Avise-me</value>
   </data>
+  <data name="CurrentJorney.Text" xml:space="preserve">
+    <value>Acompanhamento da Jornada</value>
+  </data>
+  <data name="Register.Content" xml:space="preserve">
+    <value>Registrar</value>
+    </data>
   <data name="WorkedHours.Text" xml:space="preserve">
     <value>Horas trabalhadas</value>
   </data>
