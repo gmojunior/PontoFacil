@@ -117,7 +117,7 @@
                 </StackPanel>
             </Border>
             <TextBlock FontWeight="Bold" Margin="0,5,0,0">
-                    <Run x:Uid="AccumuletedHours"/>
+                    <Run x:Uid="AccumulatedHours"/>
                     <Run Text="{Binding AccumuletedHours}"/>
             </TextBlock>
         </StackPanel>
