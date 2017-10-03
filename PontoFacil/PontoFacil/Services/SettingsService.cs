@@ -8,6 +8,8 @@ namespace PontoFacil.Services
     {
         #region Properties
         private IPersistencyService _persistencyService;
+        private readonly int HOURS_OF_A_DAY = 24;
+        private readonly string HOURS_SEPARATOR = @":";
         #endregion
 
         #region Constructor
@@ -39,18 +41,37 @@ namespace PontoFacil.Services
 
         private string CalculateAccumulatedHours(string accumuletedHours, TimeSpan overtimeHours)
         {
-            TimeSpan totalHours;
-            TimeSpan.TryParse(accumuletedHours, out totalHours);
+            int hours = 0;
+            Int32.TryParse(accumuletedHours.Split(':')[0], out hours);
 
+            int minutes = 0;
+            Int32.TryParse(accumuletedHours.Split(':')[1], out minutes);
+
+            int seconds = 0;
+
+            TimeSpan totalHours = new TimeSpan(hours, minutes, seconds);
+            
             totalHours = totalHours + overtimeHours;
-
-            string totalHoursText = totalHours.ToString(@"hh\:mm\:ss");
+            
+            string totalHoursText = GetTimeSpanFormatedToString(totalHours);
             if (totalHours < TimeSpan.Zero)
             {
                 totalHoursText = "-" + totalHoursText;
             }
 
             return totalHoursText;
+        }
+
+        private string GetTimeSpanFormatedToString(TimeSpan totalTime)
+        {
+            string timeFormated;
+            int hoursOfTheDays = totalTime.Days * HOURS_OF_A_DAY;
+            string totalHours = (hoursOfTheDays + totalTime.Hours).ToString();
+            string totalMinutes = totalTime.Minutes.ToString();
+
+            timeFormated = totalHours + HOURS_SEPARATOR + totalMinutes;
+            
+            return timeFormated;
         }
 
         public string GetProfileAccumulatedHours()

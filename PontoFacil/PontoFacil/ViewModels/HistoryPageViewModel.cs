@@ -35,7 +35,7 @@ namespace PontoFacil.ViewModels
         }
 
         private string _accumulatedHours;
-        public string AccumuletedHours
+        public string AccumulatedHours
         {
             get { return _accumulatedHours; }
             set { SetProperty(ref _accumulatedHours, value); }
@@ -53,7 +53,7 @@ namespace PontoFacil.ViewModels
         {
             InitializeCommands();
 
-            _historyService = historyService;            
+            _historyService = historyService;
             _loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
             // Set StartDate to yesterday by default
@@ -64,7 +64,7 @@ namespace PontoFacil.ViewModels
 
             History = new ObservableCollection<ClockIn>();
 
-            AccumuletedHours = settingsService.GetProfileAccumulatedHours();
+            AccumulatedHours = settingsService.GetProfileAccumulatedHours();
 
             // Show monthly history by default
             ShowMonthlyHistory();
