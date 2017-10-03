@@ -10,25 +10,31 @@ namespace PontoFacil.Services
         private ClockIn _clockIn;
 
         private IPersistencyService _persistencyService;
+        private INotificationService _notificationService;
 
         #endregion
 
         #region Constructor
-        public ClockInService(IPersistencyService persistencyService)
+        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService)
         {
             _persistencyService = persistencyService;
+            _notificationService = notificationService;
 
             _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
         }
         #endregion
 
         #region Methods
-        public void Register(DateTime date)
+        public ClockIn Register(DateTime date)
         {
             if (_clockIn != null && _clockIn.IsOpen())
                 EndCurrentDay(date);
             else
+            {
                 StartNewDay(date);
+                _notificationService.createNotificationTask(_clockIn);
+            }
+            return _clockIn;
         }
 
         private void StartNewDay(DateTime dt)
@@ -48,6 +54,11 @@ namespace PontoFacil.Services
         public ClockIn getClockInById(DateTime datetime)
         {
             return _persistencyService.getClockInById(datetime);
+        }
+
+        public TimeSpan getEstimatedTimeToLeave()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

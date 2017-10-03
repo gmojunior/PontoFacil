@@ -76,6 +76,14 @@ namespace PontoFacil.Models
             set { SetProperty(ref _isWaiver, value); }
         }
 
+        private bool _showNotification;
+        public bool ShowNotification
+        {
+            get { return _showNotification; }
+            set { SetProperty(ref _showNotification, value); }
+        }
+
+
         private readonly DateTime MIDDAY = Convert.ToDateTime("12:00:00");
         private readonly DateTime ONE_PM = Convert.ToDateTime("13:00:00");
         private readonly DateTime TWO_PM = Convert.ToDateTime("14:00:00");

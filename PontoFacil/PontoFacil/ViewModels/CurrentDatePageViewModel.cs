@@ -48,6 +48,13 @@ namespace PontoFacil.ViewModels
             get { return _userName; }
             set { SetProperty(ref _userName, value); }
         }
+
+        private ClockIn _currentclockIn;
+        public ClockIn CurrentClockIn
+        {
+            get { return _currentclockIn; }
+            set { SetProperty(ref _currentclockIn, value); }
+        }
         #endregion
 
         #region Constructor
@@ -57,7 +64,11 @@ namespace PontoFacil.ViewModels
             _settingsService = settingsService;
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
-            SetStartEndTime(clockIn);
+            if (clockIn != null)
+                CurrentClockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            else
+                CurrentClockIn = new ClockIn();
+            SetStartEndTime(CurrentClockIn);
 
             initializeProperties();
             InitializeCommands();
@@ -106,13 +117,11 @@ namespace PontoFacil.ViewModels
 
         private void RegisterTime()
         {
-            _clockInService.Register(DateTime.Now);
+            CurrentClockIn = _clockInService.Register(DateTime.Now);
 
-            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            SetStartEndTime(CurrentClockIn);
 
-            SetStartEndTime(clockIn);
-
-            SetButtonState(clockIn);
+            SetButtonState(CurrentClockIn);
         }
 
         private void SetStartEndTime(ClockIn clockIn)

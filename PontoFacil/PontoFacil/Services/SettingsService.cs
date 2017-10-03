@@ -12,14 +12,14 @@ namespace PontoFacil.Services
         #region Constructor
         public SettingsService(IPersistencyService persistencyService)
         {
-            this._persistencyService = persistencyService;
+            _persistencyService = persistencyService;
         }
         #endregion
 
         #region Methods
         public Profile GetProfile()
         {
-            return this._persistencyService.getProfile();
+            return _persistencyService.getProfile();
         }
 
         public void Save(Profile profile)

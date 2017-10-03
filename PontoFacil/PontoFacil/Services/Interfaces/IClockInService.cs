@@ -5,7 +5,8 @@ namespace PontoFacil.Services.Interfaces
 {
     public interface IClockInService
     {
-        void Register(DateTime date);
+        ClockIn Register(DateTime date);
         ClockIn getClockInById(DateTime datetime);
+        TimeSpan getEstimatedTimeToLeave();
     }
 }
