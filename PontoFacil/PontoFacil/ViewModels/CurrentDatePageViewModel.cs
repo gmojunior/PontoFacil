@@ -58,8 +58,6 @@ namespace PontoFacil.ViewModels
             _settingsService = settingsService;
             _planningService = planningService;
 
-            var a = _planningService.GetPlanningByDate();
-
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
             SetStartEndTime(clockIn);
 
