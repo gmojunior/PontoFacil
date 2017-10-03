@@ -40,7 +40,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <TextBlock x:Uid="AccumulatedHoursLabel" />
-            <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Planning.AccumulatedHoursValue, Mode=TwoWay}"/>
+            <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Profile.AccumulatedHours, Mode=TwoWay}"/>
 
             <TextBlock Grid.Column="0" Grid.Row="1" x:Uid="HoursToAdjust" />
             <TimePicker Grid.Column="1" Grid.Row="1" Time="{x:Bind ViewModel.Planning.HoursToAdjustValue, Mode=TwoWay}" />

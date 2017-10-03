@@ -19,12 +19,7 @@ namespace PontoFacil.Services
         #region Methods
         public Planning GetPlanning()
         {
-            var profile = _persistencyService.getProfile();
-
-            var planning = _persistencyService.getPlanning();
-            planning.AccumulatedHoursValue = profile.AccumuletedHours;
-
-            return planning;
+            return _persistencyService.getPlanning();
         }
 
         public void Save(Planning planning)

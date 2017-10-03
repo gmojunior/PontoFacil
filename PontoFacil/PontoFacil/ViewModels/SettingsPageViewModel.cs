@@ -96,7 +96,7 @@ namespace PontoFacil.ViewModels
             sbValidationMessages = new StringBuilder();
             string message;
 
-            if (!FormatHourIsValid(Profile.AccumuletedHours))
+            if (!FormatHourIsValid(Profile.AccumulatedHours))
             {
                 message = resourceLoader.GetString(MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS);
                 sbValidationMessages.AppendLine(message);
