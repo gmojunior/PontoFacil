@@ -26,7 +26,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
@@ -34,6 +34,12 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+
+        <TextBlock Margin="10 20 0 40" FontSize="32" Grid.ColumnSpan="2">
+            <Run>Bem-vindo, </Run>
+            <Run Text="{Binding UserName}"/>
+            <Run>!</Run>
+        </TextBlock>
 
         <Grid Grid.Row="1" Margin="20,0,10,30" BorderBrush="Black" BorderThickness="2" CornerRadius="20,20,20,20">
             <Grid.RowDefinitions>
@@ -89,7 +95,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="CurrentDate" FontSize="18" Text="{Binding DayOfWeekDayMonthYear}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="CurrentDate" FontSize="18" Text="{Binding DayOfWeekDayMonthYear}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
             <Border BorderBrush="Black" BorderThickness="2"  CornerRadius="20" Grid.RowSpan="3" Margin="10,0,10,0"/>
             <TextBlock x:Name="CurrentTime" FontSize="60" Text="{Binding CurrentTime}" Grid.Row="1" HorizontalAlignment="Center"/>
 

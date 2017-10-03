@@ -10,6 +10,7 @@ namespace PontoFacil.ViewModels
     {
         #region Properties
         private IClockInService _clockInService;
+        private ISettingsService _settingsService;
         public DelegateCommand RegisterTimeCommand { get; private set; }
         private DispatcherTimer _timer;
 
@@ -40,12 +41,20 @@ namespace PontoFacil.ViewModels
             get { return this._endTime; }
             set { SetProperty(ref _endTime, value); }
         }
+
+        private string _userName;
+        public string UserName
+        {
+            get { return _userName; }
+            set { SetProperty(ref _userName, value); }
+        }
         #endregion
 
         #region Constructor
-        public CurrentDatePageViewModel(IClockInService clockInService)
+        public CurrentDatePageViewModel(IClockInService clockInService, ISettingsService settingsService)
         {
             _clockInService = clockInService;
+            _settingsService = settingsService;
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
             SetStartEndTime(clockIn);
@@ -62,6 +71,9 @@ namespace PontoFacil.ViewModels
             var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
             var linkPreposition = loader.GetString("LinkPreposition");
             DayOfWeekDayMonthYear = DateTime.Now.ToString("dddd, dd {0} MMMM {0} yyyy").Replace("{0}", linkPreposition);
+
+            Profile profile = _settingsService.GetProfile();
+            UserName = profile.Name;
         }
 
         private void InitializeClockInTime()
