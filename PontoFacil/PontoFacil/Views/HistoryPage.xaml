@@ -116,7 +116,7 @@
                     <ListView x:Name="historyList" ItemsSource="{Binding History}" ItemTemplate="{StaticResource HistoryDataTemplate}"></ListView>
                 </StackPanel>
             </Border>
-            <TextBlock FontWeight="Bold">
+            <TextBlock FontWeight="Bold" Margin="0,5,0,0">
                     <Run x:Uid="AccumuletedHours"/>
                     <Run Text="{Binding AccumuletedHours}"/>
             </TextBlock>
