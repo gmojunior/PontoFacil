@@ -62,7 +62,7 @@ namespace PontoFacil.ViewModels
             {
                 SetFirstAccess();
 
-                SaveSettings();
+                _settingsService.Save(Profile);
 
                 message = resourceLoader.GetString(MESSAGE_SAVE_SUCCESS);
             }
@@ -98,11 +98,6 @@ namespace PontoFacil.ViewModels
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["SettingsOk"] = true;
-        }
-
-        private void SaveSettings()
-        {
-            _settingsService.Save(Profile);
         }
         #endregion
     }

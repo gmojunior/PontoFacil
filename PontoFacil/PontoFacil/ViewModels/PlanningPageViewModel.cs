@@ -21,7 +21,7 @@ namespace PontoFacil.ViewModels
         public DelegateCommand SaveCommand { get; private set; }
         #endregion
 
-        #region Construcutor
+        #region Constructor
         public PlanningPageViewModel(IPlanningService planningService)
         {
             _planningService = planningService;
@@ -42,6 +42,7 @@ namespace PontoFacil.ViewModels
         }
         #endregion
 
+        #region Methods
         public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
             if (!IsANumber(sender.Text))
@@ -58,5 +59,6 @@ namespace PontoFacil.ViewModels
         {
             return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
         }
+        #endregion
     }
 }

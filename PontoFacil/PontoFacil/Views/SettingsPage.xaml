@@ -43,10 +43,10 @@
             <TimePicker Time="{x:Bind ViewModel.Profile.EntryHour, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="LunchTime"/>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Uid="OneHour" Tag="OneHour" IsChecked="{Binding Profile.LunchTime, Mode=TwoWay,
-                                Converter={StaticResource LunchTimeToBoolConverter}, ConverterParameter=OneHour}" />
-                <RadioButton x:Uid="TwoHours" Tag="TwoHours" IsChecked="{Binding Profile.LunchTime, Mode=TwoWay,
-                                Converter={StaticResource LunchTimeToBoolConverter}, ConverterParameter=TwoHours}" />
+                <RadioButton x:Uid="OneHour" IsChecked="{Binding Profile.LunchTime, Mode=TwoWay,
+                    Converter={StaticResource LunchTimeToBoolConverter}, ConverterParameter=OneHour}" />
+                <RadioButton x:Uid="TwoHours" IsChecked="{Binding Profile.LunchTime, Mode=TwoWay,
+                    Converter={StaticResource LunchTimeToBoolConverter}, ConverterParameter=TwoHours}" />
             </StackPanel>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Exit"/>
             <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"/>
@@ -60,7 +60,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" x:Uid="WarnMe"/>
-                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked, ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0" MaxLength="2"/>
+                <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked,
+                    ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0" MaxLength="2"/>
                 <TextBlock VerticalAlignment="Center" x:Uid="MinutesBeforeExit"/>
             </StackPanel>
             <StackPanel Style="{StaticResource StackPanelStyle}">
