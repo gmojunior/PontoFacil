@@ -231,4 +231,7 @@
   <data name="StartDateLessThenCurrentDate" xml:space="preserve">
     <value>A data inicial deve ser menor que a data atual</value>
   </data>
+  <data name="AccumuletedHours.Text" xml:space="preserve">
+    <value>Saldo: </value>
+  </data>
 </root>

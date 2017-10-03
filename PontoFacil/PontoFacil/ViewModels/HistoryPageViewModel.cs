@@ -1,5 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
@@ -33,6 +34,13 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _history, value); }
         }
 
+        private TimeSpan _accumulatedHours;
+        public TimeSpan AccumuletedHours
+        {
+            get { return _accumulatedHours; }
+            set { SetProperty(ref _accumulatedHours, value); }
+        }
+
         private string _dateValidationMessage;
         private ResourceLoader _loader;
 
@@ -41,11 +49,11 @@ namespace PontoFacil.ViewModels
         #endregion
 
         #region Constructor
-        public HistoryPageViewModel(IHistoryService historyService)
+        public HistoryPageViewModel(IHistoryService historyService, ISettingsService settingsService)
         {
             InitializeCommands();
 
-            _historyService = historyService;
+            _historyService = historyService;            
             _loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
             // Set StartDate to yesterday by default
@@ -55,6 +63,8 @@ namespace PontoFacil.ViewModels
             EndDate = DateTime.Now;
 
             History = new ObservableCollection<ClockIn>();
+
+            AccumuletedHours = settingsService.GetProfileAccumulatedHours();
 
             // Show monthly history by default
             ShowMonthlyHistory();

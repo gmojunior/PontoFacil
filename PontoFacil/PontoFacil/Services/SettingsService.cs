@@ -1,5 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services.Interfaces;
+using System;
 
 namespace PontoFacil.Services
 {
@@ -12,19 +13,33 @@ namespace PontoFacil.Services
         #region Constructor
         public SettingsService(IPersistencyService persistencyService)
         {
-            this._persistencyService = persistencyService;
+            _persistencyService = persistencyService;
         }
         #endregion
 
         #region Methods
         public Profile GetProfile()
         {
-            return this._persistencyService.getProfile();
+            return _persistencyService.getProfile();
         }
 
         public void Save(Profile profile)
         {
             _persistencyService.SaveProfile(profile);
+        }
+
+        public void UpdateProfileAcumulatedHours(TimeSpan overtimeHours)
+        {
+            Profile profile = _persistencyService.getProfile();
+            profile.AccumuletedHours = profile.AccumuletedHours + overtimeHours;
+
+            _persistencyService.SaveProfile(profile);
+        }
+
+        public TimeSpan GetProfileAccumulatedHours()
+        {
+            Profile profile = _persistencyService.getProfile();
+            return profile.AccumuletedHours;
         }
         #endregion
     }
