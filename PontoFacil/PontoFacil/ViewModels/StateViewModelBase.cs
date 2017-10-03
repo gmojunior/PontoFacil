@@ -1,15 +1,10 @@
 ﻿using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.ViewModels
 {
-	public class StateViewModelBase : ViewModelBase
+    public class StateViewModelBase : ViewModelBase
 	{
 		public const string REGISTER_IN_STATE = "RegisterIn";
 

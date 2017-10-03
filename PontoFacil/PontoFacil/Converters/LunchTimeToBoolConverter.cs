@@ -5,6 +5,13 @@ namespace PontoFacil.Converters
 {
     class LunchTimeToBoolConverter : IValueConverter
     {
+        #region Properties
+        private const byte TWO_HOURS = 2;
+
+        private const byte ONE_HOUR = 1;
+        #endregion
+
+        #region Methods
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (IsOneHourRadioButton(parameter))
@@ -42,9 +49,6 @@ namespace PontoFacil.Converters
                 return TWO_HOURS;
             else return null;
         }
-
-        private const byte TWO_HOURS = 2;
-
-        private const byte ONE_HOUR = 1;
+        #endregion
     }
 }

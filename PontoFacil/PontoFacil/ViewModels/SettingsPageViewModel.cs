@@ -13,20 +13,6 @@ namespace PontoFacil.ViewModels
     public class SettingsPageViewModel : ViewModelBase
     {
         #region Properties
-        private bool _lunchTimeOneHour;
-        public bool LunchTimeOneHour
-        {
-            get { return this._lunchTimeOneHour; }
-            set { SetProperty(ref _lunchTimeOneHour, value); }
-        }
-
-        private bool _lunchTimeTwoHour;
-        public bool LunchTimeTwoHour
-        {
-            get { return this._lunchTimeTwoHour; }
-            set { SetProperty(ref _lunchTimeTwoHour, value); }
-        }
-
         private Profile _profile;
         public Profile Profile
         {
@@ -57,8 +43,6 @@ namespace PontoFacil.ViewModels
             resourceLoader = new ResourceLoader();
 
             Profile = _settingsService.GetProfile();
-
-            SetPropertiesLunchTime();
 
             InicializeCommands();
         }
@@ -118,14 +102,7 @@ namespace PontoFacil.ViewModels
 
         private void SaveSettings()
         {
-            Profile.LunchTime = (byte)(LunchTimeOneHour ? 1 : 2);
             _settingsService.Save(Profile);
-        }
-
-        private void SetPropertiesLunchTime()
-        {
-            LunchTimeOneHour = Profile.LunchTime == 1;
-            LunchTimeTwoHour = !LunchTimeOneHour;
         }
         #endregion
     }
