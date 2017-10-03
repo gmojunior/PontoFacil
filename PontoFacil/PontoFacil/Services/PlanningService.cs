@@ -25,6 +25,12 @@ namespace PontoFacil.Services
         {
             _persistencyService.SavePlanning(planning);
         }
+
+        //TODO: Its necessary get the planning day instead of a all planning
+        public void GetPlanningByDay()
+        {
+            var p = _persistencyService.getPlanning();
+        }
         #endregion
     }
 }

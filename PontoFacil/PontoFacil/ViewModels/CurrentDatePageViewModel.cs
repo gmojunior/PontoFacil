@@ -10,6 +10,7 @@ namespace PontoFacil.ViewModels
 	{
         #region Properties
         private IClockInService _clockInService;
+        private IPersistencyService _persistencyService;
 
         private string _dayOfWeekDayMonthYear;
         public string DayOfWeekDayMonthYear
