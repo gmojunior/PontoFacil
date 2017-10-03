@@ -16,19 +16,29 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _planning, value); }
         }
 
+        private Profile _profile;
+        public Profile Profile
+        {
+            get { return _profile; }
+            set { SetProperty(ref _profile, value); }
+        }
+
         private IPlanningService _planningService;
+        private ISettingsService _settingsService;
 
         public DelegateCommand SaveCommand { get; private set; }
         #endregion
-
+        
         #region Construcutor
-        public PlanningPageViewModel(IPlanningService planningService)
+        public PlanningPageViewModel(IPlanningService planningService, ISettingsService settingsService)
         {
             _planningService = planningService;
+            _settingsService = settingsService;
 
             InicializeCommands();
 
             Planning = _planningService.GetPlanning();
+            Profile = _settingsService.GetProfile();
         }
 
         private void InicializeCommands()
@@ -42,6 +52,7 @@ namespace PontoFacil.ViewModels
         }
         #endregion
 
+        #region Methods
         public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
             if (!IsANumber(sender.Text))
@@ -58,5 +69,6 @@ namespace PontoFacil.ViewModels
         {
             return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
         }
+        #endregion
     }
 }

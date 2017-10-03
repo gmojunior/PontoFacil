@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:prism="using:Prism.Windows.Mvvm"
-    xmlns:converters="using:PontoFacil.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     prism:ViewModelLocator.AutoWireViewModel="true">
@@ -40,7 +39,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <TextBlock x:Uid="AccumulatedHoursLabel" />
-            <TimePicker Grid.Column="1" Time="{x:Bind ViewModel.Planning.AccumulatedHoursValue, Mode=TwoWay}" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Text="{x:Bind ViewModel.Profile.AccumulatedHours, Mode=TwoWay}" IsEnabled="False" PlaceholderText="0:00"/>
 
             <TextBlock Grid.Column="0" Grid.Row="1" x:Uid="HoursToAdjust" />
             <TimePicker Grid.Column="1" Grid.Row="1" Time="{x:Bind ViewModel.Planning.HoursToAdjustValue, Mode=TwoWay}" />
