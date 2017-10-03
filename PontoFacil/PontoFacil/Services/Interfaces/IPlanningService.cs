@@ -1,11 +1,10 @@
 ﻿using PontoFacil.Models;
 
-namespace PontoFacil.Services
+namespace PontoFacil.Services.Interfaces
 {
     public interface IPlanningService
     {
         Planning GetPlanning();
-
         void Save(Planning planning);
     }
 }

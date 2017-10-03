@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PontoFacil.Models;
 using PontoFacil.Repositories;
+using PontoFacil.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;

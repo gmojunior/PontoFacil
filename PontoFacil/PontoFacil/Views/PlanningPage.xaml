@@ -9,7 +9,6 @@
     mc:Ignorable="d"
     prism:ViewModelLocator.AutoWireViewModel="true">
     <Page.Resources>
-        <converters:ShowHoursOnlyConverter x:Key="ShowHoursOnlyConverter" />
         <Style x:Key="GridStyle" TargetType="Grid" >
             <Setter Property="Height" Value="180" />
             <Setter Property="Width" Value="Auto" />
@@ -47,7 +46,7 @@
             <TimePicker Grid.Column="1" Grid.Row="1" Time="{x:Bind ViewModel.Planning.HoursToAdjustValue, Mode=TwoWay}" />
 
             <TextBlock Grid.Column="0" Grid.Row="2" x:Uid="NumberOfDays" />
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{x:Bind ViewModel.Planning.NumberOfDaysValue, Mode=TwoWay}" Style="{StaticResource TextBoxDaysStyle}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{x:Bind ViewModel.Planning.NumberOfDaysValue, Mode=TwoWay}" Style="{StaticResource TextBoxDaysStyle}" TextChanging="{x:Bind ViewModel.TextBox_TextChanging}" />
 
             <TextBlock Grid.Column="0" Grid.Row="3" x:Uid="StartDay" />
             <CalendarDatePicker Grid.Column="1" Grid.Row="3" Style="{StaticResource CalendarDatePickerStyle}" Date="{x:Bind ViewModel.Planning.StartDayValue, Mode=TwoWay}" />
