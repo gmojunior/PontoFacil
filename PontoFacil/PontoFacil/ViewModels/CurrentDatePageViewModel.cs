@@ -11,7 +11,6 @@ namespace PontoFacil.ViewModels
         #region Properties
         private IClockInService _clockInService;
         private ISettingsService _settingsService;
-        private IPlanningService _planningService;
         public DelegateCommand RegisterTimeCommand { get; private set; }
         private DispatcherTimer _timer;
 
@@ -52,11 +51,10 @@ namespace PontoFacil.ViewModels
         #endregion
 
         #region Constructor
-        public CurrentDatePageViewModel(IClockInService clockInService, ISettingsService settingsService, IPlanningService planningService)
+        public CurrentDatePageViewModel(IClockInService clockInService, ISettingsService settingsService)
         {
             _clockInService = clockInService;
             _settingsService = settingsService;
-            _planningService = planningService;
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
             SetStartEndTime(clockIn);
