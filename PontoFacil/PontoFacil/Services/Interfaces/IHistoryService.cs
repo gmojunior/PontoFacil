@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using PontoFacil.Models;
+using global::PontoFacil.Models;
 using System;
+using System.Collections.Generic;
 
 namespace PontoFacil.Services
 {

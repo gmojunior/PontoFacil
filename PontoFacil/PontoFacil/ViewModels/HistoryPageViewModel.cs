@@ -3,13 +3,8 @@ using PontoFacil.Services;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 
 namespace PontoFacil.ViewModels
 {
