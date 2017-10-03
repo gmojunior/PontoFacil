@@ -35,7 +35,7 @@ namespace PontoFacil.Models
         }
 
         private string _accumulatedHours;
-        public string AccumuletedHours
+        public string AccumulatedHours
         {
             get { return _accumulatedHours; }
             set { SetProperty(ref _accumulatedHours, value); }

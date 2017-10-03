@@ -16,19 +16,29 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _planning, value); }
         }
 
+        private Profile _profile;
+        public Profile Profile
+        {
+            get { return _profile; }
+            set { SetProperty(ref _profile, value); }
+        }
+
         private IPlanningService _planningService;
+        private ISettingsService _settingsService;
 
         public DelegateCommand SaveCommand { get; private set; }
         #endregion
-
-        #region Constructor
-        public PlanningPageViewModel(IPlanningService planningService)
+        
+        #region Construcutor
+        public PlanningPageViewModel(IPlanningService planningService, ISettingsService settingsService)
         {
             _planningService = planningService;
+            _settingsService = settingsService;
 
             InicializeCommands();
 
             Planning = _planningService.GetPlanning();
+            Profile = _settingsService.GetProfile();
         }
 
         private void InicializeCommands()
