@@ -23,6 +23,7 @@ namespace PontoFacil.Services
         }
         #endregion
 
+        #region Methods
         public List<ClockIn> GetMonthlyHistory()
         {
             _clockInList = _persistencyService.GetMonthlyHistory();
@@ -40,5 +41,6 @@ namespace PontoFacil.Services
             clockIn.AllowWaiver();
             return _persistencyService.SaveClockIn(clockIn);
         }
+        #endregion
     }
 }

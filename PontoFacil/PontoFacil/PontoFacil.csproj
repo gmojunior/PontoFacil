@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\PlanningPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\StateViewModelBase.cs" />
     <Compile Include="Views\CurrentDatePage.xaml.cs">
       <DependentUpon>CurrentDatePage.xaml</DependentUpon>
     </Compile>

@@ -5,7 +5,7 @@ namespace PontoFacil.Models
 {
     public class ClockIn : BindableBase
     {
-        #region
+        #region Properties
         private DateTime? _id;
         public DateTime? Id
         {
@@ -75,6 +75,10 @@ namespace PontoFacil.Models
             get { return _isWaiver; }
             set { SetProperty(ref _isWaiver, value); }
         }
+
+        private readonly DateTime MIDDAY = Convert.ToDateTime("12:00:00");
+        private readonly DateTime ONE_PM = Convert.ToDateTime("13:00:00");
+        private readonly DateTime TWO_PM = Convert.ToDateTime("14:00:00");
         #endregion
 
         #region Constructor
@@ -88,11 +92,9 @@ namespace PontoFacil.Models
         public void Open(DateTime dt, int lunchTime)
         {
             Start = Convert.ToDateTime(dt.ToString("HH:mm:ss"));
-            LunchTime = lunchTime;
-            StartLunchTime = Convert.ToDateTime("12:00:00");
-            EndLunchTime = lunchTime == 1 ? Convert.ToDateTime("13:00:00") : Convert.ToDateTime("14:00:00");
+            SetProperties(lunchTime);
         }
-
+        
         public void Close(DateTime dt)
         {
             End = dt;
@@ -103,13 +105,20 @@ namespace PontoFacil.Models
 
         public bool IsOpen()
         {
-            return _start != null;
+            return (_start != null && DateTime.MinValue != _start) && (_end == null || DateTime.MinValue == _end );
         }
         
         public void AllowWaiver()
         {
             this.IsWaiver = true;
             this.OvertimeHours = TimeSpan.Zero;
+        }
+
+        private void SetProperties(int lunchTime)
+        {
+            LunchTime = lunchTime;
+            StartLunchTime = MIDDAY;
+            EndLunchTime = lunchTime == 1 ? ONE_PM : TWO_PM;
         }
         #endregion
     }

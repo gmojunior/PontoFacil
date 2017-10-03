@@ -1,15 +1,22 @@
-﻿using PontoFacil.Services;
+﻿using PontoFacil.Models;
+using PontoFacil.Services;
 using Prism.Commands;
-using Prism.Windows.Mvvm;
 using System;
 using Windows.UI.Xaml;
 
 namespace PontoFacil.ViewModels
 {
-    public class CurrentDatePageViewModel : ViewModelBase
-    {
+    public class CurrentDatePageViewModel : StateViewModelBase
+	{
         #region Properties
         private IClockInService _clockInService;
+
+        private string _dayOfWeekDayMonthYear;
+        public string DayOfWeekDayMonthYear
+        {
+            get { return _dayOfWeekDayMonthYear; }
+            set { SetProperty(ref _dayOfWeekDayMonthYear, value); }
+        }
 
         private string _currentTime;
         public string CurrentTime
@@ -19,14 +26,42 @@ namespace PontoFacil.ViewModels
         }
 
         private DispatcherTimer _timer;
+
+        private string _startTime;
+
+        public string StartTime
+        {
+            get { return this._startTime; }
+            set { SetProperty(ref _startTime, value); }
+        }
+
+        private string _endTime;
+
+        public string EndTime
+        {
+            get { return this._endTime; }
+            set { SetProperty(ref _endTime, value); }
+        }
+
         #endregion
 
         public CurrentDatePageViewModel(IClockInService clockInService)
         {
             _clockInService = clockInService;
-            InitializeCommands();
 
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            SetStartEndTime(clockIn);
+
+            initializeProperties();
+            InitializeCommands();
             InitializeClockInTime();
+        }
+
+        private void initializeProperties()
+        {
+            var loader = new Windows.ApplicationModel.Resources.ResourceLoader();
+            var linkPreposition = loader.GetString("LinkPreposition");
+            DayOfWeekDayMonthYear = DateTime.Now.ToString("dddd, dd {0} MMMM {0} yyyy").Replace("{0}", linkPreposition);
         }
 
         private void InitializeClockInTime()
@@ -47,9 +82,52 @@ namespace PontoFacil.ViewModels
             RegisterTimeCommand = new DelegateCommand(RegisterTime);
         }
 
+        protected override void OnLoaded()
+        {
+            base.OnLoaded();
+
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+            SetButtonState(clockIn);
+        }
+
         private void RegisterTime()
         {
             _clockInService.Register(DateTime.Now);
+
+            ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
+
+            SetStartEndTime(clockIn);
+
+            SetButtonState(clockIn);
+        }
+
+        private void SetStartEndTime(ClockIn clockIn)
+        {
+            if (clockIn != null)
+            {
+                StartTime = clockIn.Start.ToString("HH:mm:ss");
+
+                if (!clockIn.IsOpen())
+                {
+                    EndTime = clockIn.End.ToString("HH:mm:ss");
+                }
+            }
+        }
+
+        private void SetButtonState(ClockIn clockIn)
+        {
+
+            if (clockIn != null)
+            {
+                if (clockIn.IsOpen())
+                {
+                    GoToState(REGISTER_OUT_STATE);
+                }
+                else
+                {
+                    GoToState(REGISTER_DISABLED);
+                }
+            }
         }
 
         public DelegateCommand RegisterTimeCommand { get; private set; }
