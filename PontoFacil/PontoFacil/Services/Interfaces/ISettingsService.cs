@@ -1,5 +1,5 @@
-﻿using System;
-using PontoFacil.Models;
+﻿using PontoFacil.Models;
+using System;
 
 namespace PontoFacil.Services.Interfaces
 {

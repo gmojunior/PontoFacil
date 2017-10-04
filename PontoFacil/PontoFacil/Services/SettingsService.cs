@@ -28,6 +28,7 @@ namespace PontoFacil.Services
         public void Save(Profile profile)
         {
             _persistencyService.SaveProfile(profile);
+
         }
 
         public void UpdateProfileAcumulatedHours(TimeSpan overtimeHours)
