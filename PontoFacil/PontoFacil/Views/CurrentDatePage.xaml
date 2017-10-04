@@ -41,6 +41,11 @@
             <Run>!</Run>
         </TextBlock>
 
+        <TextBlock>
+            <Run>Testando -> </Run>
+            <Run Text="{Binding CurrentClockIn.ShowNotification, Mode=TwoWay}"/>
+        </TextBlock>
+
         <Grid Grid.Row="1" Margin="20,0,10,30" BorderBrush="Black" BorderThickness="2" CornerRadius="20,20,20,20" MinHeight="100" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

@@ -55,10 +55,6 @@ namespace PontoFacil.Services
             totalHours = totalHours + overtimeHours;
             
             string totalHoursText = GetTimeSpanFormatedToString(totalHours);
-            if (totalHours < TimeSpan.Zero)
-            {
-                totalHoursText = "-" + totalHoursText;
-            }
 
             return totalHoursText;
         }
@@ -67,10 +63,11 @@ namespace PontoFacil.Services
         {
             string timeFormated;
             int hoursOfTheDays = totalTime.Days * HOURS_OF_A_DAY;
-            string totalHours = (hoursOfTheDays + totalTime.Hours).ToString();
-            string totalMinutes = totalTime.Minutes.ToString();
+            string totalHours = (hoursOfTheDays + totalTime.Hours).ToString("D2");
+            int totalMinutes = totalTime.Minutes < 0 ? totalTime.Negate().Minutes : totalTime.Minutes;
+            string totalMinutesText = totalMinutes.ToString("D2");
 
-            timeFormated = totalHours + HOURS_SEPARATOR + totalMinutes;
+            timeFormated = totalHours + HOURS_SEPARATOR + totalMinutesText;
             
             return timeFormated;
         }

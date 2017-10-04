@@ -107,7 +107,12 @@ namespace PontoFacil.Models
         {
             return (_start != null && DateTime.MinValue != _start) && (_end == null || DateTime.MinValue == _end );
         }
-        
+
+        public TimeSpan GetLunchTime()
+        {
+            return LunchTime == 1 ? new TimeSpan(1, 0, 0) : new TimeSpan(2, 0, 0);
+        }
+
         public void AllowWaiver()
         {
             this.IsWaiver = true;
