@@ -51,7 +51,7 @@
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="Exit"/>
             <TimePicker Time="{x:Bind ViewModel.Profile.ExitHour, Mode=TwoWay}"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" x:Uid="AccumulatedHoursLabel"/>
-            <TextBox Text="{x:Bind ViewModel.Profile.AccumuletedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}" MaxLength="7"/>
+            <TextBox Text="{x:Bind ViewModel.Profile.AccumulatedHours, Mode=TwoWay}" Style="{StaticResource TextBoxHourStyle}" MaxLength="7"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Style="{StaticResource StackPanelStyle}">

@@ -1,5 +1,6 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services;
+using PontoFacil.Services.Interfaces;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
@@ -33,19 +34,28 @@ namespace PontoFacil.ViewModels
             set { SetProperty(ref _history, value); }
         }
 
+        private string _accumulatedHours;
+        public string AccumulatedHours
+        {
+            get { return _accumulatedHours; }
+            set { SetProperty(ref _accumulatedHours, value); }
+        }
+
         private string _dateValidationMessage;
         private ResourceLoader _loader;
 
         private IHistoryService _historyService;
+        private ISettingsService _settingsService;
 
         #endregion
 
         #region Constructor
-        public HistoryPageViewModel(IHistoryService historyService)
+        public HistoryPageViewModel(IHistoryService historyService, ISettingsService settingsService)
         {
             InitializeCommands();
 
             _historyService = historyService;
+            _settingsService = settingsService;
             _loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
             // Set StartDate to yesterday by default
@@ -55,6 +65,8 @@ namespace PontoFacil.ViewModels
             EndDate = DateTime.Now;
 
             History = new ObservableCollection<ClockIn>();
+
+            AccumulatedHours = settingsService.GetProfileAccumulatedHours();
 
             // Show monthly history by default
             ShowMonthlyHistory();
@@ -67,7 +79,6 @@ namespace PontoFacil.ViewModels
             ShowMonthlyHistoryCommand = new DelegateCommand(ShowMonthlyHistory);
             ShowFreeHistoryCommand = new DelegateCommand(ShowFreeHistory);
             ClockInWaiverCommand = new DelegateCommand<ClockIn>(ClockInWaiver);
-            EditClockInCommand = new DelegateCommand<ClockIn>(EditClockIn);
         }
         #endregion
 
@@ -75,7 +86,6 @@ namespace PontoFacil.ViewModels
         public DelegateCommand ShowMonthlyHistoryCommand { get; private set; }
         public DelegateCommand ShowFreeHistoryCommand { get; private set; }
         public DelegateCommand<ClockIn> ClockInWaiverCommand { get; private set; }
-        public DelegateCommand<ClockIn> EditClockInCommand { get; private set; }
 
         private void ShowMonthlyHistory()
         {
@@ -97,12 +107,11 @@ namespace PontoFacil.ViewModels
 
         private void ClockInWaiver(ClockIn clockIn)
         {
+            TimeSpan hoursToWaive = clockIn.OvertimeHours.Negate();
+            _settingsService.UpdateProfileAcumulatedHours(hoursToWaive);
+            AccumulatedHours = _settingsService.GetProfileAccumulatedHours();
+
             _historyService.AllowWaiver(clockIn);
-        }
-
-        private void EditClockIn(ClockIn clockIn)
-        {
-
         }
 
         /// <summary>

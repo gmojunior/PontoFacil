@@ -248,5 +248,8 @@
   </data>
   <data name="Reminder" xml:space="preserve">
     <value>Lembrete</value>
+	</data>
+  <data name="AccumulatedHours.Text" xml:space="preserve">
+    <value>Saldo: </value>
   </data>
 </root>

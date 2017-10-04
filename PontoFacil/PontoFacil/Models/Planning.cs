@@ -6,13 +6,6 @@ namespace PontoFacil.Models
     public class Planning : BindableBase
     {
         #region Properties
-        private TimeSpan _accumulatedHoursValue;
-        public TimeSpan AccumulatedHoursValue
-        {
-            get { return _accumulatedHoursValue; }
-            set { SetProperty(ref _accumulatedHoursValue, value); }
-        }
-
         private TimeSpan _hoursToAdjustValue;
         public TimeSpan HoursToAdjustValue
         {

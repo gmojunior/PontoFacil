@@ -15,6 +15,7 @@ namespace PontoFacil.Services
         private ClockIn _clockIn;
 
         private IPersistencyService _persistencyService;
+        private ISettingsService _settingsService;
 
         private INotificationService _notificationService;
 
@@ -72,8 +73,10 @@ namespace PontoFacil.Services
         {
             _clockIn.Close(dt);
             _persistencyService.SaveClockIn(_clockIn);
-        }
 
+            _settingsService.UpdateProfileAcumulatedHours(_clockIn.OvertimeHours);
+        }
+        
         public ClockIn getClockInById(DateTime datetime)
         {
             return _persistencyService.getClockInById(datetime);

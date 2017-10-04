@@ -1,4 +1,5 @@
-﻿using PontoFacil.Models;
+﻿using System;
+using PontoFacil.Models;
 
 namespace PontoFacil.Services.Interfaces
 {
@@ -6,5 +7,7 @@ namespace PontoFacil.Services.Interfaces
     {
         void Save(Profile profile);
         Profile GetProfile();
+        void UpdateProfileAcumulatedHours(TimeSpan overtimeHours);
+        string GetProfileAccumulatedHours();
     }
 }
