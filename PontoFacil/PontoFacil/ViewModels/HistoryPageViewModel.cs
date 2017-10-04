@@ -113,7 +113,7 @@ namespace PontoFacil.ViewModels
 
             _historyService.AllowWaiver(clockIn);
         }
-        
+
         /// <summary>
         /// Check if the date interval is valid
         /// </summary>
