@@ -25,8 +25,6 @@ namespace PontoFacil.ViewModels
         private ISettingsService _settingsService;
 
         private ResourceLoader resourceLoader;
-
-        private StringBuilder sbValidationMessages;
         #endregion
 
         #region Constants
