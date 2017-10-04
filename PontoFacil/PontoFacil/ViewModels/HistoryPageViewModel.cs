@@ -45,6 +45,7 @@ namespace PontoFacil.ViewModels
         private ResourceLoader _loader;
 
         private IHistoryService _historyService;
+        private ISettingsService _settingsService;
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace PontoFacil.ViewModels
             InitializeCommands();
 
             _historyService = historyService;
+            _settingsService = settingsService;
             _loader = new Windows.ApplicationModel.Resources.ResourceLoader();
 
             // Set StartDate to yesterday by default
@@ -77,7 +79,6 @@ namespace PontoFacil.ViewModels
             ShowMonthlyHistoryCommand = new DelegateCommand(ShowMonthlyHistory);
             ShowFreeHistoryCommand = new DelegateCommand(ShowFreeHistory);
             ClockInWaiverCommand = new DelegateCommand<ClockIn>(ClockInWaiver);
-            EditClockInCommand = new DelegateCommand<ClockIn>(EditClockIn);
         }
         #endregion
 
@@ -85,7 +86,6 @@ namespace PontoFacil.ViewModels
         public DelegateCommand ShowMonthlyHistoryCommand { get; private set; }
         public DelegateCommand ShowFreeHistoryCommand { get; private set; }
         public DelegateCommand<ClockIn> ClockInWaiverCommand { get; private set; }
-        public DelegateCommand<ClockIn> EditClockInCommand { get; private set; }
 
         private void ShowMonthlyHistory()
         {
@@ -107,14 +107,13 @@ namespace PontoFacil.ViewModels
 
         private void ClockInWaiver(ClockIn clockIn)
         {
+            TimeSpan hoursToWaive = clockIn.OvertimeHours.Negate();
+            _settingsService.UpdateProfileAcumulatedHours(hoursToWaive);
+            AccumulatedHours = _settingsService.GetProfileAccumulatedHours();
+
             _historyService.AllowWaiver(clockIn);
         }
-
-        private void EditClockIn(ClockIn clockIn)
-        {
-
-        }
-
+        
         /// <summary>
         /// Check if the date interval is valid
         /// </summary>
