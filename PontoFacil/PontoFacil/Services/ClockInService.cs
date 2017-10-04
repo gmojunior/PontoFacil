@@ -27,11 +27,11 @@ namespace PontoFacil.Services
         #endregion
 
         #region Constructor
-        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService)
+        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService, ISettingsService settingsService)
         {
             _persistencyService = persistencyService;
             _notificationService = notificationService;
-
+            _settingsService = settingsService;
             resourceLoader = new ResourceLoader();
 
             _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
