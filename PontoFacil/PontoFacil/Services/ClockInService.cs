@@ -1,6 +1,11 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services.Interfaces;
 using System;
+using Windows.ApplicationModel.Resources;
+
+
+#if !WINRT_NOT_PRESENT
+# endif
 
 namespace PontoFacil.Services
 {
@@ -10,8 +15,14 @@ namespace PontoFacil.Services
         private ClockIn _clockIn;
 
         private IPersistencyService _persistencyService;
+
         private INotificationService _notificationService;
 
+        private ResourceLoader resourceLoader;
+        #endregion
+
+        #region Constants
+        private const string MESSAGE_CLOCKIN_REMINDER = "ClockInReminder";
         #endregion
 
         #region Constructor
@@ -19,6 +30,8 @@ namespace PontoFacil.Services
         {
             _persistencyService = persistencyService;
             _notificationService = notificationService;
+
+            resourceLoader = new ResourceLoader();
 
             _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
         }
@@ -32,9 +45,19 @@ namespace PontoFacil.Services
             else
             {
                 StartNewDay(date);
-                _notificationService.createNotificationTask(_clockIn);
+                _notificationService.CreateNotificationTask(GetTimeToLeave(), resourceLoader.GetString(MESSAGE_CLOCKIN_REMINDER));
             }
+
             return _clockIn;
+        }
+
+        private TimeSpan GetTimeToLeave()
+        {
+            TimeSpan regular = _clockIn.RegularHours;
+            TimeSpan lunch = _clockIn.GetLunchTime();
+            int notification = _persistencyService.getProfile().NotifyTime;
+
+            return new TimeSpan(regular.Hours + lunch.Hours, regular.Minutes + lunch.Minutes - notification, 0);
         }
 
         private void StartNewDay(DateTime dt)

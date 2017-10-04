@@ -1,9 +1,9 @@
-﻿using PontoFacil.Models;
+﻿using System;
 
 namespace PontoFacil.Services.Interfaces
 {
     public interface INotificationService
     {
-        void createNotificationTask(ClockIn clockIn);
+        void CreateNotificationTask(TimeSpan timeToLeave, string message);
     }
 }

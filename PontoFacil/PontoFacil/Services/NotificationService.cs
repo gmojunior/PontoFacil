@@ -1,10 +1,9 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services.Interfaces;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
-using Windows.UI.Xaml;
+using Windows.ApplicationModel.Resources;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 namespace PontoFacil.Services
 {
@@ -12,42 +11,46 @@ namespace PontoFacil.Services
     {
         #region Properties
         private IPersistencyService _persistencyService;
+        
+        private ResourceLoader resourceLoader;
+        #endregion
+        
+        #region Constants
+        private const string MESSAGE_REMINDER = "Reminder";
+        
+        private const string MESSAGE_STRUCTURE = "<toast><visual><binding template=\"ToastGeneric\"><text>{0}</text><text>{1}</text></binding></visual></toast>";
         #endregion
 
         #region Constructor
         public NotificationService(IPersistencyService persistencyService)
         {
             _persistencyService = persistencyService;
+
+            resourceLoader = new ResourceLoader();
         }
         #endregion
 
         #region Methods
-        public void createNotificationTask(ClockIn clockIn)
+        public void CreateNotificationTask(TimeSpan timeToLeave, string message)
         {
-            // TODO Get RegularHours + LunchTime - NotificationTime (in minutes)
-            TimeSpan timeToLeave = new TimeSpan(0, 1, 0);
-            UpdateProgressBarAsync(new Progress<ClockIn>(UpdateClockInNotificationFlag), clockIn, timeToLeave);
+            DateTime alarmTime = DateTime.Now + timeToLeave;
+            var scheduledNotif = new ScheduledToastNotification(CreateStructuredMessage(message), alarmTime);
+
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledNotif);
         }
 
-        private void UpdateClockInNotificationFlag(ClockIn obj)
+        private XmlDocument CreateStructuredMessage(string message)
         {
-            obj.ShowNotification = true;
+            XmlDocument doc = new XmlDocument();
+
+            doc.LoadXml(GetMessage(message));
+
+            return doc;
         }
 
-        private async void UpdateProgressBarAsync(IProgress<ClockIn> progress, ClockIn clockIn, TimeSpan timeToLeave)
+        private string GetMessage(string message)
         {
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    await Task.Delay(Int32.Parse(timeToLeave.TotalMilliseconds.ToString()));
-                    progress.Report(clockIn);
-                }
-                catch (Exception e)
-                {
-                    //TODO
-                }
-            });
+            return String.Format(MESSAGE_STRUCTURE, resourceLoader.GetString(MESSAGE_REMINDER), message);
         }
         #endregion
     }
