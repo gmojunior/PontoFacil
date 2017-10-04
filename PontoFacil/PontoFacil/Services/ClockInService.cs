@@ -78,12 +78,6 @@ namespace PontoFacil.Services
         {
             return _persistencyService.getClockInById(datetime);
         }
-
-        public TimeSpan getEstimatedTimeToLeave()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

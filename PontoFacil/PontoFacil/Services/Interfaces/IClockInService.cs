@@ -7,6 +7,5 @@ namespace PontoFacil.Services.Interfaces
     {
         ClockIn Register(DateTime date);
         ClockIn getClockInById(DateTime datetime);
-        TimeSpan getEstimatedTimeToLeave();
     }
 }
