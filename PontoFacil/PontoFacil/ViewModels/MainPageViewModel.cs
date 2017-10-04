@@ -4,7 +4,7 @@ using Prism.Windows.Navigation;
 
 namespace PontoFacil.ViewModels
 {
-    class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
         private bool isMenuOpen;
 
