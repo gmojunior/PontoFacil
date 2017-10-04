@@ -61,6 +61,10 @@ namespace PontoFacil.Services
                 {
                     string result = File.ReadAllText(DATABASE_PATH);
                     _repository = JsonConvert.DeserializeObject<Repository>(result);
+                } else
+                {
+                    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                    localSettings.Values["SettingsOk"] = null;
                 }
             }
             catch (Exception e)

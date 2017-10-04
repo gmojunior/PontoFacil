@@ -64,11 +64,7 @@ namespace PontoFacil.ViewModels
             _settingsService = settingsService;
 
             ClockIn clockIn = _clockInService.getClockInById(DateTime.Now.Date);
-            if (clockIn != null)
-                CurrentClockIn = _clockInService.getClockInById(DateTime.Now.Date);
-            else
-                CurrentClockIn = new ClockIn();
-            SetStartEndTime(CurrentClockIn);
+            SetStartEndTime(clockIn);
 
             initializeProperties();
             InitializeCommands();
