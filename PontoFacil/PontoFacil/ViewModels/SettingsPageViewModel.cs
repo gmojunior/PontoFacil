@@ -6,6 +6,7 @@ using System;
 using System.Text;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.ViewModels
 {
@@ -55,11 +56,14 @@ namespace PontoFacil.ViewModels
         {
             string message;
 
-            if (_settingsService.Save(Profile, out message))
+            if (Profile.IsValid())
             {
                 SetFirstAccess();
+                _settingsService.Save(Profile);
                 message = resourceLoader.GetString(MESSAGE_SAVE_SUCCESS);
             }
+            else
+                message = Profile.MessagesValidator.ToString();
 
             var dialog = new MessageDialog(message);
             await dialog.ShowAsync();
@@ -71,6 +75,23 @@ namespace PontoFacil.ViewModels
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["SettingsOk"] = true;
+        }
+
+        public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            if (!IsANumber(sender.Text) && sender.Text != "")
+                RemoveLastAddedChar(sender, sender.SelectionStart - 1);
+        }
+
+        private static void RemoveLastAddedChar(TextBox sender, int position)
+        {
+            sender.Text = sender.Text.Remove(position, 1);
+            sender.SelectionStart = position + 1;
+        }
+
+        private static bool IsANumber(string text)
+        {
+            return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
         }
         #endregion
     }

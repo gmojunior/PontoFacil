@@ -1,10 +1,8 @@
 using PontoFacil.Services.Interfaces;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Windows.ApplicationModel.Resources;
 using System.Text;
+using Windows.ApplicationModel.Resources;
 
 namespace PontoFacil.Models
 {
@@ -53,8 +51,8 @@ namespace PontoFacil.Models
             set { SetProperty(ref _notify, value); }
         }
 
-        private int _notifyTime;
-        public int NotifyTime
+        private string _notifyTime;
+        public string NotifyTime
         {
             get { return _notifyTime; }
             set { SetProperty(ref _notifyTime, value); }
@@ -118,7 +116,7 @@ namespace PontoFacil.Models
                 MessagesValidator.AppendLine(message);
             }
 
-            if (Notify == true && NotifyTime < 1)
+            if (Notify == true && !string.IsNullOrWhiteSpace(NotifyTime) && int.Parse(NotifyTime) < 1)
             {
                 message = loader.GetString(MESSAGE_NOTIFY_TIME_ISNOT_EMPTY);
                 MessagesValidator.AppendLine(message);
