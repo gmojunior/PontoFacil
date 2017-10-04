@@ -108,6 +108,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\ClockInService.cs" />
     <Compile Include="Services\HistoryService.cs" />
+    <Compile Include="Services\Interfaces\IValidator.cs" />
     <Compile Include="Services\Interfaces\IClockInService.cs" />
     <Compile Include="Services\Interfaces\IHistoryService.cs" />
     <Compile Include="Services\Interfaces\IPersistencyService.cs" />

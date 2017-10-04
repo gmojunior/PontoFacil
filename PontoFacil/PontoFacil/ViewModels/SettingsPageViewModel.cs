@@ -4,7 +4,6 @@ using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
 using System.Text;
-using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
 
@@ -30,9 +29,7 @@ namespace PontoFacil.ViewModels
         #endregion
 
         #region Constants
-            private const string PATTERN_HOUR_FORMAT = @"\d{1,4}:\d{2}";
-            private const string MESSAGE_SAVE_SUCCESS = "SaveSuccess";
-            private const string MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS = "FormatInvalidFieldAccumulatedHours";
+        private const string MESSAGE_SAVE_SUCCESS = "SaveSuccess";
         #endregion
 
         #region Constructor
@@ -58,16 +55,11 @@ namespace PontoFacil.ViewModels
         {
             string message;
 
-            if (ValidateFields())
+            if (_settingsService.Save(Profile, out message))
             {
                 SetFirstAccess();
-
-                _settingsService.Save(Profile);
-
                 message = resourceLoader.GetString(MESSAGE_SAVE_SUCCESS);
             }
-            else
-                message = sbValidationMessages.ToString();
 
             var dialog = new MessageDialog(message);
             await dialog.ShowAsync();
@@ -75,25 +67,6 @@ namespace PontoFacil.ViewModels
         #endregion
 
         #region Methods
-        private bool ValidateFields()
-        {
-            sbValidationMessages = new StringBuilder();
-            string message;
-
-            if (!FormatHourIsValid(Profile.AccumulatedHours))
-            {
-                message = resourceLoader.GetString(MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS);
-                sbValidationMessages.AppendLine(message);
-            }
-
-            return sbValidationMessages.Length == 0;
-        }
-
-        private bool FormatHourIsValid(string hour)
-        {
-            return Regex.IsMatch(hour, PATTERN_HOUR_FORMAT);
-        }
-
         private void SetFirstAccess()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;

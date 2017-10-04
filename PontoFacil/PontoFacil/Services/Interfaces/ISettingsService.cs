@@ -1,11 +1,11 @@
-﻿using System;
-using PontoFacil.Models;
+﻿using PontoFacil.Models;
+using System;
 
 namespace PontoFacil.Services.Interfaces
 {
     public interface ISettingsService
     {
-        void Save(Profile profile);
+        bool Save(Profile profile, out string messageValidator);
         Profile GetProfile();
         void UpdateProfileAcumulatedHours(TimeSpan overtimeHours);
         string GetProfileAccumulatedHours();

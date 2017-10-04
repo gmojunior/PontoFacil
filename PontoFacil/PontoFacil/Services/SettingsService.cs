@@ -25,9 +25,16 @@ namespace PontoFacil.Services
             return _persistencyService.getProfile();
         }
 
-        public void Save(Profile profile)
+        public bool Save(Profile profile, out string messageValidator)
         {
-            _persistencyService.SaveProfile(profile);
+            bool result = profile.IsValid();
+
+            if (result)
+                _persistencyService.SaveProfile(profile);
+
+            messageValidator = profile.MessagesValidator.ToString();
+
+            return result;
         }
 
         public void UpdateProfileAcumulatedHours(TimeSpan overtimeHours)
