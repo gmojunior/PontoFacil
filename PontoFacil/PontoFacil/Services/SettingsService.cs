@@ -43,10 +43,10 @@ namespace PontoFacil.Services
         private string CalculateAccumulatedHours(string accumuletedHours, TimeSpan overtimeHours)
         {
             int hours = 0;
-            Int32.TryParse(accumuletedHours.Split(':')[0], out hours);
+            Int32.TryParse(accumuletedHours?.Split(':')[0], out hours);
 
             int minutes = 0;
-            Int32.TryParse(accumuletedHours.Split(':')[1], out minutes);
+            Int32.TryParse(accumuletedHours?.Split(':')[1], out minutes);
 
             int seconds = 0;
 
