@@ -1,6 +1,11 @@
 ﻿using PontoFacil.Models;
 using PontoFacil.Services.Interfaces;
 using System;
+using Windows.ApplicationModel.Resources;
+
+
+#if !WINRT_NOT_PRESENT
+# endif
 
 namespace PontoFacil.Services
 {
@@ -12,25 +17,48 @@ namespace PontoFacil.Services
         private IPersistencyService _persistencyService;
         private ISettingsService _settingsService;
 
+        private INotificationService _notificationService;
+
+        private ResourceLoader resourceLoader;
+        #endregion
+
+        #region Constants
+        private const string MESSAGE_CLOCKIN_REMINDER = "ClockInReminder";
         #endregion
 
         #region Constructor
-        public ClockInService(IPersistencyService persistencyService, ISettingsService settingsService)
+        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService)
         {
             _persistencyService = persistencyService;
-            _settingsService = settingsService;
+            _notificationService = notificationService;
+
+            resourceLoader = new ResourceLoader();
 
             _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
         }
         #endregion
 
         #region Methods
-        public void Register(DateTime date)
+        public ClockIn Register(DateTime date)
         {
             if (_clockIn != null && _clockIn.IsOpen())
                 EndCurrentDay(date);
             else
+            {
                 StartNewDay(date);
+                _notificationService.CreateNotificationTask(GetTimeToLeave(), resourceLoader.GetString(MESSAGE_CLOCKIN_REMINDER));
+            }
+
+            return _clockIn;
+        }
+
+        private TimeSpan GetTimeToLeave()
+        {
+            TimeSpan regular = _clockIn.RegularHours;
+            TimeSpan lunch = _clockIn.GetLunchTime();
+            int notification = _persistencyService.getProfile().NotifyTime;
+
+            return new TimeSpan(regular.Hours + lunch.Hours, regular.Minutes + lunch.Minutes - notification, 0);
         }
 
         private void StartNewDay(DateTime dt)
@@ -53,7 +81,6 @@ namespace PontoFacil.Services
         {
             return _persistencyService.getClockInById(datetime);
         }
-
         #endregion
     }
 }

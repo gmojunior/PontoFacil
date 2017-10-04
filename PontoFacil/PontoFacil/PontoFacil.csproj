@@ -110,6 +110,7 @@
     <Compile Include="Services\HistoryService.cs" />
     <Compile Include="Services\Interfaces\IClockInService.cs" />
     <Compile Include="Services\Interfaces\IHistoryService.cs" />
+    <Compile Include="Services\Interfaces\INotificationService.cs" />
     <Compile Include="Services\Interfaces\IPersistencyService.cs" />
     <Compile Include="Services\Interfaces\IPlanningService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />

@@ -146,7 +146,7 @@
   </data>
   <data name="FormatInvalidFieldAccumulatedHours" xml:space="preserve">
     <value>Campo \"Horas acumuladas\" com formato inválido</value>
-    </data>
+  </data>
   <data name="FreePeriod.Content" xml:space="preserve">
     <value>Período livre</value>
   </data>
@@ -243,6 +243,12 @@
   <data name="StartDateLessThenCurrentDate" xml:space="preserve">
     <value>A data inicial deve ser menor que a data atual</value>
   </data>
+  <data name="ClockInReminder" xml:space="preserve">
+    <value>Hora de bater o ponto!</value>
+  </data>
+  <data name="Reminder" xml:space="preserve">
+    <value>Lembrete</value>
+	</data>
   <data name="AccumulatedHours.Text" xml:space="preserve">
     <value>Saldo: </value>
   </data>
