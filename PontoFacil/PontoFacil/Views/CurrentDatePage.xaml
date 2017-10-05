@@ -41,11 +41,6 @@
             <Run>!</Run>
         </TextBlock>
 
-        <TextBlock>
-            <Run>Testando -> </Run>
-            <Run Text="{Binding CurrentClockIn.ShowNotification, Mode=TwoWay}"/>
-        </TextBlock>
-
         <Grid Grid.Row="1" Margin="20,0,10,30" BorderBrush="Black" BorderThickness="2" CornerRadius="20,20,20,20" MinHeight="100" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -81,15 +76,6 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Dia" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <ProgressBar Grid.Column="1" Background="Cyan" x:Name="DailyProgress" HorizontalAlignment="Stretch" Height="16" Margin="5,0,0,0"/>
-
-            <TextBlock Text="Semana" Grid.Row="1" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <ProgressBar x:Name="WeeklyProgress" Background="DarkBlue" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Height="16" Margin="5,0,0,0" />
-
-            <TextBlock Text="Mês" Grid.Row="2" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <ProgressBar x:Name="MonthlyProgress" Background="DeepPink" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Height="16" Margin="5,0,0,0"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="20,0,20,30">
             <Grid.RowDefinitions>

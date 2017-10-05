@@ -61,7 +61,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" x:Uid="WarnMe"/>
                 <TextBox Text="{x:Bind ViewModel.Profile.NotifyTime, Mode=TwoWay}" IsEnabled="{Binding IsChecked,
-                    ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0" MaxLength="2"/>
+                    ElementName=chkEnabledNotify}" Style="{StaticResource TextBoxHourStyle}" Margin="10, 0, 10, 0" MaxLength="2" TextChanging="{x:Bind ViewModel.TextBox_TextChanging}"/>
                 <TextBlock VerticalAlignment="Center" x:Uid="MinutesBeforeExit"/>
             </StackPanel>
             <StackPanel Style="{StaticResource StackPanelStyle}">

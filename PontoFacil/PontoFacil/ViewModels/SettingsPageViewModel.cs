@@ -4,9 +4,9 @@ using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
 using System.Text;
-using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace PontoFacil.ViewModels
 {
@@ -25,14 +25,10 @@ namespace PontoFacil.ViewModels
         private ISettingsService _settingsService;
 
         private ResourceLoader resourceLoader;
-
-        private StringBuilder sbValidationMessages;
         #endregion
 
         #region Constants
-            private const string PATTERN_HOUR_FORMAT = @"\d{1,4}:\d{2}";
-            private const string MESSAGE_SAVE_SUCCESS = "SaveSuccess";
-            private const string MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS = "FormatInvalidFieldAccumulatedHours";
+        private const string MESSAGE_SAVE_SUCCESS = "SaveSuccess";
         #endregion
 
         #region Constructor
@@ -58,16 +54,14 @@ namespace PontoFacil.ViewModels
         {
             string message;
 
-            if (ValidateFields())
+            if (Profile.IsValid())
             {
                 SetFirstAccess();
-
                 _settingsService.Save(Profile);
-
                 message = resourceLoader.GetString(MESSAGE_SAVE_SUCCESS);
             }
             else
-                message = sbValidationMessages.ToString();
+                message = Profile.MessagesValidator.ToString();
 
             var dialog = new MessageDialog(message);
             await dialog.ShowAsync();
@@ -75,29 +69,27 @@ namespace PontoFacil.ViewModels
         #endregion
 
         #region Methods
-        private bool ValidateFields()
-        {
-            sbValidationMessages = new StringBuilder();
-            string message;
-
-            if (!FormatHourIsValid(Profile.AccumulatedHours))
-            {
-                message = resourceLoader.GetString(MESSAGE_INVALID_FORMAT_ACCUMULATED_HOURS);
-                sbValidationMessages.AppendLine(message);
-            }
-
-            return sbValidationMessages.Length == 0;
-        }
-
-        private bool FormatHourIsValid(string hour)
-        {
-            return Regex.IsMatch(hour, PATTERN_HOUR_FORMAT);
-        }
-
         private void SetFirstAccess()
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["SettingsOk"] = true;
+        }
+
+        public void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            if (!IsANumber(sender.Text) && sender.Text != "")
+                RemoveLastAddedChar(sender, sender.SelectionStart - 1);
+        }
+
+        private static void RemoveLastAddedChar(TextBox sender, int position)
+        {
+            sender.Text = sender.Text.Remove(position, 1);
+            sender.SelectionStart = position + 1;
+        }
+
+        private static bool IsANumber(string text)
+        {
+            return !string.IsNullOrWhiteSpace(text) && double.TryParse(text, out double dtemp);
         }
         #endregion
     }

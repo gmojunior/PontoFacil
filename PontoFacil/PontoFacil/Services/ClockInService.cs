@@ -27,11 +27,11 @@ namespace PontoFacil.Services
         #endregion
 
         #region Constructor
-        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService)
+        public ClockInService(IPersistencyService persistencyService, INotificationService notificationService, ISettingsService settingsService)
         {
             _persistencyService = persistencyService;
             _notificationService = notificationService;
-
+            _settingsService = settingsService;
             resourceLoader = new ResourceLoader();
 
             _clockIn = _persistencyService.getClockInById(DateTime.Now.Date);
@@ -56,7 +56,11 @@ namespace PontoFacil.Services
         {
             TimeSpan regular = _clockIn.RegularHours;
             TimeSpan lunch = _clockIn.GetLunchTime();
-            int notification = _persistencyService.getProfile().NotifyTime;
+
+            int notification;
+            var notifyTime = _persistencyService.getProfile().NotifyTime;
+
+            int.TryParse(notifyTime, out notification);
 
             return new TimeSpan(regular.Hours + lunch.Hours, regular.Minutes + lunch.Minutes - notification, 0);
         }

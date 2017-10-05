@@ -144,9 +144,6 @@
   <data name="Exit.Text" xml:space="preserve">
     <value>Saída</value>
   </data>
-  <data name="FormatInvalidFieldAccumulatedHours" xml:space="preserve">
-    <value>Campo \"Horas acumuladas\" com formato inválido</value>
-  </data>
   <data name="FreePeriod.Content" xml:space="preserve">
     <value>Período livre</value>
   </data>
@@ -251,5 +248,23 @@
 	</data>
   <data name="AccumulatedHours.Text" xml:space="preserve">
     <value>Saldo: </value>
+  </data>
+  <data name="AccumulatedHoursIsNotEmpty" xml:space="preserve">
+    <value>As horas acumuladas devem ser informadas</value>
+  </data>
+  <data name="EntryHourSameExit" xml:space="preserve">
+    <value>A hora da entrada deve ser diferente da saída</value>
+  </data>
+  <data name="LunchTimeIsNotEmpty" xml:space="preserve">
+    <value>O intervalo do almoço deve ser informado</value>
+  </data>
+  <data name="NameIsNotEmpty" xml:space="preserve">
+    <value>O nome deve informado</value>
+  </data>
+  <data name="NotifyTimeNotEmpty" xml:space="preserve">
+    <value>O tempo para notificação precisa ser informado</value>
+  </data>
+  <data name="NotifyNotEmpty" xml:space="preserve">
+    <value>A notificação precisa ser informada</value>
   </data>
 </root>
